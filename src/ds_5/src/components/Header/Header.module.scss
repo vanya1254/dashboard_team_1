@@ -10,7 +10,6 @@
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 1fr;
     align-items: center;
-    justify-content: center;
 
     &_back {
       @include btnStyles();
@@ -28,6 +27,7 @@
   &__dashboards {
     display: flex;
     align-items: center;
+    justify-content: center;
 
     &_btn {
       @include btnStyles();

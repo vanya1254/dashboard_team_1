@@ -18,7 +18,7 @@ p {
 .App {
   color: #151515;
   font-size: 15px;
-  padding: 25px 30px 0 30px;
+  padding: 25px 32px 0 32px;
   font-family: 'PT Sans', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   overflow-y: scroll;
@@ -135,8 +135,7 @@ img {
   vertical-align: top;
 }
 
-img,
-svg {
+img {
   max-width: 100%;
   height: auto;
 }
@@ -184,10 +183,6 @@ button::-moz-focus-inner {
 
 label {
   cursor: pointer;
-}
-
-legend {
-  display: block;
 }
 
 .active {

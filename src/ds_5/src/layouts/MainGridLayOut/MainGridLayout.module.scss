@@ -1,5 +1,10 @@
+@import '../../styles/vars';
+
 .root {
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 32px;
+
+  border: 1px solid $borderColor;
+  border-radius: 4px;
 }
