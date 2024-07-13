@@ -1,0 +1,31 @@
+{
+  "parent_id": null,
+  "dashboard_id": 1,
+  "view_class": "/internal",
+  "title": "",
+  "description": null,
+  "frame": null,
+  "layout": null,
+  "length": null,
+  "idx": 0,
+  "srt": 2147483647,
+  "config": {
+    "url": "res:App.js",
+    "frame": {
+      "h": 1,
+      "w": 1,
+      "x": 0,
+      "y": 0
+    },
+    "onClick": {},
+    "dataSource": {
+      "koob": "",
+      "style": {},
+      "xAxis": "",
+      "yAxis": "measures",
+      "filters": [],
+      "measures": [],
+      "dimensions": []
+    }
+  }
+}

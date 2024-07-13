@@ -1,0 +1,8 @@
+node_modules
+.idea
+authConfig.json
+config.json
+dist
+/dist_development/
+/dist_production/
+yarn-error.log

@@ -1,0 +1,44 @@
+@import '../../styles/mixins';
+@import '../../styles/vars';
+
+.root {
+  //   display: flex;
+  padding: $verPadding $horPadding;
+
+  &__nav {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+    align-items: center;
+    justify-content: center;
+
+    &_back {
+      @include btnStyles();
+
+      width: fit-content;
+      height: 100%;
+      line-height: 0;
+
+      &:hover {
+        @include btnHover();
+      }
+    }
+  }
+
+  &__dashboards {
+    display: flex;
+    align-items: center;
+
+    &_btn {
+      @include btnStyles();
+
+      border-radius: 0;
+      width: 50%;
+      max-width: 250px;
+
+      &:hover {
+        @include btnHover();
+      }
+    }
+  }
+}

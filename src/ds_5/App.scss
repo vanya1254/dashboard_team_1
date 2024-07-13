@@ -1,0 +1,195 @@
+@import './src/styles/vars';
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-weight: 700;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  color: #151515;
+  font-size: 15px;
+  padding: 25px 30px 0 30px;
+  font-family: 'PT Sans', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  overflow-y: scroll;
+  width: 100%;
+  min-height: calc(100vh - $heightHeader);
+}
+
+.scroller {
+  &::-webkit-scrollbar:horizontal {
+    height: 5px;
+  }
+
+  &::-webkit-scrollbar:vertical {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar {
+    -webkit-appearance: none;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(175, 197, 216, 0.3);
+    border-radius: 10px;
+    border: 0;
+    transition: all 0.2s ease-in-out;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+    transition: all 0.2s ease-in-out;
+  }
+}
+
+.chartWrapper {
+  width: 16rem;
+  height: 16rem;
+}
+
+.Dashboard__Scroller {
+  padding: 0 !important;
+}
+
+.Dashlet__Shadow {
+  margin: 0;
+}
+
+.Dashlet {
+  border-radius: 0;
+  margin: 0;
+}
+.Dashlet > .Vizel {
+  border-radius: 0;
+}
+
+.Dashboards__ListItem {
+  padding: 0 !important;
+}
+
+.Dashboard {
+  border-radius: 0;
+}
+
+.Dashboard__Footer {
+  display: none;
+}
+
+.VizelDashlet__Header,
+.chart-header {
+  display: none;
+}
+
+/* Reset and base styles  */
+* {
+  padding: 0px;
+  margin: 0px;
+  border: none;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Links */
+
+a,
+a:link,
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+/* Common */
+
+aside,
+nav,
+footer,
+header,
+section,
+main {
+  display: block;
+}
+
+ul,
+ul li {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+img,
+svg {
+  max-width: 100%;
+  height: auto;
+}
+
+address {
+  font-style: normal;
+}
+
+/* Form */
+
+input,
+textarea,
+button,
+select {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background-color: transparent;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+button,
+input[type='submit'] {
+  display: inline-block;
+  box-shadow: none;
+  background-color: transparent;
+  background: none;
+  cursor: pointer;
+}
+
+input:focus,
+input:active,
+button:focus,
+button:active {
+  outline: none;
+}
+
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+label {
+  cursor: pointer;
+}
+
+legend {
+  display: block;
+}
+
+.active {
+  background-color: $activeColor;
+}

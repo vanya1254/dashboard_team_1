@@ -1,0 +1,14 @@
+@import './vars';
+
+@mixin btnStyles() {
+  padding: 6px 12px;
+  background-color: $secondColor;
+  color: $mainColor;
+  border-radius: 8px;
+
+  transition: 0.3s ease-in-out;
+}
+
+@mixin btnHover() {
+  opacity: 0.8;
+}

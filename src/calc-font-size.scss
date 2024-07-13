@@ -1,0 +1,12 @@
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+
+  @return $number;
+}
+
+@function convertToRem($fontSize) {
+  $fontSize: strip-unit($fontSize);
+  @return calc( #{$fontSize + rem} / 13 );
+}
