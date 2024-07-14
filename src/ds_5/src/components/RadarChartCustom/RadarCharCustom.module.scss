@@ -1,0 +1,26 @@
+@import '../../styles/vars';
+
+.root {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+
+  &_title {
+    width: fit-content;
+    padding: 4px 8px;
+    font-weight: 600;
+    font-size: 1.25rem;
+    // background-color: $greenColor;
+  }
+
+  &__chartWrapper {
+    padding: 32px;
+    width: 600px;
+    height: 600px;
+  }
+
+  &__chart {
+    width: 80%;
+    height: 80%;
+  }
+}

@@ -10,7 +10,7 @@ import {
   ResponsiveContainer
 } from 'recharts';
 
-import './RadarCharCustom.scss';
+import styles from './RadarCharCustom.module.scss';
 
 const data = [
   { skill: 'databases', level: 89, fullMark: 100 },
@@ -25,17 +25,18 @@ const data = [
 
 export const RadarChartCustom: React.FC = () => {
   return (
-    <div className="radar" style={{ width: '700px', height: '700px' }}>
-      {/* <h2 className={styles.root_title}>Характеристика сотрудника</h2> */}
-      <ResponsiveContainer width="100%" height="100%">
-        <RadarChart outerRadius={90} data={data}>
-          <PolarGrid />
-          <PolarAngleAxis dataKey="skill" />
-          <Radar dataKey="level" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
-          {/* <Legend /> */}
-          <Tooltip />
-        </RadarChart>
-      </ResponsiveContainer>
+    <div className={styles.root}>
+      <h2 className={styles.root_title}>Характеристика сотрудника</h2>
+      <div className={styles.root__chartWrapper}>
+        <ResponsiveContainer className={styles.root__chart} width="100%" height="100%">
+          <RadarChart data={data}>
+            <PolarGrid />
+            <PolarAngleAxis dataKey="skill" />
+            <Radar dataKey="level" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
+            <Tooltip />
+          </RadarChart>
+        </ResponsiveContainer>
+      </div>
     </div>
   );
 };
