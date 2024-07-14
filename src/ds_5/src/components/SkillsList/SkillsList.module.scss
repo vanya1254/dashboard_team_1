@@ -60,9 +60,9 @@
   }
 
   &__skills {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     // gap: 16px;
     width: 100%;
     height: 100%;
@@ -89,9 +89,8 @@
         overflow: auto;
         max-height: 200px;
 
-        background-color: $greenColor;
-
-        li {
+        background-color: $opacityGreenColor;
+        border-radius: 6px li {
           list-style: disc;
         }
       }
