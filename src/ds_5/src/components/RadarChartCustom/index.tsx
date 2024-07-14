@@ -32,7 +32,7 @@ export const RadarChartCustom: React.FC = () => {
           <RadarChart data={data}>
             <PolarGrid />
             <PolarAngleAxis dataKey="skill" />
-            <Radar dataKey="level" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
+            <Radar dataKey="level" stroke="#c2eab4" fill="#c2eab4" fillOpacity={0.6} />
             <Tooltip />
           </RadarChart>
         </ResponsiveContainer>
