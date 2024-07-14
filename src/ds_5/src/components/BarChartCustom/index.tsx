@@ -1,79 +1,65 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ResponsiveContainer, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Bar, Rectangle } from 'recharts';
+import { ResponsiveContainer, BarChart, XAxis, YAxis, Tooltip, Bar } from 'recharts';
 
 import styles from './BarChartCustom.module.scss';
 
 const data = [
   {
-    name: 'Page A',
-    uv: 4000,
-    pv: 2400,
-    amt: 2400
+    skill: 'SQL',
+    prev: 33,
+    cur: 55
   },
   {
-    name: 'Page B',
-    uv: 3000,
-    pv: 1398,
-    amt: 2210
+    skill: 'JS',
+    prev: 33,
+    cur: 55
   },
   {
-    name: 'Page C',
-    uv: 2000,
-    pv: 9800,
-    amt: 2290
+    skill: 'HTML',
+    prev: 33,
+    cur: 55
   },
   {
-    name: 'Page D',
-    uv: 2780,
-    pv: 3908,
-    amt: 2000
+    skill: 'PYTHON',
+    prev: 33,
+    cur: 55
   },
   {
-    name: 'Page E',
-    uv: 1890,
-    pv: 4800,
-    amt: 2181
-  },
-  {
-    name: 'Page F',
-    uv: 2390,
-    pv: 3800,
-    amt: 2500
-  },
-  {
-    name: 'Page G',
-    uv: 3490,
-    pv: 4300,
-    amt: 2100
+    skill: 'C++',
+    prev: 33,
+    cur: 55
   }
 ];
+
+const ticksLabels = { 0: 'Novice', 25: 'Junior', 50: 'Middle', 75: 'Senior', 100: 'Expert' };
+const ticks = [0, 25, 50, 75, 100];
 
 export const BarChartCustom: React.FC = () => {
   return (
     <div className={styles.root}>
       <div style={{ width: '1129px', height: `263px` }}>
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart
-            width={500}
-            height={300}
-            data={data}
-            margin={{
-              top: 5,
-              right: 30,
-              left: 20,
-              bottom: 5
-            }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
+          <BarChart width={500} height={300} data={data}>
+            <XAxis dataKey="skill" />
+            <YAxis ticks={ticks} tick={CustomizedTick} />
             <Tooltip />
-            <Legend />
-            <Bar dataKey="pv" fill="#82ca9d" activeBar={<Rectangle fill="pink" stroke="blue" />} />
-            <Bar dataKey="uv" fill="#8884d8" activeBar={<Rectangle fill="gold" stroke="purple" />} />
+            <Bar dataKey="prev" fill="#82ca9d" />
+            <Bar dataKey="cur" fill="#8884d8" />
           </BarChart>
         </ResponsiveContainer>
       </div>
     </div>
+  );
+};
+
+const CustomizedTick = (props) => {
+  const { x, y, stroke, payload } = props;
+
+  return (
+    <g transform={`translate(${x},${y})`}>
+      <text x={0} y={0} dy={2} fill="#666" textAnchor="end">
+        {ticksLabels[payload.value]}
+      </text>
+    </g>
   );
 };
