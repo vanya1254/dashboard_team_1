@@ -1,11 +1,21 @@
-$mainColor: #ffffff;
-$secondColor: #9c9393;
-$activeColor: #444444;
-$borderColor: #bebebe;
-$greenColor: #c2eab4;
-$opacityGreenColor: rgba(194, 234, 180, 0.6);
+$bgLinear: linear-gradient(183deg, #7d96cb 79.14%, #3e4b65 123.35%);
 
-$heightHeader: 64px;
+$bgInfoColor: #adbcdc;
+$whiteColor: #ffffff;
+$btnColor: #8da5d6;
+$titleColor: #7689ad;
+$secondColor: #516181;
+$activeColor: #515e78;
+$borderColor: #bebebe;
+$purpleColor: #ef8eff;
+
+$heightHeader: 86px;
 
 $horPadding: 32px;
 $verPadding: 16px;
+
+$maingap: 20px;
+
+$mainBR: 4px;
+
+$frDesktop: calc(33.333333% - 40px);

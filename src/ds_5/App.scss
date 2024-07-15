@@ -18,7 +18,7 @@ p {
 .App {
   color: #151515;
   font-size: 15px;
-  padding: 25px 32px;
+  padding: 0 32px 32px 32px;
   font-family: 'PT Sans', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   overflow-y: scroll;
@@ -88,6 +88,10 @@ p {
 .VizelDashlet__Header,
 .chart-header {
   display: none;
+}
+
+.Vizel .VizelInternal {
+  background: $bgLinear;
 }
 
 /* Reset and base styles  */
@@ -189,5 +193,22 @@ label {
   background-color: $activeColor;
 }
 .activeSkill {
-  background-color: $greenColor;
+  background-color: $bgInfoColor;
+}
+
+svg.recharts-surface {
+  g.recharts-polar-grid {
+    g.recharts-polar-grid-angle {
+      line {
+        stroke: #000;
+      }
+    }
+
+    g.recharts-polar-grid-concentric {
+      path {
+        stroke: #000;
+        // fill: #dae6ff;
+      }
+    }
+  }
 }

@@ -1,8 +1,8 @@
 import React from 'react';
 import { CustomizedLayoutI } from '../../types/global';
 
-import styles from './MainGridLayout.module.scss';
+import styles from './CardLayout.module.scss';
 
-export const MainGridLayout: React.FC<CustomizedLayoutI> = ({ className, children }) => {
+export const CardLayout: React.FC<CustomizedLayoutI> = ({ children, className }) => {
   return <div className={`${styles.root}${className ? ` ${className}` : ''}`}>{children}</div>;
 };

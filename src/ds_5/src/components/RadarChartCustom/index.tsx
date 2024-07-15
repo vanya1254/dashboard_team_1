@@ -10,33 +10,32 @@ import {
   ResponsiveContainer
 } from 'recharts';
 
+import { DashletLayout } from '../../layouts/DashletLayout';
+
 import styles from './RadarCharCustom.module.scss';
 
 const data = [
-  { skill: 'databases', level: 89, fullMark: 100 },
-  { skill: 'tools', level: 55, fullMark: 100 },
-  { skill: 'platforms', level: 77, fullMark: 100 },
-  { skill: 'spheres', level: 100, fullMark: 100 },
-  { skill: 'technologies', level: 89, fullMark: 100 },
-  { skill: 'types system', level: 55, fullMark: 100 },
-  { skill: 'frameworks', level: 55, fullMark: 100 },
-  { skill: 'languages', level: 55, fullMark: 100 }
+  { skill: 'databases', level: 1, fullMark: 4 },
+  { skill: 'tools', level: 1, fullMark: 4 },
+  { skill: 'platforms', level: 2, fullMark: 4 },
+  { skill: 'spheres', level: 3, fullMark: 4 },
+  { skill: 'technologies', level: 4, fullMark: 4 },
+  { skill: 'types system', level: 3, fullMark: 4 },
+  { skill: 'frameworks', level: 0, fullMark: 4 },
+  { skill: 'languages', level: 2, fullMark: 4 }
 ];
 
 export const RadarChartCustom: React.FC = () => {
   return (
-    <div className={styles.root}>
-      <h2 className={styles.root_title}>Характеристика сотрудника</h2>
-      <div className={styles.root__chartWrapper}>
-        <ResponsiveContainer className={styles.root__chart} width="100%" height="100%">
-          <RadarChart data={data}>
-            <PolarGrid />
-            <PolarAngleAxis dataKey="skill" />
-            <Radar dataKey="level" stroke="#c2eab4" fill="#c2eab4" fillOpacity={0.6} />
-            <Tooltip />
-          </RadarChart>
-        </ResponsiveContainer>
-      </div>
-    </div>
+    <DashletLayout title="Характеристика сотрудника" width={'571px'} height={'464px'} className={styles.root}>
+      <ResponsiveContainer className={styles.root__chart} width="100%" height="100%">
+        <RadarChart style={{ fill: '#fff' }} outerRadius={'90%'} data={data}>
+          <PolarAngleAxis dataKey="skill" />
+          <PolarGrid />
+          <Radar dataKey="level" stroke="#ef8eff" fill="#ef8eff" fillOpacity={0.6} />
+          <Tooltip />
+        </RadarChart>
+      </ResponsiveContainer>
+    </DashletLayout>
   );
 };

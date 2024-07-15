@@ -3,7 +3,7 @@
 
 .root {
   //   display: flex;
-  padding: $verPadding $horPadding;
+  padding: 27px $horPadding;
 
   &__nav {
     display: grid;
@@ -39,6 +39,16 @@
       &:hover {
         @include btnHover();
       }
+    }
+
+    &_left {
+      border-top-left-radius: $mainBR;
+      border-bottom-left-radius: $mainBR;
+    }
+
+    &_right {
+      border-top-right-radius: $mainBR;
+      border-bottom-right-radius: $mainBR;
     }
   }
 }

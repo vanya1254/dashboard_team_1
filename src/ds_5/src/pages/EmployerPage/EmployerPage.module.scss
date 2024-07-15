@@ -1,16 +1,22 @@
-.root {
-  &__bar {
-    display: flex;
-    width: 100%;
-    grid-column-start: 1;
-    grid-column-end: 3;
-    grid-row-start: 2;
-    grid-row-end: 3;
-  }
+@import '../../styles/vars';
 
-  &__emp {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+.root {
+  &__filter {
+    grid-area: filters;
+  }
+  &__categories {
+    grid-area: categories;
+  }
+  &__radar {
+    grid-area: radar;
+  }
+  &__employee {
+    grid-area: employee;
+  }
+  &__upgrade {
+    grid-area: upgrade;
+  }
+  &__bar {
+    grid-area: bar;
   }
 }

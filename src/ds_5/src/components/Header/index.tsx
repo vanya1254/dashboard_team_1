@@ -23,13 +23,17 @@ export const Header: React.FC = () => {
         </button>
         <div className={styles.root__dashboards}>
           <button
-            className={`${styles.root__dashboards_btn}${dboard === '1' ? ' active' : ''}`}
+            className={`${styles.root__dashboards_btn} ${styles.root__dashboards_left}${
+              dboard === '1' ? ' active' : ''
+            }`}
             onClick={() => onClickDboard('1')}
           >
             Сотрудник
           </button>
           <button
-            className={`${styles.root__dashboards_btn}${dboard === '2' ? ' active' : ''}`}
+            className={`${styles.root__dashboards_btn} ${styles.root__dashboards_right}${
+              dboard === '2' ? ' active' : ''
+            }`}
             onClick={() => onClickDboard('2')}
           >
             Департамент

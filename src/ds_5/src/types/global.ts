@@ -7,3 +7,7 @@ export interface ChildrenI {
 export interface CustomizedI {
   className?: string;
 }
+
+export interface CustomizedLayoutI extends ChildrenI {
+  className?: string;
+}

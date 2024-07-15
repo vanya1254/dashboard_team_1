@@ -2,13 +2,23 @@
 
 @mixin btnStyles() {
   padding: 6px 12px;
-  background-color: $secondColor;
-  color: $mainColor;
-  border-radius: 8px;
+  background-color: $btnColor;
+  color: $whiteColor;
+  border-radius: $mainBR;
 
   transition: 0.3s ease-in-out;
 }
 
 @mixin btnHover() {
   opacity: 0.8;
+}
+
+@mixin titleDashletStyles {
+  width: fit-content;
+  padding: 6px 12px;
+  background-color: $titleColor;
+  border-radius: $mainBR;
+
+  color: $whiteColor;
+  font-size: 1rem;
 }

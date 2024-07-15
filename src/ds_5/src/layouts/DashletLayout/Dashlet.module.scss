@@ -1,5 +1,17 @@
+@import '../../styles/vars';
+@import '../../styles/mixins';
+
 .root {
-  padding: 32px;
-  //   width: 500px;
-  //   height: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  &_title {
+    @include titleDashletStyles();
+  }
+
+  &__chartWrapper {
+    display: flex;
+    align-self: center;
+  }
 }

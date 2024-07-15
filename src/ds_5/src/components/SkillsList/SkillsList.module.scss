@@ -6,13 +6,15 @@
   display: flex;
   flex-direction: column;
   align-items: start;
-  gap: 10%;
+  gap: 16px;
   width: 100%;
 
   &_btn {
     @include btnStyles();
 
-    border-radius: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 
     &:hover {
       @include btnHover();
@@ -28,9 +30,9 @@
     width: 200px;
     height: fit-content;
     padding: 10px;
-    background-color: $mainColor;
+    background-color: $bgInfoColor;
     box-shadow: inset 0px 0px 0px 1px $borderColor;
-    border-radius: 6px;
+    border-radius: $mainBR;
 
     display: none;
 
@@ -47,13 +49,13 @@
 
       li {
         padding: 4px 8px;
-        border-radius: 4px;
+        border-radius: $mainBR;
         cursor: pointer;
         transition: 0.3s ease-in-out;
 
         &:hover {
           opacity: 0.8;
-          background-color: $greenColor;
+          background-color: $bgInfoColor;
         }
       }
     }
@@ -61,19 +63,17 @@
 
   &__skills {
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
-    // gap: 16px;
     width: 100%;
-    height: 100%;
 
     &__list {
       display: flex;
       flex-direction: column;
-      gap: 16px;
-      width: 100%;
+      gap: 10px;
+      width: 45%;
 
       h3 {
+        color: $whiteColor;
         font-size: 1rem;
         font-weight: 600;
       }
@@ -84,14 +84,31 @@
         gap: 8px;
 
         margin-bottom: 0;
-        padding: 12px 24px;
-        margin-left: 24px;
+        padding: 16px;
         overflow: auto;
-        max-height: 200px;
+        height: 148px;
 
-        background-color: $opacityGreenColor;
-        border-radius: 6px li {
-          list-style: disc;
+        background-color: $bgInfoColor;
+        border-radius: 6px;
+
+        li {
+          position: relative;
+
+          padding-left: 20px;
+
+          background-color: $whiteColor;
+
+          &::before {
+            position: absolute;
+            content: '';
+            top: 0.5rem;
+            left: 10px;
+
+            width: 4px;
+            height: 4px;
+            border-radius: 100%;
+            background-color: black;
+          }
         }
       }
     }

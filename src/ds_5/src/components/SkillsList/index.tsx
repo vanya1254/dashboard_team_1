@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { RiFilter2Fill } from 'react-icons/ri';
 
 import styles from './SkillsList.module.scss';
 
@@ -66,7 +67,8 @@ export const SkillsList: React.FC = () => {
   return (
     <div className={styles.root}>
       <button className={styles.root_btn} onClick={onClickCategories}>
-        Категория навыков
+        <RiFilter2Fill />
+        <span>Категория навыков</span>
       </button>
       <div className={`${styles.root__categories}${isOpen ? ` ${styles.root__categories_activated}` : ''}`}>
         <ul>
