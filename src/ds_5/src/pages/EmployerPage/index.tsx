@@ -1,12 +1,11 @@
 import React from 'react';
 
 import { MainGridLayout } from '../../layouts/MainGridLayout';
-import { EmployeeCard, RadarChartCustom, SkillsList } from '../../components';
+import { CardLayout } from '../../layouts/CardLayout';
+
+import { BarChartCustom, EmployeeCard, RadarChartCustom, SkillsList, StackedAreaChartCustom } from '../../components';
 
 import styles from './EmployerPage.module.scss';
-import { BarChartCustom } from '../../components/BarChartCustom';
-import { CardLayout } from '../../layouts/CardLayout';
-import { DashletLayout } from '../../layouts/DashletLayout';
 
 const EmployerPage: React.FC = () => {
   return (
@@ -18,7 +17,9 @@ const EmployerPage: React.FC = () => {
       <CardLayout className={styles.root__categories}>
         <SkillsList />
       </CardLayout>
-      <CardLayout className={styles.root__upgrade}>[]</CardLayout>
+      <CardLayout className={styles.root__upgrade}>
+        <StackedAreaChartCustom />
+      </CardLayout>
       <CardLayout className={styles.root__radar}>
         <RadarChartCustom />
       </CardLayout>
