@@ -82,7 +82,7 @@ export const SkillsList: React.FC = () => {
       <div className={styles.root__skills}>
         <div className={styles.root__skills__list}>
           <h3>Текущие навыки:</h3>
-          <ul>
+          <ul className="scroll">
             {data[activeSkill].curSkills.map((cSkill, i) => (
               <li key={i}>{cSkill}</li>
             ))}
@@ -90,7 +90,7 @@ export const SkillsList: React.FC = () => {
         </div>
         <div className={styles.root__skills__list}>
           <h3>Область развития:</h3>
-          <ul>
+          <ul className="scroll">
             {data[activeSkill].development.map((dSkill, i) => (
               <li key={i}>{dSkill}</li>
             ))}
