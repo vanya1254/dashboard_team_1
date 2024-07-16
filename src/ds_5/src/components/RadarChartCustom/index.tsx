@@ -27,7 +27,14 @@ const data = [
 
 export const RadarChartCustom: React.FC = () => {
   return (
-    <DashletLayout title="Характеристика сотрудника" width={'571px'} height={'464px'} className={styles.root}>
+    <DashletLayout
+      title="Характеристика сотрудника"
+      // width={'571px'}
+      // height={'460px'}
+      width={'calc((1vh + 1vw)* 19.8269)'}
+      height={'calc((1vh + 1vw)* 15.9727)'}
+      className={styles.root}
+    >
       <ResponsiveContainer className={styles.root__chart} width="100%" height="100%">
         <RadarChart style={{ fill: '#fff' }} outerRadius={'90%'} data={data}>
           <PolarAngleAxis dataKey="skill" />
