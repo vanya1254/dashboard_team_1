@@ -1,2 +1,43 @@
+@import '../../styles/mixins';
+@import '../../styles/vars';
+
 .root {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  &_search {
+    background-color: $btnColor;
+    border-radius: $mainBR;
+    color: black;
+
+    width: 100%;
+    min-width: 136px;
+    height: 100%;
+    padding: 4px 12px;
+
+    &::-webkit-input-placeholder {
+      color: white;
+    }
+    &::-moz-placeholder {
+      color: white;
+    } /* Firefox 19+ */
+    &:-moz-placeholder {
+      color: white;
+    } /* Firefox 18- */
+    &:-ms-input-placeholder {
+      color: white;
+    }
+  }
+
+  &_btn {
+    @include btnStyles();
+
+    height: 100%;
+    line-height: 0;
+
+    &:hover {
+      @include btnHover();
+    }
+  }
 }
