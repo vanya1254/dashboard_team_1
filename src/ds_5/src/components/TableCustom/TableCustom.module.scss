@@ -1,42 +1,37 @@
+@import '../../styles/vars';
+
 .root {
-}
-table {
-  border-collapse: collapse;
-  border: 2px solid rgb(140 140 140);
-  font-family: sans-serif;
-  font-size: 0.8rem;
-  letter-spacing: 1px;
-}
+  display: grid;
+  grid-template-rows: repeat(3, 33px);
+  gap: 12px;
 
-caption {
-  caption-side: bottom;
-  padding: 10px;
-  font-weight: bold;
-}
+  padding: 16px;
+  margin-bottom: 0;
+  max-height: calc($index * 6.05);
+  height: 100%;
+  overflow: auto;
 
-thead,
-tfoot {
-  background-color: rgb(228 240 245);
-}
+  background-color: $bgInfoColor;
+  border-radius: 6px;
 
-th,
-td {
-  border: 1px solid rgb(160 160 160);
-  padding: 8px 10px;
-}
+  &__row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
 
-td:last-of-type {
-  text-align: center;
-}
+    border-radius: $mainBR;
+    background-color: $whiteColor;
 
-tbody > tr:nth-of-type(even) {
-  background-color: rgb(237 238 242);
-}
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
 
-tfoot th {
-  text-align: right;
-}
+    &:hover {
+      -webkit-box-shadow: 0px 0px 6px 6px rgba(0, 0, 0, 0.2);
+      -moz-box-shadow: 0px 0px 6px 6px rgba(0, 0, 0, 0.2);
+      box-shadow: 0px 0px 6px 6px rgba(0, 0, 0, 0.2);
+    }
+  }
 
-tfoot td {
-  font-weight: bold;
+  &__col {
+    padding: 8px 10px;
+  }
 }

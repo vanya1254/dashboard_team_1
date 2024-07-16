@@ -14,27 +14,16 @@ const columns = [
 
 export const TableCustom: React.FC<TableCustomPropsT> = ({ rows }) => {
   return (
-    <table className={styles.root}>
-      <thead className={styles.root__head}>
-        <tr>
+    <ul className={`${styles.root} scroll`}>
+      {rows.map((row, i) => (
+        <li key={i} className={styles.root__row}>
           {columns.map((col) => (
-            <th key={col.accessor} scope="col">
-              {col.label}
-            </th>
+            <span key={col.accessor} className={styles.root__col}>
+              {row[col.accessor]}
+            </span>
           ))}
-        </tr>
-      </thead>
-      <tbody>
-        {rows.map((row, i) => (
-          <tr key={i}>
-            <th scope="row">{i + 1}</th>
-            {columns.map((col) => (
-              <td key={col.accessor}>{row[col.accessor]}</td>
-            ))}
-          </tr>
-        ))}
-      </tbody>
-      <tfoot></tfoot>
-    </table>
+        </li>
+      ))}
+    </ul>
   );
 };
