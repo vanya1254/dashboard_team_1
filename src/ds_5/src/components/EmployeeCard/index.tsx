@@ -23,14 +23,36 @@ const data = [
 export const EmployeeCard: React.FC = () => {
   return (
     <section className={styles.root}>
-      <div>
-        <div>{/* <img src={employee} alt="employee image" /> */}</div>
-        <div>
-          <ul>{data.map((info, i) => (i < 5 ? <li key={i}>{info.label}</li> : ''))}</ul>
+      <div className={styles.root__left}>
+        <div className={styles.root_img}>{/* <img src={employee} alt="employee image" /> */}</div>
+        <div className={styles.root__info}>
+          <ul>
+            {data.map((info, i) =>
+              i < 5 ? (
+                <li key={i}>
+                  <h4>{info.label}:</h4>
+                  <p>{typeof info.value === 'string' ? info.value : info.value.join(', ')}</p>
+                </li>
+              ) : (
+                ''
+              )
+            )}
+          </ul>
         </div>
       </div>
-      <div>
-        <ul>{data.map((info, i) => (i < 5 ? <li key={i}>{info.label}</li> : ''))}</ul>
+      <div className={styles.root__info}>
+        <ul>
+          {data.map((info, i) =>
+            i >= 5 ? (
+              <li key={i}>
+                <h4>{info.label}:</h4>
+                <p>{typeof info.value === 'string' ? info.value : info.value.join(', ')}</p>
+              </li>
+            ) : (
+              ''
+            )
+          )}
+        </ul>
       </div>
     </section>
   );

@@ -1,74 +1,59 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+
 import { DashletLayout } from '../../layouts/DashletLayout';
+
+import styles from './StackedAreaChartCustom.module.scss';
 
 const data = [
   {
     name: 'Page A',
-    uv: 4000,
-    pv: 2400,
-    amt: 2400
+    prev: 1,
+    cur: 3
   },
   {
     name: 'Page B',
-    uv: 3000,
-    pv: 1398,
-    amt: 2210
+    prev: 2,
+    cur: 3
   },
   {
     name: 'Page C',
-    uv: 2000,
-    pv: 9800,
-    amt: 2290
+    prev: 1,
+    cur: 3
   },
   {
     name: 'Page D',
-    uv: 2780,
-    pv: 3908,
-    amt: 2000
+    prev: 2,
+    cur: 3
   },
   {
     name: 'Page E',
-    uv: 1890,
-    pv: 4800,
-    amt: 2181
+    prev: 2,
+    cur: 2
   },
   {
     name: 'Page F',
-    uv: 2390,
-    pv: 3800,
-    amt: 2500
-  },
-  {
-    name: 'Page G',
-    uv: 3490,
-    pv: 4300,
-    amt: 2100
+    prev: 3,
+    cur: 2
   }
 ];
 
 export const StackedAreaChartCustom: React.FC = () => {
   return (
-    <DashletLayout title={'Динамика улучшения знаний предметной области'} width={'550px'} height={'180px'}>
+    <DashletLayout
+      title={'Динамика улучшения знаний предметной области'}
+      width={'550px'}
+      height={'175px'}
+      className={styles.root}
+    >
       <ResponsiveContainer width="100%" height="100%">
-        <AreaChart
-          width={500}
-          height={400}
-          data={data}
-          margin={{
-            top: 10,
-            right: 30,
-            left: 0,
-            bottom: 0
-          }}
-        >
+        <AreaChart data={data}>
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
+          <XAxis dataKey="name" stroke="#fff" />
+          <YAxis stroke="#fff" />
           <Tooltip />
-          <Area type="monotone" dataKey="uv" stackId="1" stroke="#8884d8" fill="#8884d8" />
-          <Area type="monotone" dataKey="pv" stackId="1" stroke="#82ca9d" fill="#82ca9d" />
-          <Area type="monotone" dataKey="amt" stackId="1" stroke="#ffc658" fill="#ffc658" />
+          <Area type="monotone" dataKey="prev" stroke="#6DA7FF" fill="#6DA7FF" />
+          <Area type="monotone" dataKey="cur" stroke="#E697FF" fill="#E697FF" />
         </AreaChart>
       </ResponsiveContainer>
     </DashletLayout>

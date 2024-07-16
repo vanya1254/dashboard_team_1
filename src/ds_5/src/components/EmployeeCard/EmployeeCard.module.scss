@@ -1,2 +1,60 @@
+@import '../../styles/vars';
+
 .root {
+  display: flex;
+  gap: 12px;
+  height: 100%;
+
+  &_img {
+    width: 194px;
+    height: 194px;
+    padding: 24px 16px;
+
+    background-color: $bgInfoColor;
+    border-radius: 6px;
+  }
+
+  &__left {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  &__info {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    padding: 24px 16px;
+
+    background-color: $bgInfoColor;
+    border-radius: 6px;
+
+    ul {
+      display: flex;
+      flex-direction: column;
+      // gap: 12px;
+      justify-content: space-between;
+
+      width: 100%;
+      margin-bottom: 0;
+
+      li {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        h4 {
+          font-size: 14px;
+        }
+
+        p {
+          font-size: 14px;
+
+          background-color: $whiteColor;
+          padding: 4px 6px;
+          border-radius: $mainBR;
+        }
+      }
+    }
+  }
 }

@@ -62,7 +62,14 @@ const CustomizedTick = (props) => {
 
   return (
     <g transform={`translate(${x},${y})`}>
-      <text x={0} y={0} dy={2} fill="#fff" textAnchor="end">
+      <text
+        x={0}
+        y={0}
+        dy={2}
+        fill="#fff"
+        textAnchor="end"
+        // fontFamily="sans-serif"
+      >
         {ticksLabels[payload.value]}
       </text>
     </g>
