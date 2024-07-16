@@ -3,14 +3,23 @@ import React from 'react';
 import { MainGridLayout } from '../../layouts/MainGridLayout';
 import { CardLayout } from '../../layouts/CardLayout';
 
-import { BarChartCustom, EmployeeCard, RadarChartCustom, SkillsList, StackedAreaChartCustom } from '../../components';
+import {
+  BarChartCustom,
+  EmployeeCard,
+  EmployesList,
+  RadarChartCustom,
+  SkillsList,
+  StackedAreaChartCustom
+} from '../../components';
 
 import styles from './EmployerPage.module.scss';
 
 const EmployerPage: React.FC = () => {
   return (
     <MainGridLayout>
-      <CardLayout className={styles.root__filters}>[]</CardLayout>
+      <CardLayout className={styles.root__filters}>
+        <EmployesList />
+      </CardLayout>
       <CardLayout className={styles.root__employee}>
         <EmployeeCard />
       </CardLayout>

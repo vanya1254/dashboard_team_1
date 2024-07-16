@@ -73,7 +73,7 @@ export const SkillsList: React.FC = () => {
       <div className={`${styles.root__categories}${isOpen ? ` ${styles.root__categories_activated}` : ''}`}>
         <ul>
           {data.map((skill, i) => (
-            <li className={`${activeSkill === i ? ` activeSkill` : ''}`} key={i} onClick={() => onClickSkill(i)}>
+            <li className={`${activeSkill === i ? ` activeOption` : ''}`} key={i} onClick={() => onClickSkill(i)}>
               {skill.skill}
             </li>
           ))}

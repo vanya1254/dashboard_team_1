@@ -1,0 +1,58 @@
+@import '../../styles/mixins';
+@import '../../styles/vars';
+
+.root {
+  position: relative;
+
+  &_btn {
+    @include btnStyles();
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    &:hover {
+      @include btnHover();
+    }
+  }
+
+  &__options {
+    position: absolute;
+    top: 39px;
+    left: 0;
+    z-index: 10;
+
+    width: 200px;
+    height: fit-content;
+    padding: 10px;
+    background-color: $bgInfoColor;
+    box-shadow: inset 0px 0px 0px 1px $borderColor;
+    border-radius: $mainBR;
+
+    display: none;
+
+    &_activated {
+      display: block;
+    }
+
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      justify-content: center;
+      margin-bottom: 0;
+
+      li {
+        padding: 4px 8px;
+        border-radius: $mainBR;
+        cursor: pointer;
+        transition: 0.3s ease-in-out;
+
+        &:hover {
+          opacity: 0.8;
+          background-color: $btnColor;
+        }
+      }
+    }
+  }
+}

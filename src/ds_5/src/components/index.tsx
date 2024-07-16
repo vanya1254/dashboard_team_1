@@ -6,3 +6,7 @@ export { SkillsList } from './SkillsList';
 export { EmployeeCard } from './EmployeeCard';
 export { StackedAreaChartCustom } from './StackedAreaChartCustom';
 export { BarChartCustom } from './BarChartCustom';
+export { SelectCustom } from './SelectCustom';
+export { Filters } from './Filters';
+export { TableCustom } from './TableCustom';
+export { EmployesList } from './EmployesList';
