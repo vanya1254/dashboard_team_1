@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 
 import { store } from './src/redux/store';
 
-import EmployerPage from './src/pages/EmployerPage';
+import EmployerPage from './src/pages/EmployeePage';
 import DepartmentPage from './src/pages/DepartmentPage';
 
 import { Route, Header } from './src/components';

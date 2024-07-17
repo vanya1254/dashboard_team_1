@@ -1,0 +1,25 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  width: 100%;
+  height: 100%;
+
+  &__filters {
+    width: fit-content;
+  }
+
+  &__grid {
+  }
+
+  &__deps {
+    grid-area: deps;
+  }
+  &__skills {
+    grid-area: skills;
+  }
+  &__dynamic {
+    grid-area: dynamic;
+  }
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { MainGridLayout } from '../../layouts/MainGridLayout';
+import { EmployeeGridLayout } from '../../layouts/EmployeeGridLayout';
 import { CardLayout } from '../../layouts/CardLayout';
 
 import {
@@ -12,11 +12,11 @@ import {
   StackedAreaChartCustom
 } from '../../components';
 
-import styles from './EmployerPage.module.scss';
+import styles from './EmployeePage.module.scss';
 
 const EmployerPage: React.FC = () => {
   return (
-    <MainGridLayout>
+    <EmployeeGridLayout>
       <CardLayout className={styles.root__filters}>
         <EmployesList />
       </CardLayout>
@@ -35,7 +35,7 @@ const EmployerPage: React.FC = () => {
       <CardLayout className={styles.root__bar}>
         <BarChartCustom />
       </CardLayout>
-    </MainGridLayout>
+    </EmployeeGridLayout>
   );
 };
 
