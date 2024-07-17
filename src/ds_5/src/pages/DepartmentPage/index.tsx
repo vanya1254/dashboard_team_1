@@ -3,14 +3,16 @@ import React from 'react';
 import { DepartmentGridLayout } from '../../layouts/DepartmentGridLayout';
 import { CardLayout } from '../../layouts/CardLayout';
 
-import { SimpleAreaChartCustom, TreemapCustom } from '../../components';
+import { DepFilters, SimpleAreaChartCustom, StackedMixBarChart, TreemapCustom } from '../../components';
 
 import styles from './DepartmentPage.module.scss';
 
 const DepartmentPage: React.FC = () => {
   return (
     <section className={styles.root}>
-      <CardLayout className={styles.root__filters}>[]</CardLayout>
+      <CardLayout className={styles.root__filters}>
+        <DepFilters />
+      </CardLayout>
       <DepartmentGridLayout className={styles.root__grid}>
         <CardLayout className={styles.root__deps}>
           <TreemapCustom />
@@ -18,7 +20,9 @@ const DepartmentPage: React.FC = () => {
         <CardLayout className={styles.root__skills}>
           <SimpleAreaChartCustom />
         </CardLayout>
-        <CardLayout className={styles.root__dynamic}>[]</CardLayout>
+        <CardLayout className={styles.root__dynamic}>
+          <StackedMixBarChart />
+        </CardLayout>
       </DepartmentGridLayout>
     </section>
   );

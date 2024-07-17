@@ -12,3 +12,5 @@ export { TableCustom } from './TableCustom';
 export { EmployesList } from './EmployesList';
 export { TreemapCustom } from './TreemapCustom';
 export { SimpleAreaChartCustom } from './SimpleAreaChartCustom';
+export { StackedMixBarChart } from './StackedMixBarChart';
+export { DepFilters } from './DepFilters';

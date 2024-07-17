@@ -1,0 +1,20 @@
+@import '../../styles/vars';
+
+.root {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  &_title {
+    font-size: 1rem;
+    color: $whiteColor;
+    // background-color: $titleColor;
+    border-radius: $mainBR;
+    align-self: center;
+  }
+
+  &__filters {
+    display: flex;
+    gap: 16px;
+  }
+}
