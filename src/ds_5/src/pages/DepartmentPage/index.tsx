@@ -3,7 +3,7 @@ import React from 'react';
 import { DepartmentGridLayout } from '../../layouts/DepartmentGridLayout';
 import { CardLayout } from '../../layouts/CardLayout';
 
-import { TreemapCustom } from '../../components';
+import { SimpleAreaChartCustom, TreemapCustom } from '../../components';
 
 import styles from './DepartmentPage.module.scss';
 
@@ -15,7 +15,9 @@ const DepartmentPage: React.FC = () => {
         <CardLayout className={styles.root__deps}>
           <TreemapCustom />
         </CardLayout>
-        <CardLayout className={styles.root__skills}>[]</CardLayout>
+        <CardLayout className={styles.root__skills}>
+          <SimpleAreaChartCustom />
+        </CardLayout>
         <CardLayout className={styles.root__dynamic}>[]</CardLayout>
       </DepartmentGridLayout>
     </section>
