@@ -29,9 +29,6 @@ export const RadarChartCustom: React.FC = () => {
   return (
     <DashletLayout
       title="Характеристика сотрудника"
-      // width={'571px'}
-      // height={'460px'}
-      // width={'100%'}
       width={'calc((1vh + 1vw)* 19.8269)'}
       height={'calc((1vh + 1vw)* 15.9727)'}
       className={styles.root}

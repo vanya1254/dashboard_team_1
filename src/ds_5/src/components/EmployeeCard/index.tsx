@@ -6,8 +6,6 @@ import styles from './EmployeeCard.module.scss';
 
 const data = [
   { label: 'ФИО', value: 'Иван Иванов' },
-  { label: 'Должность', value: ['Разработчик'] },
-  { label: 'Подразделение', value: ['Отдел разработки'] },
   { label: 'Образование', value: ['Высшее'] },
   { label: 'Иностранные языки', value: ['Английский', 'Немецкий'] },
   { label: 'Инструменты', value: ['VS Code', 'Git'] },
@@ -28,7 +26,7 @@ export const EmployeeCard: React.FC = () => {
         <div className={styles.root__info}>
           <ul>
             {data.map((info, i) =>
-              i < 5 ? (
+              i < 3 ? (
                 <li key={i}>
                   <h4>{info.label}:</h4>
                   <p>{typeof info.value === 'string' ? info.value : info.value.join(', ')}</p>
@@ -43,7 +41,7 @@ export const EmployeeCard: React.FC = () => {
       <div className={styles.root__info}>
         <ul>
           {data.map((info, i) =>
-            i >= 5 ? (
+            i >= 3 ? (
               <li key={i}>
                 <h4>{info.label}:</h4>
                 <p>{typeof info.value === 'string' ? info.value : info.value.join(', ')}</p>

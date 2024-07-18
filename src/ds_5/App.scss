@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 @import './src/styles/vars';
 
 h1,
@@ -8,6 +9,7 @@ h5,
 h6 {
   margin: 0;
   font-weight: 700;
+  font-size: inherit;
 }
 
 p {
@@ -15,15 +17,23 @@ p {
   padding: 0;
 }
 
+.theme-light,
+.theme-dark {
+  --font-family: 'Roboto' !important;
+}
+
 .App {
   color: #151515;
-  font-size: 15px;
+  font-size: 14px;
   padding: 0 32px 32px 32px;
-  font-family: 'PT Sans', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Roboto';
   overflow-y: scroll;
   width: 100%;
   min-height: calc(100vh - $heightHeader);
+
+  @media (max-width: 1700px) {
+    font-size: 12px;
+  }
 }
 
 .scroller {
@@ -84,6 +94,13 @@ p {
 .VizelDashlet__Header,
 .chart-header {
   display: none;
+}
+
+.Vizel,
+.VizelInternal {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 /* Reset and base styles  */

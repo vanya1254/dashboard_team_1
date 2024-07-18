@@ -45,8 +45,6 @@ export const StackedAreaChartCustom: React.FC = () => {
   return (
     <DashletLayout
       title={'Динамика улучшения знаний предметной области'}
-      // width={'550px'}
-      // height={'173px'}
       width={'calc((1vh + 1vw) * 19.0977)'}
       height={'calc((1vh + 1vw)* 6.007)'}
       className={styles.root}
