@@ -7,27 +7,27 @@ import styles from './SimpleAreaChartCustom.module.scss';
 
 const data = [
   {
-    name: 'Page A',
+    name: `Фин`,
     value: 20
   },
   {
-    name: 'Page B',
-    value: 35
+    name: `Фарм`,
+    value: 40
   },
   {
-    name: 'Page C',
-    value: 45
+    name: `Строи`,
+    value: 25
   },
   {
-    name: 'Page D',
-    value: 23
+    name: `Рекл`,
+    value: 28
   },
   {
-    name: 'Page E',
+    name: `Нефть`,
     value: 10
   },
   {
-    name: 'Page F',
+    name: `Логист`,
     value: 40
   }
 ];
@@ -45,7 +45,7 @@ export const SimpleAreaChartCustom: React.FC = () => {
           <XAxis dataKey="name" stroke="#fff" />
           <YAxis stroke="#fff" />
           <Tooltip />
-          <Area type="monotone" dataKey="value" stroke="#E697FF" fill="#E697FF" />
+          <Area type="monotone" dataKey="value" stroke="#E697FF" fill="#E697FF" fillOpacity={1} />
         </AreaChart>
       </ResponsiveContainer>
     </DashletLayout>

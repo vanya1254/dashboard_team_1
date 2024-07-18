@@ -8,33 +8,33 @@ import styles from './BarChartCustom.module.scss';
 const data = [
   {
     skill: 'SQL',
-    prev: 33,
-    cur: 55
+    2023: 1,
+    2024: 3
   },
   {
     skill: 'JS',
-    prev: 33,
-    cur: 55
+    2023: 2,
+    2024: 2
   },
   {
     skill: 'HTML',
-    prev: 33,
-    cur: 55
+    2023: 3,
+    2024: 3
   },
   {
     skill: 'PYTHON',
-    prev: 33,
-    cur: 55
+    2023: 3,
+    2024: 4
   },
   {
     skill: 'C++',
-    prev: 33,
-    cur: 55
+    2023: 0,
+    2024: 1
   }
 ];
 
-const ticksLabels = { 0: 'Novice', 25: 'Junior', 50: 'Middle', 75: 'Senior', 100: 'Expert' };
-const ticks = [0, 25, 50, 75, 100];
+const ticksLabels = { 0: 'Novice', 1: 'Junior', 2: 'Middle', 3: 'Senior', 4: 'Expert' };
+const ticks = [0, 1, 2, 3, 4];
 
 export const BarChartCustom: React.FC = () => {
   return (
@@ -51,8 +51,8 @@ export const BarChartCustom: React.FC = () => {
           <XAxis dataKey="skill" stroke="#fff" />
           <YAxis ticks={ticks} tick={CustomizedTick} stroke="#fff" />
           <Tooltip />
-          <Bar dataKey="prev" fill="#6DA7FF" />
-          <Bar dataKey="cur" fill="#ef8eff" />
+          <Bar dataKey="2023" fill="#6DA7FF" />
+          <Bar dataKey="2024" fill="#ef8eff" />
         </BarChart>
       </ResponsiveContainer>
     </DashletLayout>

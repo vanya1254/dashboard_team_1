@@ -75,11 +75,11 @@ export const StackedMixBarChart: React.FC = () => {
   return (
     <DashletLayout className={styles.root} title={'Динамика развития навыков в ДАР'} width={'100%'} height={'270px'}>
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart margin={{ left: 100 }} width={500} height={300} data={data}>
+        <BarChart data={data}>
           <XAxis dataKey="name" stroke="#fff" />
           <YAxis stroke="#fff" tick={() => null} />
           <Tooltip />
-          <Legend align="left" verticalAlign="middle" width={100} margin={{ right: 10 }} />
+          {/* <Legend align="left" verticalAlign="middle" width={100} margin={{ right: 10 }} /> */}
           <Bar dataKey="prevOk" stackId="2023" fill="#8842B4" />
           <Bar dataKey="prevGood" stackId="2023" fill="#E29076" />
           <Bar dataKey="prevPerfect" stackId="2023" fill="#58C5BE" />
