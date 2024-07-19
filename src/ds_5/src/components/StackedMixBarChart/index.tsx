@@ -73,9 +73,14 @@ const data = [
 
 export const StackedMixBarChart: React.FC = () => {
   return (
-    <DashletLayout className={styles.root} title={'Динамика развития навыков в ДАР'} width={'100%'} height={'270px'}>
+    <DashletLayout
+      className={styles.root}
+      title={'Динамика развития навыков в ДАР'}
+      width={'100%'}
+      height={'calc((1vh + 1vw) * 9.375)'}
+    >
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={data}>
+        <BarChart data={data} barGap={0}>
           <XAxis dataKey="name" stroke="#fff" />
           <YAxis stroke="#fff" tick={() => null} />
           <Tooltip />

@@ -37,7 +37,7 @@ export const SimpleAreaChartCustom: React.FC = () => {
     <DashletLayout
       title={'Самый развитый навык в целом по ДАР'}
       width={'100%'}
-      height={'270px'}
+      height={'calc((1vh + 1vw) * 9.375)'}
       className={styles.root}
     >
       <ResponsiveContainer width="100%" height="100%">

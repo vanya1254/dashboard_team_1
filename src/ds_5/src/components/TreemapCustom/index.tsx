@@ -34,7 +34,12 @@ const data = [
 
 export const TreemapCustom: React.FC = () => {
   return (
-    <DashletLayout className={styles.root} title={'Самые развитые подразделенеия'} width={'100%'} height={'270px'}>
+    <DashletLayout
+      className={styles.root}
+      title={'Самые развитые подразделенеия'}
+      width={'100%'}
+      height={'calc((1vh + 1vw) * 9.375)'}
+    >
       {/* <ResponsiveContainer className={styles.root__chart} width="100%" height="100%">
         <Treemap
           data={data}

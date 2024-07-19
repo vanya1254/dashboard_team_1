@@ -45,7 +45,7 @@ export const BarChartCustom: React.FC = () => {
       className={styles.root}
     >
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={data}>
+        <BarChart data={data} barGap={0}>
           <XAxis dataKey="skill" stroke="#fff" />
           <YAxis ticks={ticks} tick={CustomizedTick} stroke="#fff" />
           <Tooltip />
