@@ -1,9 +1,9 @@
 import React from 'react';
-import { ResponsiveContainer, Treemap } from 'recharts';
 import { TagCloud } from 'react-tagcloud';
 
-import styles from './TreemapCustom.module.scss';
 import { DashletLayout } from '../../layouts/DashletLayout';
+
+import styles from './TagCloudCustom.module.scss';
 
 const data = [
   {
@@ -32,7 +32,14 @@ const data = [
   }
 ];
 
-export const TreemapCustom: React.FC = () => {
+const colors = {
+  blue: '#6DA7FF',
+  purple: '#8842B4',
+  orange: '#E29076',
+  green: '#58C5BE'
+};
+
+export const TagCloudCustom: React.FC = () => {
   return (
     <DashletLayout
       className={styles.root}
@@ -40,17 +47,7 @@ export const TreemapCustom: React.FC = () => {
       width={'100%'}
       height={'calc((1vh + 1vw) * 9.375)'}
     >
-      {/* <ResponsiveContainer className={styles.root__chart} width="100%" height="100%">
-        <Treemap
-          data={data}
-          dataKey="size"
-          aspectRatio={4 / 3}
-          stroke="#fff"
-          fill="#EF8EFF"
-          isAnimationActive={false}
-        />
-      </ResponsiveContainer> */}
-      <TagCloud minSize={14} maxSize={48} tags={data} className={styles.root__chart} />
+      <TagCloud minSize={12} maxSize={48} tags={data} colorOptions={colors} className={styles.root__chart} />
     </DashletLayout>
   );
 };

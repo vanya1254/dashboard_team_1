@@ -10,7 +10,7 @@ export { SelectCustom } from './SelectCustom';
 export { Filters } from './Filters';
 export { TableCustom } from './TableCustom';
 export { EmployesList } from './EmployesList';
-export { TreemapCustom } from './TreemapCustom';
+export { TagCloudCustom } from './TagCloudCustom';
 export { SimpleAreaChartCustom } from './SimpleAreaChartCustom';
 export { StackedMixBarChart } from './StackedMixBarChart';
 export { DepFilters } from './DepFilters';

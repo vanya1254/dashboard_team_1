@@ -3,7 +3,7 @@ import React from 'react';
 import { DepartmentGridLayout } from '../../layouts/DepartmentGridLayout';
 import { CardLayout } from '../../layouts/CardLayout';
 
-import { DepFilters, SimpleAreaChartCustom, StackedMixBarChart, TreemapCustom } from '../../components';
+import { DepFilters, SimpleAreaChartCustom, StackedMixBarChart, TagCloudCustom } from '../../components';
 
 import styles from './DepartmentPage.module.scss';
 
@@ -15,7 +15,7 @@ const DepartmentPage: React.FC = () => {
       </CardLayout>
       <DepartmentGridLayout className={styles.root__grid}>
         <CardLayout className={styles.root__deps}>
-          <TreemapCustom />
+          <TagCloudCustom />
         </CardLayout>
         <CardLayout className={styles.root__skills}>
           <SimpleAreaChartCustom />
