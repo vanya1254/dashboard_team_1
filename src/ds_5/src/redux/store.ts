@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import employees from './features/employees/slice';
 import filters from './features/filters/slice';
+import filter from './features/filter/slice';
 
 export const store = configureStore({
-  reducer: { employees, filters }
+  reducer: { employees, filters, filter }
 });
 
 export type RootState = ReturnType<typeof store.getState>;

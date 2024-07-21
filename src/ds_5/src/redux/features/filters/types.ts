@@ -1,4 +1,4 @@
-import { AllFiltersT, CommentT, CoobDataI, RequestT, Status } from '../../mainTypes';
+import { CommentT, CoobDataI, RequestT, Status } from '../../mainTypes';
 
 export interface FiltersState {
   filters: CoobDataI[][];

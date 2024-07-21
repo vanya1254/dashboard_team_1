@@ -42,10 +42,7 @@ const initialState: FiltersState = {
 export const filtersSlice = createSlice({
   name: 'filters',
   initialState,
-  reducers: {
-    setFilter: (state, action: PayloadAction<{ name: string; value: string | number }>) => {},
-    clearFilters: (state) => {}
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchFilters.pending, (state) => {
@@ -53,7 +50,13 @@ export const filtersSlice = createSlice({
         state.status = Status.Pending;
       })
       .addCase(fetchFilters.fulfilled, (state, action: PayloadAction<CoobDataI[][]>) => {
-        state.filters = action.payload;
+        state.filters = action.payload.map((filterArr) => {
+          const allFilter = {};
+          allFilter[Object.keys(filterArr[0])[0]] = 'Все';
+          filterArr.unshift(allFilter);
+
+          return filterArr;
+        });
         state.status = Status.Fulfilled;
       })
       .addCase(fetchFilters.rejected, (state) => {
@@ -63,6 +66,6 @@ export const filtersSlice = createSlice({
   }
 });
 
-export const { setFilter, clearFilters } = filtersSlice.actions;
+export const {} = filtersSlice.actions;
 
 export default filtersSlice.reducer;

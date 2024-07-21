@@ -15,7 +15,9 @@ export type KoobIdT = string;
 export type DimensionsT = string[];
 export type MeasuresT = string[];
 export type AllFiltersT = {
-  [key: string]: any[];
+  [key: string]: FilterT;
 };
 export type RequestT = IKoobDataRequest3 | { schema_name: string };
 export type CommentT = string;
+
+export type FilterT = string[] | [string, [string, string], [string, string]];

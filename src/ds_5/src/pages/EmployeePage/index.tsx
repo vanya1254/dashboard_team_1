@@ -1,5 +1,10 @@
 import React, { useEffect } from 'react';
 
+import { useAppDispatch, useAppSelector } from '../../redux/store';
+import { fetchEmployees } from '../../redux/features/employees/slice';
+import { fetchFilters } from '../../redux/features/filters/slice';
+import { filterSelector } from '../../redux/features/filter/selectors';
+
 import { EmployeeGridLayout } from '../../layouts/EmployeeGridLayout';
 import { CardLayout } from '../../layouts/CardLayout';
 
@@ -13,20 +18,19 @@ import {
 } from '../../components';
 
 import styles from './EmployeePage.module.scss';
-import { useAppDispatch } from '../../redux/store';
-import { fetchEmployees } from '../../redux/features/employees/slice';
-import { fetchFilters } from '../../redux/features/filters/slice';
 
 const EmployerPage: React.FC = () => {
   const dispatch = useAppDispatch();
+  const { position, department, fullname } = useAppSelector(filterSelector);
 
   useEffect(() => {
     dispatch(fetchFilters({}));
   }, []);
 
   useEffect(() => {
-    dispatch(fetchEmployees({ measures: [], allFilters: {} }));
-  }, []);
+    dispatch(fetchEmployees({ measures: [], allFilters: { position, department, fullname } }));
+    console.log('after', position, department, fullname);
+  }, [position, department, fullname]);
 
   return (
     <EmployeeGridLayout>
