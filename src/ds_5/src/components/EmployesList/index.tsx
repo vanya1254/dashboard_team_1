@@ -1,4 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+
+import { useAppSelector } from '../../redux/store';
+import { Status } from '../../redux/mainTypes';
+import { employeesSelector } from '../../redux/features/employees/selectors';
+import { filtersSelector } from '../../redux/features/filters/selectors';
 
 import { Filters, TableCustom } from '../';
 
@@ -15,10 +20,12 @@ const rows = [
 ];
 
 export const EmployesList: React.FC = () => {
+  const { employees, status } = useAppSelector(employeesSelector);
+
   return (
     <div className={styles.root}>
       <Filters />
-      <TableCustom rows={rows} />
+      {status === Status.Fulfilled ? <TableCustom rows={employees} /> : 'LOADING'}
     </div>
   );
 };

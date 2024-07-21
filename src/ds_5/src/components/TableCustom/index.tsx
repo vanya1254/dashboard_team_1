@@ -8,8 +8,8 @@ type TableCustomPropsT = {
 
 const columns = [
   { label: 'ФИО', accessor: 'fullname' },
-  { label: 'Должность', accessor: 'employee_post' },
-  { label: 'Подразделение', accessor: 'division' }
+  { label: 'Должность', accessor: 'position' },
+  { label: 'Подразделение', accessor: 'department' }
 ];
 
 export const TableCustom: React.FC<TableCustomPropsT> = ({ rows }) => {

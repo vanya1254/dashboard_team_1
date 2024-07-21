@@ -22,6 +22,8 @@
   }
 
   &__categories {
+    display: none;
+
     position: absolute;
     top: 39px;
     left: 0;
@@ -29,12 +31,13 @@
 
     width: fit-content;
     height: fit-content;
+    max-height: 277px;
+    overflow: auto;
     padding: 10px;
+
     background-color: $optionsColor;
     box-shadow: inset 0px 0px 0px 1px $borderColor;
     border-radius: $mainBR;
-
-    display: none;
 
     &_activated {
       display: block;

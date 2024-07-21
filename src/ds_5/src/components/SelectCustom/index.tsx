@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { RiFilter2Fill } from 'react-icons/ri';
 
+import { CoobDataI } from '../../redux/mainTypes';
+
 import styles from './SelectCustom.module.scss';
 
 type SelectCustomPropsT = {
-  onClickFilter: (filter: string) => void;
+  onClickFilter: (filter: any) => void; //TODO
   selectTitle: string;
-  options: string[];
+  options: CoobDataI[];
 };
 
 export const SelectCustom: React.FC<SelectCustomPropsT> = ({ onClickFilter, selectTitle, options }) => {
@@ -33,7 +35,7 @@ export const SelectCustom: React.FC<SelectCustomPropsT> = ({ onClickFilter, sele
         <ul>
           {options.map((option, i) => (
             <li className={`${activeOption === i ? ` activeOption` : ''}`} key={i} onClick={() => onClickSkill(i)}>
-              {option}
+              {option[Object.keys(options[0])[0]]}
             </li>
           ))}
         </ul>

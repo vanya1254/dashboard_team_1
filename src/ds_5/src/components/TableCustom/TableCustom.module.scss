@@ -2,7 +2,7 @@
 
 .root {
   display: grid;
-  grid-template-rows: repeat(3, 33px);
+  grid-template-rows: repeat(3, 1fr);
   gap: 12px;
 
   padding: 16px;

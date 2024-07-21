@@ -1,10 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 
-import employee from './features/employee/slice';
+import employees from './features/employees/slice';
+import filters from './features/filters/slice';
 
 export const store = configureStore({
-  reducer: { employee }
+  reducer: { employees, filters }
 });
 
 export type RootState = ReturnType<typeof store.getState>;
