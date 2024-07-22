@@ -9,13 +9,17 @@ type SelectCustomPropsT = {
   onClickFilter: (filter: any) => void; //TODO
   selectTitle: string;
   options: CoobDataI[];
+  isReset: boolean;
 };
 
-export const SelectCustom: React.FC<SelectCustomPropsT> = ({ onClickFilter, selectTitle, options }) => {
+export const SelectCustom: React.FC<SelectCustomPropsT> = ({ onClickFilter, selectTitle, options, isReset }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeOption, setActiveOption] = useState(0);
 
   const onClickCategories = () => {
+    if (isReset) {
+      setActiveOption(0);
+    }
     setIsOpen((prev) => !prev);
   };
 

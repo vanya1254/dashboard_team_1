@@ -30,12 +30,14 @@ export const filterSlice = createSlice({
         state.fullname = initialState.fullname;
       }
     },
-    clearCurFilter: (state) => {
-      state.curFilter = initialState.curFilter;
+    clearCurFilters: (state) => {
+      state.position = initialState.position;
+      state.department = initialState.department;
+      state.fullname = initialState.fullname;
     }
   }
 });
 
-export const { setCurFilter, setFullname, clearCurFilter } = filterSlice.actions;
+export const { setCurFilter, setFullname, clearCurFilters } = filterSlice.actions;
 
 export default filterSlice.reducer;

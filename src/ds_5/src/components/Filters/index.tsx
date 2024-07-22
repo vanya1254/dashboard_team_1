@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import debounce from 'lodash.debounce';
 import { FaSortAlphaDown } from 'react-icons/fa';
 import { IoSearch } from 'react-icons/io5';
+import { RiFilterOffFill } from 'react-icons/ri';
 
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { filtersSelector } from '../../redux/features/filters/selectors';
-import { setCurFilter, setFullname } from '../../redux/features/filter/slice';
+import { clearCurFilters, setCurFilter, setFullname } from '../../redux/features/filter/slice';
 
 import { CoobDataI, Status } from '../../redux/mainTypes';
 
@@ -20,8 +21,10 @@ export const Filters: React.FC = () => {
   const dispatch = useAppDispatch();
   const { filters, status } = useAppSelector(filtersSelector);
   const [value, setValue] = useState('');
+  const [isReset, setIsReset] = useState(false);
 
   const onClickFilter = (filter: CoobDataI) => {
+    setIsReset(false);
     dispatch(setCurFilter(filter));
   };
 
@@ -34,6 +37,11 @@ export const Filters: React.FC = () => {
     debounce((value) => dispatch(setFullname(value.toLowerCase())), 404),
     []
   );
+
+  const onClickResetFilters = () => {
+    dispatch(clearCurFilters());
+    setIsReset(true);
+  };
 
   return (
     <div className={styles.root}>
@@ -49,8 +57,18 @@ export const Filters: React.FC = () => {
         </button> */}
       {status === Status.Fulfilled ? (
         <>
-          <SelectCustom onClickFilter={onClickFilter} selectTitle={'Должность'} options={filters[0]} />
-          <SelectCustom onClickFilter={onClickFilter} selectTitle={'Подразделение'} options={filters[1]} />
+          <SelectCustom
+            isReset={isReset}
+            onClickFilter={onClickFilter}
+            selectTitle={'Должность'}
+            options={filters[0]}
+          />
+          <SelectCustom
+            isReset={isReset}
+            onClickFilter={onClickFilter}
+            selectTitle={'Подразделение'}
+            options={filters[1]}
+          />
         </>
       ) : (
         'Loading...'
@@ -58,6 +76,9 @@ export const Filters: React.FC = () => {
       {/* <button className={styles.root_btn}>
         <FaSortAlphaDown />
       </button> */}
+      <button onClick={onClickResetFilters} className={styles.root_btn}>
+        <RiFilterOffFill />
+      </button>
     </div>
   );
 };
