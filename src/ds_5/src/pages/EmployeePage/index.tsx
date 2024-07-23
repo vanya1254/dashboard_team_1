@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { fetchEmployees } from '../../redux/features/employees/slice';
 import { fetchFilters } from '../../redux/features/filters/slice';
 import { filterSelector } from '../../redux/features/filter/selectors';
-import { fetchEmpDash, setEmpSkillsList } from '../../redux/features/empDash/slice';
+import { fetchEmpDash, setEmployee, setEmpSkillsList } from '../../redux/features/empDash/slice';
 
 import { EmployeeGridLayout } from '../../layouts/EmployeeGridLayout';
 import { CardLayout } from '../../layouts/CardLayout';
@@ -20,12 +20,14 @@ import {
 
 import styles from './EmployeePage.module.scss';
 import { empDashSelector } from '../../redux/features/empDash/selectors';
-import { Status } from '../../redux/mainTypes';
+import { EmployeeT, Status } from '../../redux/mainTypes';
+import { employeesSelector } from '../../redux/features/employees/selectors';
 
 const EmployerPage: React.FC = () => {
   const dispatch = useAppDispatch();
   const { position, department, fullname } = useAppSelector(filterSelector);
   const { status } = useAppSelector(empDashSelector);
+  const { employees } = useAppSelector(employeesSelector);
 
   useEffect(() => {
     dispatch(fetchFilters({}));
@@ -42,6 +44,12 @@ const EmployerPage: React.FC = () => {
       dispatch(setEmpSkillsList());
     }
   }, [status]);
+
+  useEffect(() => {
+    if (employees.length) {
+      dispatch(setEmployee(employees[0]));
+    }
+  }, [employees]);
 
   return (
     <EmployeeGridLayout>

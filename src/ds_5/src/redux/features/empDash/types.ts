@@ -1,7 +1,7 @@
-import { CommentT, CoobDataI, RequestT, Status } from '../../mainTypes';
+import { CommentT, CoobDataI, EmployeeT, RequestT, SkillT, Status } from '../../mainTypes';
 
 export interface EmpDashState {
-  employee: string;
+  employee: EmployeeT;
   data: CoobDataI[];
   empSkillsList: SkillT[];
   status: Status;
@@ -10,10 +10,4 @@ export interface EmpDashState {
 export type FetchEmpDashPropsT = {
   request?: RequestT;
   comment?: CommentT;
-};
-
-export type SkillT = {
-  skill: string;
-  curSkills: string[];
-  nextSkills: string[];
 };

@@ -21,3 +21,16 @@ export type RequestT = IKoobDataRequest3 | { schema_name: string };
 export type CommentT = string;
 
 export type FilterT = string[] | [string, [string, string], [string, string]];
+
+export type SkillT = {
+  skill: string;
+  curSkills: string[];
+  nextSkills: string[];
+};
+
+export type EmployeeT = {
+  fullname: string;
+  position: string;
+  department: string;
+  fact_empl_skills_employee_key: number;
+};

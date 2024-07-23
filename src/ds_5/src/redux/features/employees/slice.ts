@@ -4,16 +4,16 @@ import { DIMENSIONS, KOOB_ID, MEASURES, SCHEMA_NAME } from '../../../constants';
 import { EmployeesState, FetchEmployeesPropsT } from './types';
 //@ts-ignore
 import { KoobDataService } from 'bi-internal/services';
-import { CoobDataI, Status } from '../../mainTypes';
+import { CoobDataI, EmployeeT, Status } from '../../mainTypes';
 
 const { koobDataRequest3 } = KoobDataService;
 
 export const fetchEmployees = createAsyncThunk(
   'employees/fetchEmployees',
-  async (params: FetchEmployeesPropsT, thunkAPI): Promise<CoobDataI[]> => {
+  async (params: FetchEmployeesPropsT, thunkAPI): Promise<EmployeeT[]> => {
     const { measures, allFilters, request, comment } = params;
 
-    const response: CoobDataI[] = await koobDataRequest3(
+    const response: EmployeeT[] = await koobDataRequest3(
       KOOB_ID,
       DIMENSIONS.employees,
       measures || MEASURES.employees,
@@ -38,17 +38,14 @@ const initialState: EmployeesState = {
 export const employeesSlice = createSlice({
   name: 'employees',
   initialState,
-  reducers: {
-    setFilter: (state, action: PayloadAction<{ name: string; value: string | number }>) => {},
-    clearFilters: (state) => {}
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchEmployees.pending, (state) => {
         state.employees = initialState.employees;
         state.status = Status.Pending;
       })
-      .addCase(fetchEmployees.fulfilled, (state, action: PayloadAction<CoobDataI[]>) => {
+      .addCase(fetchEmployees.fulfilled, (state, action: PayloadAction<EmployeeT[]>) => {
         state.employees = action.payload;
         state.status = Status.Fulfilled;
       })
@@ -59,6 +56,6 @@ export const employeesSlice = createSlice({
   }
 });
 
-export const { setFilter, clearFilters } = employeesSlice.actions;
+export const {} = employeesSlice.actions;
 
 export default employeesSlice.reducer;

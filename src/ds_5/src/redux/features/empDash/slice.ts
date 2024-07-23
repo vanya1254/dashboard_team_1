@@ -12,7 +12,7 @@ import {
 import { EmpDashState, FetchEmpDashPropsT } from './types';
 //@ts-ignore
 import { KoobDataService } from 'bi-internal/services';
-import { CoobDataI, Status } from '../../mainTypes';
+import { CoobDataI, EmployeeT, Status } from '../../mainTypes';
 
 const { koobDataRequest3 } = KoobDataService;
 
@@ -65,7 +65,7 @@ export const fetchEmpDash = createAsyncThunk(
 );
 
 const initialState: EmpDashState = {
-  employee: '',
+  employee: { fullname: '', position: '', department: '', fact_empl_skills_employee_key: 0 },
   data: [],
   empSkillsList: [],
   status: Status.Pending
@@ -75,6 +75,9 @@ export const empDashSlice = createSlice({
   name: 'empDash',
   initialState,
   reducers: {
+    setEmployee(state, action: PayloadAction<EmployeeT>) {
+      state.employee = action.payload;
+    },
     setEmpSkillsList(state) {
       const processedData = state.data.reduce((acc, item) => {
         const curLevel = SKILL_LEVEL[item.current_skill_level];
@@ -122,6 +125,6 @@ export const empDashSlice = createSlice({
   }
 });
 
-export const { setEmpSkillsList } = empDashSlice.actions;
+export const { setEmployee, setEmpSkillsList } = empDashSlice.actions;
 
 export default empDashSlice.reducer;

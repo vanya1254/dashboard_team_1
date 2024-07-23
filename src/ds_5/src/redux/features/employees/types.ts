@@ -1,7 +1,7 @@
-import { AllFiltersT, CommentT, CoobDataI, MeasuresT, RequestT, Status } from '../../mainTypes';
+import { AllFiltersT, CommentT, CoobDataI, EmployeeT, MeasuresT, RequestT, Status } from '../../mainTypes';
 
 export interface EmployeesState {
-  employees: CoobDataI[];
+  employees: EmployeeT[];
   status: Status;
 }
 
