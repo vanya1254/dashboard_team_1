@@ -13,19 +13,20 @@ import { EmpDashState, FetchEmpDashPropsT } from './types';
 //@ts-ignore
 import { KoobDataService } from 'bi-internal/services';
 import { CoobDataI, EmployeeT, Status } from '../../mainTypes';
+import { RootState } from '../../store';
 
 const { koobDataRequest3 } = KoobDataService;
 
 export const fetchEmpDash = createAsyncThunk(
   'empDash/fetchEmpDash',
   async (params: FetchEmpDashPropsT, thunkAPI): Promise<CoobDataI[]> => {
-    const { request, comment } = params;
+    const { allFilters, request, comment } = params;
 
     const response: CoobDataI[] = await koobDataRequest3(
       KOOB_ID,
       DIMENSIONS.empSkillsList,
       [],
-      { ...DEFAULT_FILTERS.empSkillsList, fullname: ['=', 'Кожевникова Юлия'] },
+      { ...DEFAULT_FILTERS.empSkillsList, ...allFilters },
       /**
        * пришлось расширить request, чтобы передавать schema_name
        */
@@ -61,6 +62,19 @@ export const fetchEmpDash = createAsyncThunk(
     console.log('res', response);
 
     return response;
+  }
+);
+
+export const setEmployeeAndFetchDashboard = createAsyncThunk(
+  'empDash/setEmployeeAndFetchDashboard',
+  async (employees: EmployeeT[], { dispatch, getState }) => {
+    if (employees.length) {
+      dispatch(setEmployee(employees[0]));
+    }
+    const state = getState() as RootState;
+    const { fullname } = state.empDash.employee;
+
+    await dispatch(fetchEmpDash({ allFilters: { fullname: ['=', fullname] } }));
   }
 );
 

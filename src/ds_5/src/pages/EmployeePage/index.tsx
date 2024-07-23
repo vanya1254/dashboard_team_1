@@ -1,10 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { fetchEmployees } from '../../redux/features/employees/slice';
 import { fetchFilters } from '../../redux/features/filters/slice';
 import { filterSelector } from '../../redux/features/filter/selectors';
-import { fetchEmpDash, setEmployee, setEmpSkillsList } from '../../redux/features/empDash/slice';
+import {
+  fetchEmpDash,
+  setEmployee,
+  setEmployeeAndFetchDashboard,
+  setEmpSkillsList
+} from '../../redux/features/empDash/slice';
 
 import { EmployeeGridLayout } from '../../layouts/EmployeeGridLayout';
 import { CardLayout } from '../../layouts/CardLayout';
@@ -25,14 +30,15 @@ import { employeesSelector } from '../../redux/features/employees/selectors';
 
 const EmployerPage: React.FC = () => {
   const dispatch = useAppDispatch();
+  const isFirstLoading = useRef(true);
   const { position, department, fullname } = useAppSelector(filterSelector);
-  const { status } = useAppSelector(empDashSelector);
+  const { employee, status } = useAppSelector(empDashSelector);
   const { employees } = useAppSelector(employeesSelector);
 
   useEffect(() => {
-    dispatch(fetchFilters({}));
-
-    dispatch(fetchEmpDash({}));
+    if (isFirstLoading.current) {
+      dispatch(fetchFilters({}));
+    }
   }, []);
 
   useEffect(() => {
@@ -46,10 +52,14 @@ const EmployerPage: React.FC = () => {
   }, [status]);
 
   useEffect(() => {
-    if (employees.length) {
-      dispatch(setEmployee(employees[0]));
-    }
+    dispatch(setEmployeeAndFetchDashboard(employees));
   }, [employees]);
+
+  useEffect(() => {
+    if (employee.fullname) {
+      dispatch(fetchEmpDash({ allFilters: { fullname: ['=', employee.fullname] } }));
+    }
+  }, [employee]);
 
   return (
     <EmployeeGridLayout>
