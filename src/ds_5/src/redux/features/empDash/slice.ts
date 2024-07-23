@@ -1,15 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import {
-  DEFAULT_FILTERS,
-  DIMENSIONS,
-  EMP_DASHES_REQUESTS,
-  KOOB_ID,
-  MEASURES,
-  SCHEMA_NAME,
-  SKILL_LEVEL,
-  SKILL_TYPES
-} from '../../../constants';
+import { EMP_DASHES_REQUESTS, KOOB_ID, SCHEMA_NAME, SKILL_LEVEL, SKILL_TYPES } from '../../../constants';
 import { EmpDashState, FetchEmpDashPropsT } from './types';
 //@ts-ignore
 import { KoobDataService } from 'bi-internal/services';
@@ -64,7 +55,7 @@ export const fetchEmpDash = createAsyncThunk(
     //   comment || `dashlet`
     // ),
 
-    console.log('res', response[1]);
+    // console.log('res', response[1]);
 
     return response;
   }
