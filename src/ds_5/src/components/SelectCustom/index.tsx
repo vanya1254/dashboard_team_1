@@ -35,7 +35,7 @@ export const SelectCustom: React.FC<SelectCustomPropsT> = ({ onClickFilter, sele
         <RiFilter2Fill />
         <span>{selectTitle}</span>
       </button>
-      <div className={`${styles.root__options}${isOpen ? ` ${styles.root__options_activated}` : ''}`}>
+      <div className={`${styles.root__options}${isOpen ? ` ${styles.root__options_activated}` : ''} scroll`}>
         <ul>
           {options.map((option, i) => (
             <li className={`${activeOption === i ? ` activeOption` : ''}`} key={i} onClick={() => onClickSkill(i)}>

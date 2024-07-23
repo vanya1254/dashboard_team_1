@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { RiFilter2Fill } from 'react-icons/ri';
 
 import styles from './SkillsList.module.scss';
+import { useAppDispatch, useAppSelector } from '../../redux/store';
+import { empDashSelector } from '../../redux/features/empDash/selectors';
 
 const data = [
   {
@@ -52,6 +54,8 @@ const data = [
 ];
 
 export const SkillsList: React.FC = () => {
+  const { empSkillsList } = useAppSelector(empDashSelector);
+
   const [isOpen, setIsOpen] = useState(false);
   const [activeSkill, setActiveSkill] = useState(0);
 
@@ -70,30 +74,32 @@ export const SkillsList: React.FC = () => {
         <RiFilter2Fill />
         <span>Категория навыков</span>
       </button>
-      <div className={`${styles.root__categories}${isOpen ? ` ${styles.root__categories_activated}` : ''}`}>
+      <div className={`${styles.root__categories}${isOpen ? ` ${styles.root__categories_activated}` : ''} scroll`}>
         <ul>
-          {data.map((skill, i) => (
-            <li className={`${activeSkill === i ? ` activeOption` : ''}`} key={i} onClick={() => onClickSkill(i)}>
-              {skill.skill}
-            </li>
-          ))}
+          {empSkillsList.length
+            ? empSkillsList.map((skill, i) => (
+                <li className={`${activeSkill === i ? ` activeOption` : ''}`} key={i} onClick={() => onClickSkill(i)}>
+                  {skill.skill}
+                </li>
+              ))
+            : 'LOADING'}
         </ul>
       </div>
       <div className={styles.root__skills}>
         <div className={styles.root__skills__list}>
           <h3>Текущие навыки:</h3>
           <ul className="scroll">
-            {data[activeSkill].curSkills.map((cSkill, i) => (
-              <li key={i}>{cSkill}</li>
-            ))}
+            {empSkillsList.length
+              ? empSkillsList[activeSkill].curSkills.map((cSkill, i) => <li key={i}>{cSkill}</li>)
+              : 'LOADING'}
           </ul>
         </div>
         <div className={styles.root__skills__list}>
           <h3>Область развития:</h3>
           <ul className="scroll">
-            {data[activeSkill].development.map((dSkill, i) => (
-              <li key={i}>{dSkill}</li>
-            ))}
+            {empSkillsList.length
+              ? empSkillsList[activeSkill].nextSkills.map((dSkill, i) => <li key={i}>{dSkill}</li>)
+              : 'LOADING'}
           </ul>
         </div>
       </div>

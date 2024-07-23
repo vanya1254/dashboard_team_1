@@ -25,7 +25,7 @@ export const filterSlice = createSlice({
     },
     setFullname: (state, action: PayloadAction<string>) => {
       if (action.payload) {
-        state.fullname = ['like', `%${action.payload}%`];
+        state.fullname = ['ilike', `%${action.payload}%`];
       } else {
         state.fullname = initialState.fullname;
       }

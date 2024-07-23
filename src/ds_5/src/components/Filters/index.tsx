@@ -34,7 +34,7 @@ export const Filters: React.FC = () => {
   };
 
   const updateSearchValue = React.useCallback(
-    debounce((value) => dispatch(setFullname(value.toLowerCase())), 404),
+    debounce((value) => dispatch(setFullname(value)), 808),
     []
   );
 

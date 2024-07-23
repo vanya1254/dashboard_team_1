@@ -22,6 +22,8 @@ const rows = [
 export const EmployesList: React.FC = () => {
   const { employees, status } = useAppSelector(employeesSelector);
 
+  // console.log(employees);
+
   return (
     <div className={styles.root}>
       <Filters />

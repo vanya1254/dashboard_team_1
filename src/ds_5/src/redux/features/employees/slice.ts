@@ -22,7 +22,7 @@ export const fetchEmployees = createAsyncThunk(
        * пришлось расширить request, чтобы передавать schema_name
        */
       // @ts-ignore
-      { schema_name: SCHEMA_NAME, ...request },
+      { schema_name: SCHEMA_NAME, sort: ['fullname'], ...request },
       comment || 'employees'
     );
 
