@@ -46,12 +46,6 @@ const EmployerPage: React.FC = () => {
   }, [position, department, fullname]);
 
   useEffect(() => {
-    if (status === Status.Fulfilled) {
-      dispatch(setEmpSkillsList());
-    }
-  }, [status]);
-
-  useEffect(() => {
     dispatch(setEmployeeAndFetchDashboard(employees));
   }, [employees]);
 

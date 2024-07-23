@@ -3,6 +3,9 @@ import React from 'react';
 import employee from '../../img/employee.png';
 
 import styles from './EmployeeCard.module.scss';
+import { useAppSelector } from '../../redux/store';
+import { empDashSelector } from '../../redux/features/empDash/selectors';
+import { Status } from '../../redux/mainTypes';
 
 const data = [
   { label: 'ФИО', value: 'Иван Иванов' },
@@ -19,37 +22,43 @@ const data = [
 ];
 
 export const EmployeeCard: React.FC = () => {
+  const { empCard, status } = useAppSelector(empDashSelector);
+
   return (
     <section className={styles.root}>
       <div className={styles.root__left}>
         <div className={styles.root_img}>{/* <img src={employee} alt="employee image" /> */}</div>
         <div className={styles.root__info}>
           <ul>
-            {data.map((info, i) =>
-              i < 3 ? (
-                <li key={i}>
-                  <h4>{info.label}:</h4>
-                  <p>{typeof info.value === 'string' ? info.value : info.value.join(', ')}</p>
-                </li>
-              ) : (
-                ''
-              )
-            )}
+            {status === Status.Fulfilled
+              ? empCard.map((info, i) =>
+                  i < 3 && info.value.length ? (
+                    <li key={i}>
+                      <h4>{info.skill_type}:</h4>
+                      <p>{info.value.join(', ')}</p>
+                    </li>
+                  ) : (
+                    ''
+                  )
+                )
+              : 'LOADING'}
           </ul>
         </div>
       </div>
       <div className={styles.root__info}>
         <ul>
-          {data.map((info, i) =>
-            i >= 3 ? (
-              <li key={i}>
-                <h4>{info.label}:</h4>
-                <p>{typeof info.value === 'string' ? info.value : info.value.join(', ')}</p>
-              </li>
-            ) : (
-              ''
-            )
-          )}
+          {status === Status.Fulfilled
+            ? empCard.map((info, i) =>
+                i >= 3 && info.value.length ? (
+                  <li key={i}>
+                    <h4>{info.skill_type}:</h4>
+                    <p>{info.value.join(', ')}</p>
+                  </li>
+                ) : (
+                  ''
+                )
+              )
+            : 'LOADING'}
         </ul>
       </div>
     </section>
