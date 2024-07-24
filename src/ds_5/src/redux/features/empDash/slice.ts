@@ -60,7 +60,7 @@ export const fetchEmpDash = createAsyncThunk(
 
     // console.log('res', response[1]);
 
-    console.log(2, response[1]);
+    // console.log(3, response[3]);
 
     return response;
   }
@@ -142,11 +142,11 @@ export const empDashSlice = createSlice({
       state.data[1].forEach((item) => {
         let found = result.find((obj) => obj.skill_type === SKILL_TYPES[item.skill_type]);
         if (found) {
-          found.level = item.avg_skill_grade_employee || 0;
-          found.midLevel = item.avg_skill_grade_position || 0;
+          found.level = (item.avg_skill_grade_employee as number) || 0;
+          found.midLevel = (item.avg_skill_grade_position as number) || 0;
         }
       });
-      console.log(result);
+
       state.empRadar = result;
     },
     setEmpCard(state) {

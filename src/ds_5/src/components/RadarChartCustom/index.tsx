@@ -48,7 +48,7 @@ export const RadarChartCustom: React.FC = () => {
               scale="linear"
               tickCount={6}
               tickFormatter={(tick) => SKILL_LEVEL[tick]}
-              angle={45}
+              angle={70}
               axisLine={false}
             />
             <PolarGrid />

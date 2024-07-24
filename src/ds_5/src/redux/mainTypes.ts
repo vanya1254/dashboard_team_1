@@ -8,7 +8,7 @@ export enum Status {
 }
 
 export interface CoobDataI {
-  [key: string]: string;
+  [key: string]: string | number;
 }
 
 export type KoobIdT = string;

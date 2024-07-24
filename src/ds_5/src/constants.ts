@@ -30,6 +30,18 @@ export const EMP_DASHES_REQUESTS = {
     filters: { skill_type: ['=', 11, 12, 1, 2, 4, 5, 6, 7, 9, 10] },
     comment: 'empCard'
   }
+  // empStackedArea: {
+  //   dimensions: ['skill_name'],
+  //   measures: ['skill_grade'],
+  //   filters: { skill_type: ['=', 3, 4] },
+  //   comment: 'empStackedArea'
+  // },
+  // empBar: {
+  //   dimensions: ['skill_name'],
+  //   measures: ['skill_grade'],
+  //   filters: { skill_type: ['=', [3, 4]] },
+  //   comment: 'empStackedArea'
+  // }
 };
 
 // empRadar: {
