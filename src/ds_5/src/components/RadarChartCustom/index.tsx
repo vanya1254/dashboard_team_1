@@ -16,6 +16,7 @@ import styles from './RadarCharCustom.module.scss';
 import { useAppSelector } from '../../redux/store';
 import { empDashSelector } from '../../redux/features/empDash/selectors';
 import { Status } from '../../redux/mainTypes';
+import { SKILL_LEVEL } from '../../constants';
 
 const data = [
   { skill_type: 'Базы данных', level: 0, midLevel: 0 },
@@ -42,11 +43,24 @@ export const RadarChartCustom: React.FC = () => {
         <ResponsiveContainer className={styles.root__chart} width="100%" height="100%">
           <RadarChart style={{ fill: '#fff' }} outerRadius={'90%'} data={empRadar}>
             <PolarAngleAxis dataKey="skill_type" />
-            <PolarRadiusAxis domain={[0, 5]} scale="linear" tickCount={6} tick={false} axisLine={false} />
+            <PolarRadiusAxis
+              domain={[0, 5]}
+              scale="linear"
+              tickCount={6}
+              tickFormatter={(tick) => SKILL_LEVEL[tick]}
+              angle={45}
+              axisLine={false}
+            />
             <PolarGrid />
             <Radar dataKey="midLevel" stroke="#6DA7FF" fill="#6DA7FF" fillOpacity={0.6} />
             <Radar dataKey="level" stroke="#ef8eff" fill="#ef8eff" fillOpacity={0.6} />
-            <Tooltip />
+            <Tooltip
+              formatter={(value, name) => {
+                if (name === 'midLevel') return [`${value}`, 'Средний по должности'];
+                if (name === 'level') return [`${value}`, 'По сотруднику'];
+                return value;
+              }}
+            />
           </RadarChart>
         </ResponsiveContainer>
       ) : status === Status.Pending ? (
