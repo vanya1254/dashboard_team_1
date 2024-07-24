@@ -18,9 +18,12 @@ export const fetchEmpDash = createAsyncThunk(
       Object.keys(EMP_DASHES_REQUESTS).map((dash, i) =>
         koobDataRequest3(
           KOOB_ID,
-          EMP_DASHES_REQUESTS[dash].dimension,
-          [],
-          { ...EMP_DASHES_REQUESTS[dash].filters, ...allFilters },
+          EMP_DASHES_REQUESTS[dash].dimensions,
+          EMP_DASHES_REQUESTS[dash].measures,
+          {
+            ...EMP_DASHES_REQUESTS[dash].filters,
+            ...allFilters
+          },
           /**
            * пришлось расширить request, чтобы передавать schema_name
            */
@@ -57,6 +60,8 @@ export const fetchEmpDash = createAsyncThunk(
 
     // console.log('res', response[1]);
 
+    console.log(2, response[1]);
+
     return response;
   }
 );
@@ -68,9 +73,13 @@ export const setEmployeeAndFetchDashboard = createAsyncThunk(
       dispatch(setEmployee(employees[0]));
     }
     const state = getState() as RootState;
-    const { fullname } = state.empDash.employee;
+    const { fullname, position, department } = state.empDash.employee;
 
-    await dispatch(fetchEmpDash({ allFilters: { fullname: ['=', fullname] } }));
+    await dispatch(
+      fetchEmpDash({
+        allFilters: { fullname: ['=', fullname], position: ['=', position], department: ['=', department] }
+      })
+    );
   }
 );
 
@@ -78,6 +87,7 @@ const initialState: EmpDashState = {
   employee: { fullname: '', position: '', department: '', fact_empl_skills_employee_key: 0 },
   data: [],
   empSkillsList: [],
+  empRadar: [],
   empCard: [],
   status: Status.Pending
 };
@@ -118,11 +128,32 @@ export const empDashSlice = createSlice({
 
       state.empSkillsList = processedData;
     },
+    setEmpRadar(state) {
+      const skillTypes = EMP_DASHES_REQUESTS.empRadar.filters.skill_type.slice(1);
+
+      // Создание массива объектов с инициализированными значениями
+      let result = skillTypes.map((skillType) => ({
+        skill_type: SKILL_TYPES[skillType],
+        level: 0,
+        midLevel: 0
+      }));
+
+      // Заполнение полей level и midLevel
+      state.data[1].forEach((item) => {
+        let found = result.find((obj) => obj.skill_type === SKILL_TYPES[item.skill_type]);
+        if (found) {
+          found.level = item.avg_skill_grade_employee || 0;
+          found.midLevel = item.avg_skill_grade_position || 0;
+        }
+      });
+      console.log(result);
+      state.empRadar = result;
+    },
     setEmpCard(state) {
       const skillOrder = EMP_DASHES_REQUESTS.empCard.filters.skill_type.slice(1);
       const transformed = {};
 
-      state.data[1].forEach((item) => {
+      state.data[2].forEach((item) => {
         const skillType = item.skill_type;
         const skillLevel = SKILL_LEVEL[item.dim_skill_level_skill_level_key];
 
@@ -159,6 +190,7 @@ export const empDashSlice = createSlice({
         state.status = Status.Fulfilled;
         // Данные под каждый дэшлет
         empDashSlice.caseReducers.setEmpSkillsList(state);
+        empDashSlice.caseReducers.setEmpRadar(state);
         empDashSlice.caseReducers.setEmpCard(state);
       })
       .addCase(fetchEmpDash.rejected, (state) => {
@@ -168,6 +200,6 @@ export const empDashSlice = createSlice({
   }
 });
 
-export const { setEmployee, setEmpSkillsList } = empDashSlice.actions;
+export const { setEmployee, setEmpSkillsList, setEmpRadar, setEmpCard } = empDashSlice.actions;
 
 export default empDashSlice.reducer;

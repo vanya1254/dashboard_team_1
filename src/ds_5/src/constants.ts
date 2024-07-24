@@ -13,16 +13,31 @@ export const MEASURES = {
 
 export const EMP_DASHES_REQUESTS = {
   empSkillsList: {
-    dimension: ['skill_type', 'skill_name', 'dim_skill_level_skill_level_key'],
+    dimensions: ['skill_type', 'skill_name', 'dim_skill_level_skill_level_key'],
+    measures: [],
     filters: { skill_type: ['=', 1, 2, 5, 6, 7, 8, 9, 10] },
     comment: 'empSkillsList'
   },
+  empRadar: {
+    dimensions: ['skill_type', 'avg_skill_grade_employee', 'avg_skill_grade_position'],
+    measures: [],
+    filters: { skill_type: ['=', 1, 2, 5, 6, 7, 8, 9, 10] },
+    comment: 'empRadar'
+  },
   empCard: {
-    dimension: ['skill_type', 'skill_name', 'dim_skill_level_skill_level_key'],
+    dimensions: ['skill_type', 'skill_name', 'dim_skill_level_skill_level_key'],
+    measures: [],
     filters: { skill_type: ['=', 11, 12, 1, 2, 4, 5, 6, 7, 9, 10] },
     comment: 'empCard'
   }
 };
+
+// empRadar: {
+//   dimensions: ['skill_type', 'avg_skill_grade_position'],
+//   measures: [],
+//   filters: { skill_type: ['=', 1, 2, 5, 6, 7, 8, 9, 10], position: ['=', 'Старший аналитик'] },
+//   comment: 'empRadar'
+// },
 
 // export const DEFAULT_FILTERS = {
 //   empSkillsList: { skill_type: ['=', 1, 2, 5, 6, 7, 8, 9, 10] },

@@ -13,19 +13,24 @@ import {
 import { DashletLayout } from '../../layouts/DashletLayout';
 
 import styles from './RadarCharCustom.module.scss';
+import { useAppSelector } from '../../redux/store';
+import { empDashSelector } from '../../redux/features/empDash/selectors';
+import { Status } from '../../redux/mainTypes';
 
 const data = [
-  { skill: 'databases', level: 1, midLevel: 3 },
-  { skill: 'tools', level: 1, midLevel: 3 },
-  { skill: 'platforms', level: 2, midLevel: 2 },
-  { skill: 'spheres', level: 3, midLevel: 3 },
-  { skill: 'technologies', level: 4, midLevel: 4 },
-  { skill: 'types system', level: 3, midLevel: 1 },
-  { skill: 'frameworks', level: 0, midLevel: 3 },
-  { skill: 'languages', level: 2, midLevel: 3 }
+  { skill_type: 'Базы данных', level: 0, midLevel: 0 },
+  { skill_type: 'Инструменты', level: 2, midLevel: 3 },
+  { skill_type: 'Платформы', level: 2, midLevel: 3 },
+  { skill_type: 'Среды разработки', level: 0, midLevel: 0 },
+  { skill_type: 'Технологии', level: 3, midLevel: 2 },
+  { skill_type: 'Типы систем', level: 0, midLevel: 0 },
+  { skill_type: 'Фреймворки', level: 0, midLevel: 0 },
+  { skill_type: 'Языки программировния', level: 3, midLevel: 3 }
 ];
 
 export const RadarChartCustom: React.FC = () => {
+  const { empRadar, status } = useAppSelector(empDashSelector);
+
   return (
     <DashletLayout
       title="Характеристика сотрудника"
@@ -33,15 +38,22 @@ export const RadarChartCustom: React.FC = () => {
       height={'calc((1vh + 1vw)* 15.9727)'}
       className={styles.root}
     >
-      <ResponsiveContainer className={styles.root__chart} width="100%" height="100%">
-        <RadarChart style={{ fill: '#fff' }} outerRadius={'90%'} data={data}>
-          <PolarAngleAxis dataKey="skill" />
-          <PolarGrid />
-          <Radar dataKey="midLevel" stroke="#6DA7FF" fill="#6DA7FF" fillOpacity={0.6} />
-          <Radar dataKey="level" stroke="#ef8eff" fill="#ef8eff" fillOpacity={0.6} />
-          <Tooltip />
-        </RadarChart>
-      </ResponsiveContainer>
+      {status === Status.Fulfilled ? (
+        <ResponsiveContainer className={styles.root__chart} width="100%" height="100%">
+          <RadarChart style={{ fill: '#fff' }} outerRadius={'90%'} data={empRadar}>
+            <PolarAngleAxis dataKey="skill_type" />
+            <PolarRadiusAxis domain={[0, 5]} scale="linear" tickCount={6} tick={false} axisLine={false} />
+            <PolarGrid />
+            <Radar dataKey="midLevel" stroke="#6DA7FF" fill="#6DA7FF" fillOpacity={0.6} />
+            <Radar dataKey="level" stroke="#ef8eff" fill="#ef8eff" fillOpacity={0.6} />
+            <Tooltip />
+          </RadarChart>
+        </ResponsiveContainer>
+      ) : status === Status.Pending ? (
+        'LOADING'
+      ) : (
+        'ERROR'
+      )}
     </DashletLayout>
   );
 };

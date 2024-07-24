@@ -51,7 +51,15 @@ const EmployerPage: React.FC = () => {
 
   useEffect(() => {
     if (employee.fullname) {
-      dispatch(fetchEmpDash({ allFilters: { fullname: ['=', employee.fullname] } }));
+      dispatch(
+        fetchEmpDash({
+          allFilters: {
+            fullname: ['=', employee.fullname],
+            position: ['=', employee.position],
+            department: ['=', employee.department]
+          }
+        })
+      );
     }
   }, [employee]);
 

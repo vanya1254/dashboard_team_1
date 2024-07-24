@@ -4,6 +4,7 @@ export interface EmpDashState {
   employee: EmployeeT;
   data: CoobDataI[][];
   empSkillsList: SkillT[];
+  empRadar: EmpRadarT[];
   empCard: EmpCardT[];
   status: Status;
 }
@@ -14,3 +15,5 @@ export type FetchEmpDashPropsT = {
 };
 
 export type EmpCardT = { skill_type: string; value: string[] };
+
+export type EmpRadarT = { skill_type: string; level: number; midLevel: number };
