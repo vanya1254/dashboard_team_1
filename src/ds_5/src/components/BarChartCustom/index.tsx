@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ResponsiveContainer, BarChart, XAxis, YAxis, Tooltip, Bar } from 'recharts';
+import { ResponsiveContainer, BarChart, XAxis, YAxis, Tooltip, Bar, Brush, CartesianGrid } from 'recharts';
 
 import { DashletLayout } from '../../layouts/DashletLayout';
 
@@ -7,6 +7,7 @@ import styles from './BarChartCustom.module.scss';
 import { useAppSelector } from '../../redux/store';
 import { empDashSelector } from '../../redux/features/empDash/selectors';
 import { Status } from '../../redux/mainTypes';
+import { SKILL_LEVEL } from '../../constants';
 
 const data = [
   {
@@ -53,10 +54,12 @@ export const BarChartCustom: React.FC = () => {
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={empBar} barGap={0}>
             <XAxis dataKey="skill" stroke="#fff" />
-            <YAxis ticks={ticks} tick={CustomizedTick} stroke="#fff" />
-            <Tooltip />
+            <YAxis domain={[0, 5]} tickCount={6} tickFormatter={(tick) => SKILL_LEVEL[tick]} stroke="#fff" />
+            <Tooltip formatter={(tick) => SKILL_LEVEL[tick]} />
+            <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} stroke="#ccc" />
             <Bar dataKey="2022" fill="#6DA7FF" />
             <Bar dataKey="2023" fill="#ef8eff" />
+            <Brush dataKey="skill" height={20} stroke="#8da5d6" fill="#fff" strokeOpacity={0.8} travellerWidth={12} />
           </BarChart>
         </ResponsiveContainer>
       ) : status === Status.Pending ? (
@@ -65,24 +68,5 @@ export const BarChartCustom: React.FC = () => {
         ''
       )}
     </DashletLayout>
-  );
-};
-
-const CustomizedTick = (props) => {
-  const { x, y, stroke, payload } = props;
-
-  return (
-    <g transform={`translate(${x},${y})`}>
-      <text
-        x={0}
-        y={0}
-        dy={2}
-        fill="#fff"
-        textAnchor="end"
-        // fontFamily="sans-serif"
-      >
-        {ticksLabels[payload.value]}
-      </text>
-    </g>
   );
 };

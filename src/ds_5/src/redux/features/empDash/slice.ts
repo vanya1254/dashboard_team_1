@@ -34,7 +34,7 @@ export const fetchEmpDash = createAsyncThunk(
       )
     );
 
-    console.log(4, response[4]);
+    console.log(4, response[3]);
 
     return response;
   }
@@ -183,7 +183,7 @@ export const empDashSlice = createSlice({
           if (obj) obj.level = level;
         }
       });
-
+      console.log([type3, type4]);
       state.empStackedArea = [type3, type4];
     },
     setEmpBar(state) {
@@ -211,8 +211,6 @@ export const empDashSlice = createSlice({
         2022: result[skill][2022],
         2023: result[skill][2023]
       }));
-
-      console.log(state.empBar);
     }
   },
   extraReducers: (builder) => {

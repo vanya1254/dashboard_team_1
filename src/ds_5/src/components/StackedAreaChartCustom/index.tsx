@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Brush } from 'recharts';
 
 import { DashletLayout } from '../../layouts/DashletLayout';
 
@@ -43,7 +43,6 @@ const data = [
 ];
 
 const ticksLabels = { 0: '', 1: '1 ур.', 2: '2 ур.', 3: '3 ур.' };
-const ticks = [0, 1, 2, 3];
 
 const titles = { false: 'отрасли', true: 'предметных областей' };
 
@@ -67,13 +66,15 @@ export const StackedAreaChartCustom: React.FC = () => {
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={empStackedArea[isToggled ? 0 : 1]}>
             <XAxis dataKey="name" stroke="#fff" />
-            <YAxis stroke="#fff" ticks={ticks} tick={CustomizedTick} />
+            <YAxis stroke="#fff" domain={[0, 3]} tickCount={4} tickFormatter={(tick) => ticksLabels[tick]} />
             <Tooltip
               formatter={(level, name) => {
                 return [`${level}`, 'Уровень владения'];
               }}
             />
+            <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} stroke="#ccc" />
             <Area type="monotone" dataKey="level" stroke="#E697FF" fill="#E697FF" fillOpacity={1} />
+            <Brush dataKey="name" height={20} stroke="#8da5d6" fill="#fff" strokeOpacity={0.8} travellerWidth={12} />
           </AreaChart>
         </ResponsiveContainer>
       ) : status === Status.Pending ? (
@@ -82,24 +83,5 @@ export const StackedAreaChartCustom: React.FC = () => {
         ''
       )}
     </DashletLayout>
-  );
-};
-
-const CustomizedTick = (props) => {
-  const { x, y, stroke, payload } = props;
-
-  return (
-    <g transform={`translate(${x},${y})`}>
-      <text
-        x={0}
-        y={0}
-        dy={2}
-        fill="#fff"
-        textAnchor="end"
-        // fontFamily="sans-serif"
-      >
-        {ticksLabels[payload.value]}
-      </text>
-    </g>
   );
 };

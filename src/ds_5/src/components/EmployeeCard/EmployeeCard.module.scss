@@ -34,7 +34,8 @@
     display: flex;
     width: 100%;
     padding: 24px 16px;
-    overflow: auto;
+    max-height: calc($index * 17.586);
+    overflow-y: auto;
 
     background-color: $bgInfoColor;
     border-radius: 6px;
