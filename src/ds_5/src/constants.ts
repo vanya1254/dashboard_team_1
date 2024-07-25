@@ -30,26 +30,19 @@ export const EMP_DASHES_REQUESTS = {
     filters: { skill_type: ['=', 11, 12, 1, 2, 4, 5, 6, 7, 9, 10] },
     comment: 'empCard'
   },
-  // empStackedArea: {
-  //   dimensions: ['dim_skills_skill_key', 'max_skill_grade_employee', 'calendar_year', 'skill_type'],
-  //   measures: [],
-  //   filters: { skill_type: ['=', 3, 4], calendar_year: ['=', 2022, 2023] },
-  //   comment: 'empStackedArea'
-  // }
-
   empStackedArea: {
     dimensions: ['dim_skills_skill_key', 'current_skill_level', 'skill_type'],
     measures: [],
     filters: { skill_type: ['=', 3, 4] },
     comment: 'empStackedArea'
-  }
+  },
   // Морозов Владислав
-  // empBar: {
-  //   dimensions: ['skill_name'],
-  //   measures: ['skill_grade'],
-  //   filters: { skill_type: ['=', [3, 4]] },
-  //   comment: 'empStackedArea'
-  // }
+  empBar: {
+    dimensions: ['skill_name'],
+    measures: ['skill_grade'],
+    filters: { skill_type: ['=', [3, 4]] },
+    comment: 'empStackedArea'
+  }
 };
 
 // export const DEFAULT_FILTERS = {

@@ -4,6 +4,7 @@ import { RiFilter2Fill } from 'react-icons/ri';
 import styles from './SkillsList.module.scss';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { empDashSelector } from '../../redux/features/empDash/selectors';
+import { Status } from '../../redux/mainTypes';
 
 const data = [
   {
@@ -54,7 +55,7 @@ const data = [
 ];
 
 export const SkillsList: React.FC = () => {
-  const { empSkillsList } = useAppSelector(empDashSelector);
+  const { empSkillsList, status } = useAppSelector(empDashSelector);
 
   const [isOpen, setIsOpen] = useState(false);
   const [activeSkill, setActiveSkill] = useState(0);
@@ -76,7 +77,7 @@ export const SkillsList: React.FC = () => {
       </button>
       <div className={`${styles.root__categories}${isOpen ? ` ${styles.root__categories_activated}` : ''} scroll`}>
         <ul>
-          {empSkillsList.length
+          {status === Status.Fulfilled && empSkillsList.length
             ? empSkillsList.map((skill, i) => (
                 <li className={`${activeSkill === i ? ` activeOption` : ''}`} key={i} onClick={() => onClickSkill(i)}>
                   {skill.skill}
@@ -89,7 +90,7 @@ export const SkillsList: React.FC = () => {
         <div className={styles.root__skills__list}>
           <h3>Текущие навыки:</h3>
           <ul className="scroll">
-            {empSkillsList.length
+            {status === Status.Fulfilled && empSkillsList.length
               ? empSkillsList[activeSkill].curSkills.map((cSkill, i) => <li key={i}>{cSkill}</li>)
               : 'LOADING'}
           </ul>
@@ -97,7 +98,7 @@ export const SkillsList: React.FC = () => {
         <div className={styles.root__skills__list}>
           <h3>Область развития:</h3>
           <ul className="scroll">
-            {empSkillsList.length
+            {status === Status.Fulfilled && empSkillsList.length
               ? empSkillsList[activeSkill].nextSkills.map((dSkill, i) => <li key={i}>{dSkill}</li>)
               : 'LOADING'}
           </ul>

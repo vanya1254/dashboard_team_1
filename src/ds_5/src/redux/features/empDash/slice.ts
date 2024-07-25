@@ -34,7 +34,7 @@ export const fetchEmpDash = createAsyncThunk(
       )
     );
 
-    console.log(0, response[0]);
+    console.log(4, response[4]);
 
     return response;
   }
@@ -77,11 +77,10 @@ export const empDashSlice = createSlice({
     setEmpSkillsList(state) {
       const processedData = state.data[0].reduce((acc, item) => {
         const curLevel = SKILL_LEVEL[item.dim_skill_level_skill_level_key];
-        //@ts-ignore
-        const nextLevel = SKILL_LEVEL[Math.min(item.dim_skill_level_skill_level_key + 1, 5)];
+        const nextLevel = item.next_grade_level;
 
         const curSkillWithLevel = `${item.skill_name} ${curLevel}`.trim();
-        const nextSkillWithLevel = nextLevel !== '' ? `${item.skill_name} ${nextLevel}`.trim() : null;
+        const nextSkillWithLevel = nextLevel ? `${item.skill_name} ${nextLevel}`.trim() : null;
 
         const skillTypeName = SKILL_TYPES[item.skill_type];
 
