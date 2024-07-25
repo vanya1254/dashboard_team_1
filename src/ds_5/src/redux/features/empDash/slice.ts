@@ -64,6 +64,7 @@ const initialState: EmpDashState = {
   empRadar: [],
   empCard: [],
   empStackedArea: [],
+  empBar: [],
   status: Status.Pending
 };
 
@@ -184,6 +185,34 @@ export const empDashSlice = createSlice({
       });
 
       state.empStackedArea = [type3, type4];
+    },
+    setEmpBar(state) {
+      const result = {};
+
+      state.data[4].forEach(({ skill_name, calendar_year, max_skill_grade_employee }) => {
+        if (!result[skill_name]) {
+          result[skill_name] = {};
+        }
+        result[skill_name][calendar_year] = max_skill_grade_employee;
+      });
+
+      Object.keys(result).forEach((skill) => {
+        const years = result[skill];
+        if (!years[2022]) {
+          years[2022] = 0;
+        }
+        if (!years[2023]) {
+          years[2023] = years[2022];
+        }
+      });
+
+      state.empBar = Object.keys(result).map((skill) => ({
+        skill,
+        2022: result[skill][2022],
+        2023: result[skill][2023]
+      }));
+
+      console.log(state.empBar);
     }
   },
   extraReducers: (builder) => {
@@ -200,6 +229,7 @@ export const empDashSlice = createSlice({
         empDashSlice.caseReducers.setEmpRadar(state);
         empDashSlice.caseReducers.setEmpCard(state);
         empDashSlice.caseReducers.setEmpStackedArea(state);
+        empDashSlice.caseReducers.setEmpBar(state);
       })
       .addCase(fetchEmpDash.rejected, (state) => {
         state.data = initialState.data;
@@ -208,6 +238,7 @@ export const empDashSlice = createSlice({
   }
 });
 
-export const { setEmployee, setEmpSkillsList, setEmpRadar, setEmpCard } = empDashSlice.actions;
+export const { setEmployee, setEmpSkillsList, setEmpRadar, setEmpCard, setEmpStackedArea, setEmpBar } =
+  empDashSlice.actions;
 
 export default empDashSlice.reducer;

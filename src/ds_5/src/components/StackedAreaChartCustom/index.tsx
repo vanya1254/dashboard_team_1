@@ -79,7 +79,7 @@ export const StackedAreaChartCustom: React.FC = () => {
       ) : status === Status.Pending ? (
         'LOADING'
       ) : (
-        'ERROR'
+        ''
       )}
     </DashletLayout>
   );

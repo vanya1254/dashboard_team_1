@@ -3,13 +3,10 @@ import React, { useEffect, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { fetchEmployees } from '../../redux/features/employees/slice';
 import { fetchFilters } from '../../redux/features/filters/slice';
+import { fetchEmpDash, setEmployeeAndFetchDashboard } from '../../redux/features/empDash/slice';
 import { filterSelector } from '../../redux/features/filter/selectors';
-import {
-  fetchEmpDash,
-  setEmployee,
-  setEmployeeAndFetchDashboard,
-  setEmpSkillsList
-} from '../../redux/features/empDash/slice';
+import { empDashSelector } from '../../redux/features/empDash/selectors';
+import { employeesSelector } from '../../redux/features/employees/selectors';
 
 import { EmployeeGridLayout } from '../../layouts/EmployeeGridLayout';
 import { CardLayout } from '../../layouts/CardLayout';
@@ -24,9 +21,6 @@ import {
 } from '../../components';
 
 import styles from './EmployeePage.module.scss';
-import { empDashSelector } from '../../redux/features/empDash/selectors';
-import { EmployeeT, Status } from '../../redux/mainTypes';
-import { employeesSelector } from '../../redux/features/employees/selectors';
 
 const EmployerPage: React.FC = () => {
   const dispatch = useAppDispatch();

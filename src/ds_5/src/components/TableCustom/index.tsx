@@ -49,7 +49,9 @@ export const TableCustom: React.FC = () => {
               ))}
             </li>
           ))
-        : 'LOADING'}
+        : status === Status.Pending
+        ? 'LOADING'
+        : ''}
     </ul>
   );
 };

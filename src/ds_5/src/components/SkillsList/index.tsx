@@ -83,7 +83,9 @@ export const SkillsList: React.FC = () => {
                   {skill.skill}
                 </li>
               ))
-            : 'LOADING'}
+            : status === Status.Pending
+            ? 'LOADING'
+            : ''}
         </ul>
       </div>
       <div className={styles.root__skills}>
@@ -92,7 +94,9 @@ export const SkillsList: React.FC = () => {
           <ul className="scroll">
             {status === Status.Fulfilled && empSkillsList.length
               ? empSkillsList[activeSkill].curSkills.map((cSkill, i) => <li key={i}>{cSkill}</li>)
-              : 'LOADING'}
+              : status === Status.Pending
+              ? 'LOADING'
+              : ''}
           </ul>
         </div>
         <div className={styles.root__skills__list}>
@@ -100,7 +104,9 @@ export const SkillsList: React.FC = () => {
           <ul className="scroll">
             {status === Status.Fulfilled && empSkillsList.length
               ? empSkillsList[activeSkill].nextSkills.map((dSkill, i) => <li key={i}>{dSkill}</li>)
-              : 'LOADING'}
+              : status === Status.Pending
+              ? 'LOADING'
+              : ''}
           </ul>
         </div>
       </div>

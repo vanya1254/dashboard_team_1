@@ -66,7 +66,7 @@ export const RadarChartCustom: React.FC = () => {
       ) : status === Status.Pending ? (
         'LOADING'
       ) : (
-        'ERROR'
+        ''
       )}
     </DashletLayout>
   );

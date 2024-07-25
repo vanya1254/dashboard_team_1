@@ -70,8 +70,10 @@ export const Filters: React.FC = () => {
             options={filters[1]}
           />
         </>
+      ) : status === Status.Pending ? (
+        'LOADING'
       ) : (
-        'Loading...'
+        ''
       )}
       {/* <button className={styles.root_btn}>
         <FaSortAlphaDown />

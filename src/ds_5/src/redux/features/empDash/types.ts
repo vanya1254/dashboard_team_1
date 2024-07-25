@@ -7,6 +7,7 @@ export interface EmpDashState {
   empRadar: EmpRadarT[];
   empCard: EmpCardT[];
   empStackedArea: EmpStackedAreaT[][];
+  empBar: EmpBarT[];
   status: Status;
 }
 
@@ -20,3 +21,5 @@ export type EmpCardT = { skill_type: string; value: string[] };
 export type EmpRadarT = { skill_type: string; level: number; midLevel: number };
 
 export type EmpStackedAreaT = { name: string; level: number };
+
+export type EmpBarT = { skill: string; 2022: number; 2023: number };

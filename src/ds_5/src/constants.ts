@@ -36,14 +36,14 @@ export const EMP_DASHES_REQUESTS = {
     filters: { skill_type: ['=', 3, 4] },
     comment: 'empStackedArea'
   },
-  // Морозов Владислав
   empBar: {
-    dimensions: ['skill_name'],
-    measures: ['skill_grade'],
-    filters: { skill_type: ['=', [3, 4]] },
+    dimensions: ['skill_name', 'calendar_year', 'max_skill_grade_employee'],
+    measures: [],
+    filters: { skill_type: ['=', 1, 2, 5, 6, 7, 8, 9, 10], calendar_year: ['=', 2022, 2023] },
     comment: 'empStackedArea'
   }
 };
+// Морозов Владислав
 
 // export const DEFAULT_FILTERS = {
 //   empSkillsList: { skill_type: ['=', 1, 2, 5, 6, 7, 8, 9, 10] },

@@ -41,7 +41,9 @@ export const EmployeeCard: React.FC = () => {
                     ''
                   )
                 )
-              : 'LOADING'}
+              : status === Status.Pending
+              ? 'LOADING'
+              : ''}
           </ul>
         </div>
       </div>
@@ -58,7 +60,9 @@ export const EmployeeCard: React.FC = () => {
                   ''
                 )
               )
-            : 'LOADING'}
+            : status === Status.Pending
+            ? 'LOADING'
+            : ''}
         </ul>
       </div>
     </section>
