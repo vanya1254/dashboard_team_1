@@ -6,6 +6,7 @@ export interface EmpDashState {
   empSkillsList: SkillT[];
   empRadar: EmpRadarT[];
   empCard: EmpCardT[];
+  empStackedArea: EmpStackedAreaT[][];
   status: Status;
 }
 
@@ -17,3 +18,5 @@ export type FetchEmpDashPropsT = {
 export type EmpCardT = { skill_type: string; value: string[] };
 
 export type EmpRadarT = { skill_type: string; level: number; midLevel: number };
+
+export type EmpStackedAreaT = { name: string; level: number };

@@ -13,6 +13,7 @@
   }
   &__upgrade {
     grid-area: upgrade;
+    position: relative;
   }
   &__bar {
     grid-area: bar;

@@ -1,3 +1,12 @@
+@import '../../styles/vars';
+
 .root {
   align-self: start;
+
+  &__toggleContainer {
+    position: absolute;
+    top: 24px;
+    right: 16px;
+    line-height: 0;
+  }
 }

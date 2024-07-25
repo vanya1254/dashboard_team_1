@@ -13,3 +13,4 @@ export { TagCloudCustom } from './TagCloudCustom';
 export { SimpleAreaChartCustom } from './SimpleAreaChartCustom';
 export { StackedMixBarChart } from './StackedMixBarChart';
 export { DepFilters } from './DepFilters';
+export { ToggleCustom } from './ToggleCustom';

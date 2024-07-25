@@ -13,7 +13,7 @@ export const MEASURES = {
 
 export const EMP_DASHES_REQUESTS = {
   empSkillsList: {
-    dimensions: ['skill_type', 'skill_name', 'dim_skill_level_skill_level_key'],
+    dimensions: ['skill_type', 'skill_name', 'dim_skill_level_skill_level_key', 'next_grade_level'],
     measures: [],
     filters: { skill_type: ['=', 1, 2, 5, 6, 7, 8, 9, 10] },
     comment: 'empSkillsList'
@@ -21,7 +21,7 @@ export const EMP_DASHES_REQUESTS = {
   empRadar: {
     dimensions: ['skill_type', 'avg_skill_grade_employee', 'avg_skill_grade_position'],
     measures: [],
-    filters: { skill_type: ['=', 1, 2, 5, 6, 7, 8, 9, 10] },
+    filters: { skill_type: ['=', 10, 1, 5, 2, 6, 8, 7, 9] },
     comment: 'empRadar'
   },
   empCard: {
@@ -29,13 +29,21 @@ export const EMP_DASHES_REQUESTS = {
     measures: [],
     filters: { skill_type: ['=', 11, 12, 1, 2, 4, 5, 6, 7, 9, 10] },
     comment: 'empCard'
-  }
+  },
   // empStackedArea: {
-  //   dimensions: ['skill_name'],
-  //   measures: ['skill_grade'],
-  //   filters: { skill_type: ['=', 3, 4] },
+  //   dimensions: ['dim_skills_skill_key', 'max_skill_grade_employee', 'calendar_year', 'skill_type'],
+  //   measures: [],
+  //   filters: { skill_type: ['=', 3, 4], calendar_year: ['=', 2022, 2023] },
   //   comment: 'empStackedArea'
-  // },
+  // }
+
+  empStackedArea: {
+    dimensions: ['dim_skills_skill_key', 'current_skill_level', 'skill_type'],
+    measures: [],
+    filters: { skill_type: ['=', 3, 4] },
+    comment: 'empStackedArea'
+  }
+  // Морозов Владислав
   // empBar: {
   //   dimensions: ['skill_name'],
   //   measures: ['skill_grade'],
@@ -43,13 +51,6 @@ export const EMP_DASHES_REQUESTS = {
   //   comment: 'empStackedArea'
   // }
 };
-
-// empRadar: {
-//   dimensions: ['skill_type', 'avg_skill_grade_position'],
-//   measures: [],
-//   filters: { skill_type: ['=', 1, 2, 5, 6, 7, 8, 9, 10], position: ['=', 'Старший аналитик'] },
-//   comment: 'empRadar'
-// },
 
 // export const DEFAULT_FILTERS = {
 //   empSkillsList: { skill_type: ['=', 1, 2, 5, 6, 7, 8, 9, 10] },
@@ -91,4 +92,28 @@ export const SKILL_LEVEL = {
   16: 'B2 - upper intermediate',
   17: 'C1 - advanced',
   18: 'C2 - proficiency'
+};
+
+export const SKILL_KEYS = {
+  43: 'Розничная торговля и дистрибуция',
+  44: 'Фармацевтика и медицина',
+  45: 'ТЭК и добывающая промышленность',
+  46: 'Связь и телекоммуникации',
+  47: 'Транспорт и логистика',
+  48: 'Промышленное производство',
+  49: 'Финансовый сектор',
+  50: 'Государственный сектор',
+  51: 'Складская логистика',
+  52: 'Транспортная логистика',
+  53: 'Управление цепочками поставок',
+  54: 'E-commerce',
+  55: 'Закупки',
+  56: 'Информационные технологии',
+  57: 'Маркетинг, реклама, PR',
+  58: 'HR',
+  59: 'Документооборот',
+  60: 'Перевозки',
+  61: 'Нефть и газ',
+  62: 'Банки, лизинг',
+  63: 'Строительство'
 };

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { EMP_DASHES_REQUESTS, KOOB_ID, SCHEMA_NAME, SKILL_LEVEL, SKILL_TYPES } from '../../../constants';
+import { EMP_DASHES_REQUESTS, KOOB_ID, SCHEMA_NAME, SKILL_KEYS, SKILL_LEVEL, SKILL_TYPES } from '../../../constants';
 import { EmpDashState, FetchEmpDashPropsT } from './types';
 //@ts-ignore
 import { KoobDataService } from 'bi-internal/services';
@@ -33,34 +33,8 @@ export const fetchEmpDash = createAsyncThunk(
         )
       )
     );
-    // koobDataRequest3(
-    //   KOOB_ID,
-    //   ['skill_type'],
-    //   ['avg_skill_grade_position'],
-    //   { position: ['=', 'Аналитик'], skill_type: ['=', 1] },
-    //   /**
-    //    * пришлось расширить request, чтобы передавать schema_name
-    //    */
-    //   // @ts-ignore
-    //   { schema_name: SCHEMA_NAME, ...request },
-    //   comment || `dashlet`
-    // ),
-    // koobDataRequest3(
-    //   KOOB_ID,
-    //   ['avg_skill_grade_employee'],
-    //   ['skill_type'],
-    //   { fullname: ['=', 'Кожевникова Юлия'] },
-    //   /**
-    //    * пришлось расширить request, чтобы передавать schema_name
-    //    */
-    //   // @ts-ignore
-    //   { schema_name: SCHEMA_NAME, ...request },
-    //   comment || `dashlet`
-    // ),
 
-    // console.log('res', response[1]);
-
-    // console.log(3, response[3]);
+    console.log(0, response[0]);
 
     return response;
   }
@@ -89,6 +63,7 @@ const initialState: EmpDashState = {
   empSkillsList: [],
   empRadar: [],
   empCard: [],
+  empStackedArea: [],
   status: Status.Pending
 };
 
@@ -177,6 +152,39 @@ export const empDashSlice = createSlice({
       result.unshift({ skill_type: 'ФИО', value: [state.employee.fullname] });
 
       state.empCard = result;
+    },
+    setEmpStackedArea(state) {
+      const type3 = [];
+      const type4 = [];
+
+      // Инициализация объектов для каждого сектора
+      Object.keys(SKILL_KEYS).forEach((key) => {
+        const sectorKey = parseInt(key, 10);
+        const sectorName = SKILL_KEYS[key];
+        const skillObj = { name: sectorName, level: 0 };
+
+        if (sectorKey >= 43 && sectorKey <= 50) {
+          type3.push(skillObj);
+        } else {
+          type4.push(skillObj);
+        }
+      });
+
+      // Заполнение данных для type3 и type4
+      state.data[3].forEach((item) => {
+        const key = item.dim_skills_skill_key;
+        const level = item.current_skill_level;
+        //@ts-ignore
+        if (key >= 43 && key <= 50) {
+          const obj = type3.find((obj) => obj.name === SKILL_KEYS[key]);
+          if (obj) obj.level = level;
+        } else {
+          const obj = type4.find((obj) => obj.name === SKILL_KEYS[key]);
+          if (obj) obj.level = level;
+        }
+      });
+
+      state.empStackedArea = [type3, type4];
     }
   },
   extraReducers: (builder) => {
@@ -192,6 +200,7 @@ export const empDashSlice = createSlice({
         empDashSlice.caseReducers.setEmpSkillsList(state);
         empDashSlice.caseReducers.setEmpRadar(state);
         empDashSlice.caseReducers.setEmpCard(state);
+        empDashSlice.caseReducers.setEmpStackedArea(state);
       })
       .addCase(fetchEmpDash.rejected, (state) => {
         state.data = initialState.data;

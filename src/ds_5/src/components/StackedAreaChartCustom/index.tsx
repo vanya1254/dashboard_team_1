@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 import { DashletLayout } from '../../layouts/DashletLayout';
 
 import styles from './StackedAreaChartCustom.module.scss';
+import { useAppSelector } from '../../redux/store';
+import { empDashSelector } from '../../redux/features/empDash/selectors';
+import { Status } from '../../redux/mainTypes';
+import { ToggleCustom } from '../ToggleCustom';
 
 const data = [
   {
@@ -41,23 +45,42 @@ const data = [
 const ticksLabels = { 0: '', 1: '1 ур.', 2: '2 ур.', 3: '3 ур.' };
 const ticks = [0, 1, 2, 3];
 
+const titles = { false: 'отрасли', true: 'предметных областей' };
+
 export const StackedAreaChartCustom: React.FC = () => {
+  const { empStackedArea, status } = useAppSelector(empDashSelector);
+  const [isToggled, setIsToggled] = useState(false);
+
+  const onToggle = () => setIsToggled(!isToggled);
+
   return (
     <DashletLayout
-      title={'Динамика улучшения знаний предметной области'}
+      title={`Уровень знаний ${titles[isToggled.toString()]}`}
       width={'calc((1vh + 1vw) * 19.0977)'}
       height={'calc((1vh + 1vw)* 6.007)'}
       className={styles.root}
     >
-      <ResponsiveContainer width="100%" height="100%">
-        <AreaChart data={data}>
-          <XAxis dataKey="name" stroke="#fff" />
-          <YAxis stroke="#fff" ticks={ticks} tick={CustomizedTick} />
-          <Tooltip />
-          <Area type="monotone" dataKey="2024" stroke="#E697FF" fill="#E697FF" />
-          <Area type="monotone" dataKey="2023" stroke="#6DA7FF" fill="#6DA7FF" />
-        </AreaChart>
-      </ResponsiveContainer>
+      <div className={styles.root__toggleContainer}>
+        <ToggleCustom isToggled={isToggled} onToggle={onToggle} />
+      </div>
+      {status === Status.Fulfilled ? (
+        <ResponsiveContainer width="100%" height="100%">
+          <AreaChart data={empStackedArea[isToggled ? 0 : 1]}>
+            <XAxis dataKey="name" stroke="#fff" />
+            <YAxis stroke="#fff" ticks={ticks} tick={CustomizedTick} />
+            <Tooltip
+              formatter={(level, name) => {
+                return [`${level}`, 'Уровень владения'];
+              }}
+            />
+            <Area type="monotone" dataKey="level" stroke="#E697FF" fill="#E697FF" fillOpacity={1} />
+          </AreaChart>
+        </ResponsiveContainer>
+      ) : status === Status.Pending ? (
+        'LOADING'
+      ) : (
+        'ERROR'
+      )}
     </DashletLayout>
   );
 };

@@ -1,0 +1,46 @@
+@import '../../styles/vars';
+
+.root {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 25px;
+
+  input[type='checkbox'] {
+    display: none;
+  }
+
+  &_switch {
+    position: absolute;
+    cursor: pointer;
+    background-color: $btnColor;
+    border-radius: 25px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transition: background-color 0.2s ease;
+
+    &::before {
+      position: absolute;
+      content: '';
+      left: 3px;
+      top: 3px;
+
+      width: 19px;
+      height: 19px;
+      border-radius: 50%;
+
+      background-color: $whiteColor;
+      transition: transform 0.3s ease;
+    }
+  }
+
+  input[type='checkbox']:checked + &_switch::before {
+    transform: translateX(25px);
+  }
+
+  input[type='checkbox']:checked + &_switch {
+    background-color: $titleColor;
+  }
+}
