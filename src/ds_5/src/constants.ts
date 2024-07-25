@@ -79,12 +79,12 @@ export const SKILL_LEVEL = {
   10: '',
   11: '',
   12: '',
-  13: 'A1 - elementary',
-  14: 'A2 - pre-intermediate',
-  15: 'B1 - intermediate',
-  16: 'B2 - upper intermediate',
-  17: 'C1 - advanced',
-  18: 'C2 - proficiency'
+  13: 'A1',
+  14: 'A2',
+  15: 'B1',
+  16: 'B2',
+  17: 'C1',
+  18: 'C2'
 };
 
 export const SKILL_KEYS = {
