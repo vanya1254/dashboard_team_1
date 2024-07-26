@@ -40,6 +40,7 @@ export const Filters: React.FC = () => {
 
   const onClickResetFilters = () => {
     dispatch(clearCurFilters());
+    setValue('');
     setIsReset(true);
   };
 
