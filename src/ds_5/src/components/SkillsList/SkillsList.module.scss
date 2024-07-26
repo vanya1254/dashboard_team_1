@@ -3,11 +3,14 @@
 
 .root {
   position: relative;
+
   display: flex;
   flex-direction: column;
   align-items: start;
   gap: 16px;
+
   width: 100%;
+  height: 100%;
 
   &_btn {
     @include btnStyles();
@@ -67,6 +70,9 @@
   &__skills {
     display: flex;
     justify-content: space-between;
+    flex-shrink: 1;
+    flex-grow: 1;
+
     width: 100%;
 
     &__list {
@@ -114,6 +120,10 @@
             border-radius: 100%;
             background-color: black;
           }
+        }
+
+        @media (max-width: 1760px) {
+          max-height: calc($index * 6.353);
         }
       }
     }

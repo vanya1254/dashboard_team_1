@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import debounce from 'lodash.debounce';
-import { FaSortAlphaDown } from 'react-icons/fa';
-import { IoSearch } from 'react-icons/io5';
 import { RiFilterOffFill } from 'react-icons/ri';
 
 import { useAppDispatch, useAppSelector } from '../../redux/store';

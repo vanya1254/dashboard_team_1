@@ -1,40 +1,45 @@
 @import '../../styles/vars';
 
 .root {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
   gap: 12px;
+
   height: 100%;
+  max-height: calc($index * 17.586);
+  overflow-x: auto;
 
   &__img {
-    // height: 194px;
     padding: 16px;
 
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
+    flex-grow: 0;
 
     background-color: $bgInfoColor;
     border-radius: 6px;
 
     @media (max-width: 1440px) {
-      // height: 135px;
     }
   }
 
   &__left {
-    display: grid;
+    display: flex;
     flex-direction: column;
     gap: 12px;
-    // grid-template-rows: 194px auto;
+
+    .root__info {
+      flex-shrink: 1;
+      flex-grow: 1;
+    }
 
     @media (max-width: 1440px) {
-      // grid-template-rows: 135px auto;
     }
   }
 
   &__right {
-    max-height: calc($index * 17.586);
-    overflow-y: auto;
   }
 
   &__info {
@@ -68,5 +73,12 @@
         }
       }
     }
+  }
+
+  @media (max-width: 1760px) {
+    max-height: calc($index * 20.888);
+  }
+  @media (max-width: 1504px) {
+    max-height: calc($index * 22.2061);
   }
 }
