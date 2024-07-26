@@ -34,7 +34,7 @@ export const TableCustom: React.FC = () => {
   };
 
   return (
-    <ul className={`${styles.root} scroll`}>
+    <ul className={`${styles.root} scroller`}>
       {status === Status.Fulfilled
         ? employees.map((row, i) => (
             <li

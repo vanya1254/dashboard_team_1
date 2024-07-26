@@ -50,7 +50,8 @@ p {
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: rgba(175, 197, 216, 0.3);
+    // background-color: rgba(175, 197, 216, 0.3);
+    background-color: $btnColor;
     border-radius: 10px;
     border: 0;
     transition: all 0.2s ease-in-out;
@@ -222,24 +223,5 @@ svg.recharts-surface {
         // fill: #dae6ff;
       }
     }
-  }
-}
-
-.scroll {
-  scrollbar-width: thin; /* "auto" или "thin"  */
-  scrollbar-color: #4a659e white;
-
-  /* для Chrome/Edge/Safari */
-  &::-webkit-scrollbar {
-    height: 14px;
-    width: 6px;
-  }
-  &::-webkit-scrollbar-track {
-    background: white;
-  }
-  &::-webkit-scrollbar-thumb {
-    background-color: #4a659e;
-    border-radius: 1px;
-    border: 0px solid white;
   }
 }

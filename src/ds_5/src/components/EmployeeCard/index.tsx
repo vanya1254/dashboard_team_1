@@ -24,7 +24,7 @@ export const EmployeeCard: React.FC = () => {
   const { employee, empCard, status } = useAppSelector(empDashSelector);
 
   return (
-    <section className={`${styles.root} scroll`}>
+    <section className={`${styles.root} scroller`}>
       <div className={styles.root__left}>
         <div className={styles.root__img}>
           <img src={employee.picture_url} alt="employee image" />

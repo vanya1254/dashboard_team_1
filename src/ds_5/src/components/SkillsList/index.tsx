@@ -79,7 +79,7 @@ export const SkillsList: React.FC = () => {
         <RiFilter2Fill />
         <span>Категория навыков</span>
       </button>
-      <div className={`${styles.root__categories}${isOpen ? ` ${styles.root__categories_activated}` : ''} scroll`}>
+      <div className={`${styles.root__categories}${isOpen ? ` ${styles.root__categories_activated}` : ''} scroller`}>
         <ul>
           {status === Status.Fulfilled && empSkillsList.length
             ? empSkillsList.map((skill, i) => (
@@ -95,7 +95,7 @@ export const SkillsList: React.FC = () => {
       <div className={styles.root__skills}>
         <div className={styles.root__skills__list}>
           <h3>Текущие навыки:</h3>
-          <ul className="scroll">
+          <ul className="scroller">
             {status === Status.Fulfilled && empSkillsList.length
               ? empSkillsList[activeSkill].curSkills.map((cSkill, i) => <li key={i}>{cSkill}</li>)
               : status === Status.Pending
@@ -105,7 +105,7 @@ export const SkillsList: React.FC = () => {
         </div>
         <div className={styles.root__skills__list}>
           <h3>Область развития:</h3>
-          <ul className="scroll">
+          <ul className="scroller">
             {status === Status.Fulfilled && empSkillsList.length
               ? empSkillsList[activeSkill].nextSkills.map((dSkill, i) => <li key={i}>{dSkill}</li>)
               : status === Status.Pending
