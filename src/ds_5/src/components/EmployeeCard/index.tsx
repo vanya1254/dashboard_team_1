@@ -1,11 +1,10 @@
 import React from 'react';
 
-import employee from '../../img/employee.png';
-
-import styles from './EmployeeCard.module.scss';
 import { useAppSelector } from '../../redux/store';
 import { empDashSelector } from '../../redux/features/empDash/selectors';
 import { Status } from '../../redux/mainTypes';
+
+import styles from './EmployeeCard.module.scss';
 
 const data = [
   { label: 'ФИО', value: 'Иван Иванов' },
@@ -22,12 +21,14 @@ const data = [
 ];
 
 export const EmployeeCard: React.FC = () => {
-  const { empCard, status } = useAppSelector(empDashSelector);
+  const { employee, empCard, status } = useAppSelector(empDashSelector);
 
   return (
     <section className={styles.root}>
       <div className={styles.root__left}>
-        <div className={styles.root_img}>{/* <img src={employee} alt="employee image" /> */}</div>
+        <div className={styles.root__img}>
+          <img src={employee.picture_url} alt="employee image" />
+        </div>
         <div className={styles.root__info}>
           <ul>
             {status === Status.Fulfilled
@@ -47,7 +48,7 @@ export const EmployeeCard: React.FC = () => {
           </ul>
         </div>
       </div>
-      <div className={styles.root__info}>
+      <div className={`${styles.root__info} ${styles.root__right}`}>
         <ul>
           {status === Status.Fulfilled
             ? empCard.map((info, i) =>

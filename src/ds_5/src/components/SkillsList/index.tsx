@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { RiFilter2Fill } from 'react-icons/ri';
 
 import styles from './SkillsList.module.scss';
@@ -68,6 +68,10 @@ export const SkillsList: React.FC = () => {
     setActiveSkill(idx);
     setIsOpen(false);
   };
+
+  useEffect(() => {
+    setActiveSkill(0);
+  }, [status]);
 
   return (
     <div className={styles.root}>

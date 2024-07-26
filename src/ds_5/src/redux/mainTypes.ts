@@ -33,4 +33,5 @@ export type EmployeeT = {
   position: string;
   department: string;
   fact_empl_skills_employee_key: number;
+  picture_url: string;
 };

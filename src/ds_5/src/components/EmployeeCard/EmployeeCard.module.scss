@@ -5,17 +5,19 @@
   gap: 12px;
   height: 100%;
 
-  &_img {
-    width: 194px;
-    height: 194px;
-    padding: 24px 16px;
+  &__img {
+    // height: 194px;
+    padding: 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     background-color: $bgInfoColor;
     border-radius: 6px;
 
     @media (max-width: 1440px) {
-      width: 135px;
-      height: 135px;
+      // height: 135px;
     }
   }
 
@@ -23,19 +25,22 @@
     display: grid;
     flex-direction: column;
     gap: 12px;
-    grid-template-rows: 194px auto;
+    // grid-template-rows: 194px auto;
 
     @media (max-width: 1440px) {
-      grid-template-rows: 135px auto;
+      // grid-template-rows: 135px auto;
     }
+  }
+
+  &__right {
+    max-height: calc($index * 17.586);
+    overflow-y: auto;
   }
 
   &__info {
     display: flex;
     width: 100%;
     padding: 24px 16px;
-    max-height: calc($index * 17.586);
-    overflow-y: auto;
 
     background-color: $bgInfoColor;
     border-radius: 6px;

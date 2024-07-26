@@ -34,8 +34,6 @@ export const fetchEmpDash = createAsyncThunk(
       )
     );
 
-    console.log(4, response[3]);
-
     return response;
   }
 );
@@ -58,7 +56,7 @@ export const setEmployeeAndFetchDashboard = createAsyncThunk(
 );
 
 const initialState: EmpDashState = {
-  employee: { fullname: '', position: '', department: '', fact_empl_skills_employee_key: 0 },
+  employee: { fullname: '', position: '', department: '', fact_empl_skills_employee_key: 0, picture_url: '' },
   data: [],
   empSkillsList: [],
   empRadar: [],
@@ -138,7 +136,6 @@ export const empDashSlice = createSlice({
 
         transformed[skillType].push(`${item.skill_name} ${skillLevel}`);
       });
-
       const result = [];
 
       for (const skillType of skillOrder) {
@@ -183,7 +180,7 @@ export const empDashSlice = createSlice({
           if (obj) obj.level = level;
         }
       });
-      console.log([type3, type4]);
+
       state.empStackedArea = [type3, type4];
     },
     setEmpBar(state) {

@@ -2,7 +2,7 @@ export const KOOB_ID = 'etl_db_1.team_1';
 export const SCHEMA_NAME = 'ds_5';
 
 export const DIMENSIONS = {
-  employees: ['fullname', 'position', 'department', 'fact_empl_skills_employee_key'],
+  employees: ['fullname', 'position', 'department', 'fact_empl_skills_employee_key', 'picture_url'],
   filters: ['position', 'department']
 };
 
