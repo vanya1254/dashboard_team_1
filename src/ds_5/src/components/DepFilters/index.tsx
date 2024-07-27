@@ -11,6 +11,7 @@ import { SelectCustom } from '../SelectCustom';
 
 import styles from './DepFilters.module.scss';
 import { SKILL_TYPES } from '../../constants';
+import getKeyByValue from '../../utils/getKeyByValue';
 
 export const DepFilters: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -18,6 +19,11 @@ export const DepFilters: React.FC = () => {
   const [isReset, setIsReset] = useState(false);
 
   const onClickFilter = (filter: CoobDataI) => {
+    if (filter.skill_type && filter.skill_type !== 'Все') {
+      const key = getKeyByValue(SKILL_TYPES, filter.skill_type);
+
+      filter.skill_type = key;
+    }
     setIsReset(false);
     dispatch(setCurFilter(filter));
   };

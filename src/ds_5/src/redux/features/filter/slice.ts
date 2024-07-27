@@ -35,6 +35,7 @@ export const filterSlice = createSlice({
       state.position = initialState.position;
       state.department = initialState.department;
       state.fullname = initialState.fullname;
+      state.skill_type = initialState.skill_type;
     }
   }
 });
