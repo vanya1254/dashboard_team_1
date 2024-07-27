@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { DIMENSIONS, KOOB_ID, MEASURES, SCHEMA_NAME } from '../../../constants';
+import { EMPLOYEES_REQUEST, KOOB_ID, SCHEMA_NAME } from '../../../constants';
 import { EmployeesState, FetchEmployeesPropsT } from './types';
 //@ts-ignore
 import { KoobDataService } from 'bi-internal/services';
@@ -15,15 +15,15 @@ export const fetchEmployees = createAsyncThunk(
 
     const response: EmployeeT[] = await koobDataRequest3(
       KOOB_ID,
-      DIMENSIONS.employees,
-      measures || MEASURES.employees,
+      EMPLOYEES_REQUEST.dimensions,
+      measures || EMPLOYEES_REQUEST.measures,
       allFilters,
       /**
        * пришлось расширить request, чтобы передавать schema_name
        */
       // @ts-ignore
       { schema_name: SCHEMA_NAME, sort: ['fullname'], ...request },
-      comment || 'employees'
+      comment || EMPLOYEES_REQUEST.comment
     );
 
     return response;

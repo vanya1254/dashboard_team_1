@@ -1,9 +1,15 @@
 import React from 'react';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Brush } from 'recharts';
+
+import { useAppSelector } from '../../redux/store';
+import { depDashSelector } from '../../redux/features/depDash/selectors';
+
+import { Status } from '../../redux/mainTypes';
 
 import { DashletLayout } from '../../layouts/DashletLayout';
 
 import styles from './SimpleAreaChartCustom.module.scss';
+import { SKILL_LEVEL } from '../../constants';
 
 const data = [
   {
@@ -33,6 +39,8 @@ const data = [
 ];
 
 export const SimpleAreaChartCustom: React.FC = () => {
+  const { depSimpleArea, status } = useAppSelector(depDashSelector);
+
   return (
     <DashletLayout
       title={'Самый развитый навык в целом по ДАР'}
@@ -40,14 +48,37 @@ export const SimpleAreaChartCustom: React.FC = () => {
       height={'calc((1vh + 1vw) * 9.375)'}
       className={styles.root}
     >
-      <ResponsiveContainer width="100%" height="100%">
-        <AreaChart data={data}>
-          <XAxis dataKey="name" stroke="#fff" />
-          <YAxis stroke="#fff" />
-          <Tooltip />
-          <Area type="monotone" dataKey="value" stroke="#E697FF" fill="#E697FF" fillOpacity={1} />
-        </AreaChart>
-      </ResponsiveContainer>
+      {status === Status.Fulfilled ? (
+        <ResponsiveContainer width="100%" height="100%">
+          <AreaChart data={depSimpleArea}>
+            <XAxis dataKey="skill_name" stroke="#fff" />
+            <YAxis
+              stroke="#fff"
+              domain={[0, 'dataMax']}
+              tickFormatter={(tick) => (SKILL_LEVEL[tick] === undefined ? tick : SKILL_LEVEL[tick])}
+            />
+            <Tooltip
+              formatter={(level, name) => {
+                return [`${level}`, 'Средний по должности'];
+              }}
+            />
+            <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} stroke="#ccc" />
+            <Brush
+              dataKey="skill_name"
+              height={20}
+              stroke="#8da5d6"
+              fill="#fff"
+              strokeOpacity={0.8}
+              travellerWidth={12}
+            />
+            <Area type="monotone" dataKey="avg_skill_grade_position" stroke="#E697FF" fill="#E697FF" fillOpacity={1} />
+          </AreaChart>
+        </ResponsiveContainer>
+      ) : status === Status.Pending ? (
+        'LOADING'
+      ) : (
+        ''
+      )}
     </DashletLayout>
   );
 };

@@ -51,9 +51,6 @@ export const Filters: React.FC = () => {
         placeholder="Поиск по ФИО"
         value={value}
       />
-      {/* <button className={styles.root_btn}>
-          <IoSearch />
-        </button> */}
       {status === Status.Fulfilled ? (
         <>
           <SelectCustom
@@ -74,9 +71,6 @@ export const Filters: React.FC = () => {
       ) : (
         ''
       )}
-      {/* <button className={styles.root_btn}>
-        <FaSortAlphaDown />
-      </button> */}
       <button onClick={onClickResetFilters} className={styles.root_btn}>
         <RiFilterOffFill />
       </button>

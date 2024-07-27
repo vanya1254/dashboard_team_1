@@ -7,7 +7,8 @@ import { CoobDataI } from '../../mainTypes';
 const initialState: FilterState = {
   position: ['='],
   department: ['='],
-  fullname: ['=']
+  fullname: ['='],
+  skill_type: ['=']
 };
 
 export const filterSlice = createSlice({

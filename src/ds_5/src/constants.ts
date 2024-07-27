@@ -1,14 +1,35 @@
 export const KOOB_ID = 'etl_db_1.team_1';
 export const SCHEMA_NAME = 'ds_5';
 
-export const DIMENSIONS = {
-  employees: ['fullname', 'position', 'department', 'fact_empl_skills_employee_key', 'picture_url'],
-  filters: ['position', 'department']
+// KOOB REQUESTS
+
+export const EMPLOYEES_REQUEST = {
+  dimensions: ['fullname', 'position', 'department', 'fact_empl_skills_employee_key', 'picture_url'],
+  measures: [],
+  filters: {},
+  comment: 'employees'
 };
 
-export const MEASURES = {
-  employees: [],
-  filters: []
+//TODO:maybe change to array?(func?)
+export const FILTERS_REQUESTS = {
+  position: {
+    dimensions: ['position'],
+    measures: [],
+    filters: {},
+    comment: 'position'
+  },
+  department: {
+    dimensions: ['department'],
+    measures: [],
+    filters: {},
+    comment: 'department'
+  },
+  skill_type: {
+    dimensions: ['skill_type'],
+    measures: [],
+    filters: { skill_type: ['and', ['>', 0], ['<', 11]] },
+    comment: 'skill_type'
+  }
 };
 
 export const EMP_DASHES_REQUESTS = {
@@ -43,12 +64,21 @@ export const EMP_DASHES_REQUESTS = {
     comment: 'empStackedArea'
   }
 };
-// Морозов Владислав
 
-// export const DEFAULT_FILTERS = {
-//   empSkillsList: { skill_type: ['=', 1, 2, 5, 6, 7, 8, 9, 10] },
-//   empCard: { skill_type: ['=', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] }
-// };
+export const DEP_DASHES_REQUESTS = {
+  depSimpleArea: {
+    dimensions: ['skill_name', 'avg_skill_grade_position'],
+    measures: [],
+    filters: {},
+    comment: 'depSimpleArea'
+  }
+  // empBar: {
+  //   dimensions: ['skill_name', 'calendar_year', 'max_skill_grade_employee'],
+  //   measures: [],
+  //   filters: { skill_type: ['=', 1, 2, 5, 6, 7, 8, 9, 10], calendar_year: ['=', 2022, 2023] },
+  //   comment: 'empStackedArea'
+  // }
+};
 
 export const SKILL_TYPES = {
   1: 'Базы данных',

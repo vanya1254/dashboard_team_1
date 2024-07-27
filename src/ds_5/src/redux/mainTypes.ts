@@ -20,7 +20,10 @@ export type AllFiltersT = {
 export type RequestT = IKoobDataRequest3 | { schema_name: string };
 export type CommentT = string;
 
-export type FilterT = string[] | [string, [string, string], [string, string]];
+export type FilterT =
+  | any[]
+  | [string, [string, string], [string, string]]
+  | [string, [string, number], [string, number]];
 
 export type SkillT = {
   skill: string;

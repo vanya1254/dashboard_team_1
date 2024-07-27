@@ -1,4 +1,4 @@
-import { AllFiltersT, CommentT, CoobDataI, EmployeeT, RequestT, SkillT, Status } from '../../mainTypes';
+import { AllFiltersT, CoobDataI, EmployeeT, RequestT, SkillT, Status } from '../../mainTypes';
 
 export interface EmpDashState {
   employee: EmployeeT;

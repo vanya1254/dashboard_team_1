@@ -1,4 +1,5 @@
 @import '../../styles/vars';
+@import '../../styles/mixins';
 
 .root {
   display: flex;
@@ -6,15 +7,25 @@
   width: 100%;
 
   &_title {
-    // font-size: 1rem;
-    color: $whiteColor;
-    // background-color: $titleColor;
-    border-radius: $mainBR;
     align-self: center;
+
+    border-radius: $mainBR;
+    color: $whiteColor;
   }
 
   &__filters {
     display: flex;
     gap: 16px;
+  }
+
+  &_btn {
+    @include btnStyles();
+
+    line-height: 0;
+    padding: 7.5px 12px;
+
+    &:hover {
+      @include btnHover();
+    }
   }
 }

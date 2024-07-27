@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { DIMENSIONS, KOOB_ID, MEASURES, SCHEMA_NAME } from '../../../constants';
+import { FILTERS_REQUESTS, KOOB_ID, SCHEMA_NAME } from '../../../constants';
 import { FiltersState, FetchFiltersPropsT } from './types';
 //@ts-ignore
 import { KoobDataService } from 'bi-internal/services';
@@ -14,22 +14,22 @@ export const fetchFilters = createAsyncThunk(
     const { request, comment } = params;
 
     const response: CoobDataI[][] = await Promise.all(
-      DIMENSIONS.filters.map((filter) =>
+      Object.keys(FILTERS_REQUESTS).map((filter) =>
         koobDataRequest3(
           KOOB_ID,
-          [filter],
-          MEASURES.filters,
-          {},
+          FILTERS_REQUESTS[filter].dimensions,
+          FILTERS_REQUESTS[filter].measures,
+          FILTERS_REQUESTS[filter].filters,
           /**
            * пришлось расширить request, чтобы передавать schema_name
            */
           // @ts-ignore
           { schema_name: SCHEMA_NAME, ...request },
-          comment || `filter-${filter}`
+          comment || `filter-${FILTERS_REQUESTS[filter].comment}`
         )
       )
     );
-
+    console.log(2, response[2]);
     return response;
   }
 );

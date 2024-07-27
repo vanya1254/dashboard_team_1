@@ -40,7 +40,9 @@ export const TableCustom: React.FC = () => {
             <li
               key={i}
               onClick={() => onClickEmployee(row)}
-              className={`${styles.root__row}${employee.fullname === row.fullname ? ' activeOption' : ''}`}
+              className={`${styles.root__row}${
+                employee.fact_empl_skills_employee_key === row.fact_empl_skills_employee_key ? ' activeOption' : ''
+              }`}
             >
               {columns.map((col) => (
                 <span key={col.accessor} className={styles.root__col}>
