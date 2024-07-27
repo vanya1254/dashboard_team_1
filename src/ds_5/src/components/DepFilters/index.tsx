@@ -22,7 +22,7 @@ export const DepFilters: React.FC = () => {
     if (filter.skill_type && filter.skill_type !== 'Все') {
       const key = getKeyByValue(SKILL_TYPES, filter.skill_type);
 
-      filter.skill_type = key;
+      filter.skill_type = Number.parseInt(key);
     }
     setIsReset(false);
     dispatch(setCurFilter(filter));

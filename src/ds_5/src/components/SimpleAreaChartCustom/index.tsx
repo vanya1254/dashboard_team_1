@@ -54,8 +54,9 @@ export const SimpleAreaChartCustom: React.FC = () => {
             <XAxis dataKey="skill_name" stroke="#fff" />
             <YAxis
               stroke="#fff"
-              domain={[0, 'dataMax']}
-              tickFormatter={(tick) => (SKILL_LEVEL[tick] === undefined ? tick : SKILL_LEVEL[tick])}
+              domain={[0, 5]}
+              ticks={[0, 1, 2, 3, 4, 5]}
+              tickFormatter={(tick) => SKILL_LEVEL[tick]}
             />
             <Tooltip
               formatter={(level, name) => {
