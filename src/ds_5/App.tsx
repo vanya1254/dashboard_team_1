@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Provider } from 'react-redux';
 
-import { store } from './src/redux/store';
+import { store, useAppDispatch } from './src/redux/store';
 
 import EmployerPage from './src/pages/EmployeePage';
 import DepartmentPage from './src/pages/DepartmentPage';

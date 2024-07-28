@@ -11,6 +11,7 @@ import { CardLayout } from '../../layouts/CardLayout';
 import { DepFilters, SimpleAreaChartCustom, StackedMixBarChart, TagCloudCustom } from '../../components';
 
 import styles from './DepartmentPage.module.scss';
+import { clearCurFilters } from '../../redux/features/filter/slice';
 
 const DepartmentPage: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -19,6 +20,7 @@ const DepartmentPage: React.FC = () => {
 
   useEffect(() => {
     if (isFirstLoading.current) {
+      dispatch(clearCurFilters());
       dispatch(fetchFilters({}));
     }
   }, []);

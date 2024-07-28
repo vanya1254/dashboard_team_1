@@ -1,6 +1,67 @@
 export const KOOB_ID = 'etl_db_1.team_1';
 export const SCHEMA_NAME = 'ds_5';
 
+export const SKILL_TYPES = {
+  1: 'Базы данных',
+  2: 'Инструменты',
+  3: 'Опыт в отрасли',
+  4: 'Опыт сотрудника в предметной области',
+  5: 'Платформы',
+  6: 'Среды разработки',
+  7: 'Технологии',
+  8: 'Типы систем',
+  9: 'Фреймворки',
+  10: 'Языки программировния',
+  11: 'Иностранные языки',
+  12: 'Образование'
+};
+
+export const SKILL_LEVEL = {
+  0: '',
+  1: 'Novice',
+  2: 'Junior',
+  3: 'Middle',
+  4: 'Senior',
+  5: 'Expert',
+  6: 'Знаком',
+  7: 'Знаком и могу применить',
+  8: 'Знаком, могу применить и реализовать',
+  9: '',
+  10: '',
+  11: '',
+  12: '',
+  13: 'A1',
+  14: 'A2',
+  15: 'B1',
+  16: 'B2',
+  17: 'C1',
+  18: 'C2'
+};
+
+export const SKILL_KEYS = {
+  43: 'Торговля',
+  44: 'Медицина',
+  45: 'ТЭК',
+  46: 'Связь',
+  47: 'Транспорт',
+  48: 'Промышленность',
+  49: 'Финансы',
+  50: 'Госсектор',
+  51: 'Складская логистика',
+  52: 'Транспорт',
+  53: 'Поставки',
+  54: 'E-commerce',
+  55: 'Закупки',
+  56: 'IT',
+  57: 'PR',
+  58: 'HR',
+  59: 'Документооборот',
+  60: 'Перевозки',
+  61: 'Нефтегаз',
+  62: 'Банки',
+  63: 'Строительство'
+};
+
 // KOOB REQUESTS
 
 export const EMPLOYEES_REQUEST = {
@@ -66,77 +127,41 @@ export const EMP_DASHES_REQUESTS = {
 };
 
 export const DEP_DASHES_REQUESTS = {
+  // depTagCloud: {
+  //   dimensions: ['skill_name', 'calendar_year', 'max_skill_grade_employee'],
+  //   measures: [],
+  //   filters: { skill_type: ['=', 1, 2, 5, 6, 7, 8, 9, 10], calendar_year: ['=', 2022, 2023] },
+  //   comment: 'empStackedArea'
+  // },
   depSimpleArea: {
     dimensions: ['skill_name', 'avg_skill_grade_position'],
     measures: [],
     filters: {},
     comment: 'depSimpleArea'
-  }
-  // empBar: {
-  //   dimensions: ['skill_name', 'calendar_year', 'max_skill_grade_employee'],
+  },
+  // depStackedMixedBar: {
+  //   dimensions: ['skill_name', 'max_skill_grade_employee', 'count_skill_department', 'calendar_year'],
   //   measures: [],
-  //   filters: { skill_type: ['=', 1, 2, 5, 6, 7, 8, 9, 10], calendar_year: ['=', 2022, 2023] },
-  //   comment: 'empStackedArea'
-  // }
-};
-
-export const SKILL_TYPES = {
-  1: 'Базы данных',
-  2: 'Инструменты',
-  3: 'Опыт в отрасли',
-  4: 'Опыт сотрудника в предметной области',
-  5: 'Платформы',
-  6: 'Среды разработки',
-  7: 'Технологии',
-  8: 'Типы систем',
-  9: 'Фреймворки',
-  10: 'Языки программировния',
-  11: 'Иностранные языки',
-  12: 'Образование'
-};
-
-export const SKILL_LEVEL = {
-  0: '',
-  1: 'Novice',
-  2: 'Junior',
-  3: 'Middle',
-  4: 'Senior',
-  5: 'Expert',
-  6: 'Знаком',
-  7: 'Знаком и могу применить',
-  8: 'Знаком, могу применить и реализовать',
-  9: '',
-  10: '',
-  11: '',
-  12: '',
-  13: 'A1',
-  14: 'A2',
-  15: 'B1',
-  16: 'B2',
-  17: 'C1',
-  18: 'C2'
-};
-
-export const SKILL_KEYS = {
-  43: 'Торговля',
-  44: 'Медицина',
-  45: 'ТЭК',
-  46: 'Связь',
-  47: 'Транспорт',
-  48: 'Промышленность',
-  49: 'Финансы',
-  50: 'Госсектор',
-  51: 'Складская логистика',
-  52: 'Транспорт',
-  53: 'Поставки',
-  54: 'E-commerce',
-  55: 'Закупки',
-  56: 'IT',
-  57: 'PR',
-  58: 'HR',
-  59: 'Документооборот',
-  60: 'Перевозки',
-  61: 'Нефтегаз',
-  62: 'Банки',
-  63: 'Строительство'
+  //   filters: {
+  //     calendar_year: ['=', 0]
+  //   },
+  //   comment: 'depStackedMixedBar'
+  // },
+  depStackedMixedBar: {
+    dimensions: [
+      'dim_skills_skill_key',
+      'skill_name',
+      'count_novice_department',
+      'count_junior_department',
+      'count_middle_department',
+      'count_senior_department',
+      'count_expert_department',
+      'calendar_year'
+    ],
+    measures: [],
+    filters: {
+      calendar_year: ['=', 2022, 2023]
+    },
+    comment: 'depStackedMixedBar'
+  }
 };

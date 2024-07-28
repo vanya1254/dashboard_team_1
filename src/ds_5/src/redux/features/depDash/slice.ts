@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { DEP_DASHES_REQUESTS, KOOB_ID, SCHEMA_NAME, SKILL_KEYS } from '../../../constants';
+import { DEP_DASHES_REQUESTS, KOOB_ID, SCHEMA_NAME, SKILL_KEYS, SKILL_LEVEL, SKILL_TYPES } from '../../../constants';
 import { DepDashState, DepSimpleAreaT, FetchDepDashPropsT } from './types';
 //@ts-ignore
 import { KoobDataService } from 'bi-internal/services';
@@ -32,7 +32,7 @@ export const fetchDepDash = createAsyncThunk(
         )
       )
     );
-    console.log(0, response[0]);
+    console.log(1, response[1]);
 
     return response;
   }
@@ -41,7 +41,7 @@ export const fetchDepDash = createAsyncThunk(
 const initialState: DepDashState = {
   data: [],
   depSimpleArea: [],
-  depBar: [],
+  depStackedMixedBar: [],
   status: Status.Pending
 };
 
@@ -52,31 +52,52 @@ export const depDashSlice = createSlice({
     setDepSimpleArea(state) {
       state.depSimpleArea = state.data[0] as DepSimpleAreaT[];
     },
-    setDepBar(state) {
-      const result = {};
+    setDepStackedMixedBar(state) {
+      const result = [];
+      const SKILL_LEVEL = {
+        novice: 'Novice',
+        junior: 'Junior',
+        middle: 'Middle',
+        senior: 'Senior',
+        expert: 'Expert'
+        // Добавьте другие уровни, если необходимо
+      };
 
-      state.data[4].forEach(({ skill_name, calendar_year, max_skill_grade_employee }) => {
-        if (!result[skill_name]) {
-          result[skill_name] = {};
+      state.data[1].forEach((item) => {
+        // Определение уровня навыка
+        const skillLevel = Object.keys(SKILL_LEVEL).find((level) => item[`count_${level}_department`] !== undefined);
+
+        if (!skillLevel) return;
+
+        // Найти или создать объект для данного skill_name
+        let skill = result.find((skill) => skill.name === item.skill_name);
+        if (!skill) {
+          skill = {
+            name: item.skill_name,
+            prevNovice: 0,
+            prevJunior: 0,
+            prevMiddle: 0,
+            prevSenior: 0,
+            prevExpert: 0,
+            curNovice: 0,
+            curJunior: 0,
+            curMiddle: 0,
+            curSenior: 0,
+            curExpert: 0
+          };
+          result.push(skill);
         }
-        result[skill_name][calendar_year] = max_skill_grade_employee;
+
+        // Обновить счетчик для предыдущего года или текущего года
+        if (item.calendar_year === 2022) {
+          skill[`prev${SKILL_LEVEL[skillLevel]}`] += item[`count_${skillLevel}_department`];
+        } else if (item.calendar_year === 2023) {
+          skill[`cur${SKILL_LEVEL[skillLevel]}`] += item[`count_${skillLevel}_department`];
+        }
       });
 
-      Object.keys(result).forEach((skill) => {
-        const years = result[skill];
-        if (!years[2022]) {
-          years[2022] = 0;
-        }
-        if (!years[2023]) {
-          years[2023] = years[2022];
-        }
-      });
-
-      state.empBar = Object.keys(result).map((skill) => ({
-        skill,
-        2022: result[skill][2022],
-        2023: result[skill][2023]
-      }));
+      console.log(result);
+      state.depStackedMixedBar = result;
     }
   },
   extraReducers: (builder) => {
@@ -91,7 +112,7 @@ export const depDashSlice = createSlice({
 
         // Данные под каждый дэшлет
         depDashSlice.caseReducers.setDepSimpleArea(state);
-        // depDashSlice.caseReducers.setDepBar(state);
+        depDashSlice.caseReducers.setDepStackedMixedBar(state);
       })
       .addCase(fetchDepDash.rejected, (state) => {
         state.data = initialState.data;
@@ -100,6 +121,6 @@ export const depDashSlice = createSlice({
   }
 });
 
-export const { setDepSimpleArea, setDepBar } = depDashSlice.actions;
+export const { setDepSimpleArea, setDepStackedMixedBar } = depDashSlice.actions;
 
 export default depDashSlice.reducer;

@@ -21,16 +21,18 @@ import {
 } from '../../components';
 
 import styles from './EmployeePage.module.scss';
+import { clearCurFilters } from '../../redux/features/filter/slice';
 
 const EmployerPage: React.FC = () => {
   const dispatch = useAppDispatch();
   const isFirstLoading = useRef(true);
   const { position, department, fullname } = useAppSelector(filterSelector);
-  const { employee, status } = useAppSelector(empDashSelector);
+  const { employee } = useAppSelector(empDashSelector);
   const { employees } = useAppSelector(employeesSelector);
 
   useEffect(() => {
     if (isFirstLoading.current) {
+      dispatch(clearCurFilters());
       dispatch(fetchFilters({}));
     }
   }, []);
