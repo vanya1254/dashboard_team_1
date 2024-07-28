@@ -29,7 +29,7 @@ export const fetchFilters = createAsyncThunk(
         )
       )
     );
-    console.log(2, response[2]);
+
     return response;
   }
 );

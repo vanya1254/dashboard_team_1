@@ -24,7 +24,7 @@ export const Header: React.FC = () => {
         <div className={styles.root__dashboards}>
           <button
             className={`${styles.root__dashboards_btn} ${styles.root__dashboards_left}${
-              dboard === '1' ? ' active' : ''
+              dboard === '1' ? ' activated' : ''
             }`}
             onClick={() => onClickDboard('1')}
           >
@@ -32,7 +32,7 @@ export const Header: React.FC = () => {
           </button>
           <button
             className={`${styles.root__dashboards_btn} ${styles.root__dashboards_right}${
-              dboard === '2' ? ' active' : ''
+              dboard === '2' ? ' activated' : ''
             }`}
             onClick={() => onClickDboard('2')}
           >

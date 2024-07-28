@@ -43,13 +43,13 @@ export const DepFilters: React.FC = () => {
               isReset={isReset}
               onClickFilter={onClickFilter}
               selectTitle={'Выбор подразделения'}
-              options={filters[0]}
+              options={filters[1]}
             />
             <SelectCustom
               isReset={isReset}
               onClickFilter={onClickFilter}
               selectTitle={'Выбор должности'}
-              options={filters[1]}
+              options={filters[0]}
             />
             <SelectCustom
               isReset={isReset}

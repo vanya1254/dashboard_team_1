@@ -32,7 +32,7 @@ export const fetchDepDash = createAsyncThunk(
         )
       )
     );
-    console.log(1, response[1]);
+    console.log(0, response[0]);
 
     return response;
   }

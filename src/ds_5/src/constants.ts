@@ -143,22 +143,19 @@ export const DEP_DASHES_REQUESTS = {
   //   dimensions: ['skill_name', 'max_skill_grade_employee', 'count_skill_department', 'calendar_year'],
   //   measures: [],
   //   filters: {
-  //     calendar_year: ['=', 0]
+  //     calendar_year: ['=', 2022, 2023]
   //   },
   //   comment: 'depStackedMixedBar'
   // },
   depStackedMixedBar: {
-    dimensions: [
-      'dim_skills_skill_key',
-      'skill_name',
-      'count_novice_department',
-      'count_junior_department',
-      'count_middle_department',
-      'count_senior_department',
-      'count_expert_department',
-      'calendar_year'
+    dimensions: ['dim_skills_skill_key', 'skill_name', 'calendar_year'],
+    measures: [
+      'sum(count_novice_department)',
+      'sum(count_junior_department)',
+      'sum(count_middle_department)',
+      'sum(count_senior_department)',
+      'sum(count_expert_department)'
     ],
-    measures: [],
     filters: {
       calendar_year: ['=', 2022, 2023]
     },
