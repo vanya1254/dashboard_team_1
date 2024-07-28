@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { GiProgression } from 'react-icons/gi';
 
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { fetchEmployees } from '../../redux/features/employees/slice';
@@ -15,6 +16,7 @@ import {
   BarChartCustom,
   EmployeeCard,
   EmployesList,
+  KpiBlock,
   RadarChartCustom,
   SkillsList,
   StackedAreaChartCustom
@@ -68,6 +70,7 @@ const EmployerPage: React.FC = () => {
         <EmployeeCard />
       </CardLayout>
       <CardLayout className={styles.root__categories}>
+        {/* <KpiBlock icon={<GiProgression />} title={'Всего новых навыков за год '} value={'26'} /> */}
         <SkillsList />
       </CardLayout>
       <CardLayout className={styles.root__upgrade}>

@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { DEP_DASHES_REQUESTS, KOOB_ID, SCHEMA_NAME, SKILL_KEYS, SKILL_LEVEL, SKILL_TYPES } from '../../../constants';
-import { DepDashState, DepSimpleAreaT, FetchDepDashPropsT } from './types';
+import { DepDashState, DepSimpleAreaT, DepTagCloudT, FetchDepDashPropsT } from './types';
 //@ts-ignore
 import { KoobDataService } from 'bi-internal/services';
 import { CoobDataI, Status } from '../../mainTypes';
@@ -40,6 +40,7 @@ export const fetchDepDash = createAsyncThunk(
 
 const initialState: DepDashState = {
   data: [],
+  depTagCloud: [],
   depSimpleArea: [],
   depStackedMixedBar: [],
   status: Status.Pending
@@ -49,8 +50,15 @@ export const depDashSlice = createSlice({
   name: 'depDash',
   initialState,
   reducers: {
+    setDepTagCloud(state) {
+      state.depTagCloud = state.data[0].map((obj) => ({
+        value: obj.department as string,
+        count: obj.count_last_year_skill as number
+      }));
+      console.log(state.depTagCloud);
+    },
     setDepSimpleArea(state) {
-      state.depSimpleArea = state.data[0] as DepSimpleAreaT[];
+      state.depSimpleArea = state.data[1] as DepSimpleAreaT[];
     },
     setDepStackedMixedBar(state) {
       const result = [];
@@ -63,7 +71,7 @@ export const depDashSlice = createSlice({
         // Добавьте другие уровни, если необходимо
       };
 
-      state.data[1].forEach((item) => {
+      state.data[2].forEach((item) => {
         // Определение уровня навыка
         const skillLevel = Object.keys(SKILL_LEVEL).find((level) => item[`count_${level}_department`] !== undefined);
 
@@ -111,6 +119,7 @@ export const depDashSlice = createSlice({
         state.status = Status.Fulfilled;
 
         // Данные под каждый дэшлет
+        depDashSlice.caseReducers.setDepTagCloud(state);
         depDashSlice.caseReducers.setDepSimpleArea(state);
         depDashSlice.caseReducers.setDepStackedMixedBar(state);
       })

@@ -2,6 +2,7 @@ import { AllFiltersT, CoobDataI, RequestT, Status } from '../../mainTypes';
 
 export interface DepDashState {
   data: CoobDataI[][];
+  depTagCloud: DepTagCloudT[];
   depSimpleArea: DepSimpleAreaT[];
   depStackedMixedBar: DepStackedMixedBar[];
   status: Status;
@@ -28,4 +29,9 @@ export type DepStackedMixedBar = {
   cur4: number;
   cur5: number;
   cur6: number;
+};
+
+export type DepTagCloudT = {
+  value: string;
+  count: number;
 };

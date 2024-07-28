@@ -4,6 +4,9 @@ import { TagCloud } from 'react-tagcloud';
 import { DashletLayout } from '../../layouts/DashletLayout';
 
 import styles from './TagCloudCustom.module.scss';
+import { useAppSelector } from '../../redux/store';
+import { depDashSelector } from '../../redux/features/depDash/selectors';
+import { Status } from '../../redux/mainTypes';
 
 const data = [
   {
@@ -40,14 +43,44 @@ const colors = {
 };
 
 export const TagCloudCustom: React.FC = () => {
+  const { depTagCloud, status } = useAppSelector(depDashSelector);
+
   return (
     <DashletLayout
-      className={styles.root}
+      className={`${styles.root} scroller`}
       title={'Самые развитые подразделенеия'}
       width={'100%'}
       height={'calc((1vh + 1vw) * 9.375)'}
     >
-      <TagCloud minSize={12} maxSize={48} tags={data} colorOptions={colors} className={styles.root__chart} />
+      {status === Status.Fulfilled ? (
+        <TagCloud
+          minSize={12}
+          maxSize={48}
+          shuffle={true}
+          tags={depTagCloud}
+          colorOptions={colors}
+          className={`simple-cloud ${styles.root__chart}`}
+          renderer={customRenderer}
+        />
+      ) : status === Status.Pending ? (
+        'LOADING'
+      ) : (
+        ''
+      )}
     </DashletLayout>
   );
 };
+
+const customRenderer = (tag, size, color) => (
+  <span
+    key={tag.value}
+    style={{
+      animation: 'blinker 3s linear infinite',
+      animationDelay: `${Math.random() * 2}s`,
+      color: color,
+      fontSize: `${size}px`
+    }}
+  >
+    {tag.value}
+  </span>
+);
