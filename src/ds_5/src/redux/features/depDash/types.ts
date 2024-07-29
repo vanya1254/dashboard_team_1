@@ -17,18 +17,16 @@ export type DepSimpleAreaT = { skill_name: string; avg_skill_grade_position: num
 
 export type DepStackedMixedBar = {
   name: string;
-  prev1: number;
-  prev2: number;
-  prev3: number;
-  prev4: number;
-  prev5: number;
-  prev6: number;
-  cur1: number;
-  cur2: number;
-  cur3: number;
-  cur4: number;
-  cur5: number;
-  cur6: number;
+  prev_count_expert_department: number;
+  prev_count_junior_department: number;
+  prev_count_middle_department: number;
+  prev_count_novice_department: number;
+  prev_count_senior_department: number;
+  cur_count_expert_department: number;
+  cur_count_junior_department: number;
+  cur_count_middle_department: number;
+  cur_count_novice_department: number;
+  cur_count_senior_department: number;
 };
 
 export type DepTagCloudT = {

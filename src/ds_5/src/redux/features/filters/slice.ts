@@ -24,7 +24,7 @@ export const fetchFilters = createAsyncThunk(
            * пришлось расширить request, чтобы передавать schema_name
            */
           // @ts-ignore
-          { schema_name: SCHEMA_NAME, ...request },
+          { schema_name: SCHEMA_NAME, ...FILTERS_REQUESTS[filter].request, ...request },
           comment || `filter-${FILTERS_REQUESTS[filter].comment}`
         )
       )

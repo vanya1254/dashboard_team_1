@@ -32,7 +32,7 @@ export const fetchDepDash = createAsyncThunk(
         )
       )
     );
-    console.log(0, response[0]);
+    console.log(2, response[2]);
 
     return response;
   }
@@ -55,55 +55,50 @@ export const depDashSlice = createSlice({
         value: obj.department as string,
         count: obj.count_last_year_skill as number
       }));
-      console.log(state.depTagCloud);
     },
     setDepSimpleArea(state) {
       state.depSimpleArea = state.data[1] as DepSimpleAreaT[];
     },
     setDepStackedMixedBar(state) {
       const result = [];
-      const SKILL_LEVEL = {
-        novice: 'Novice',
-        junior: 'Junior',
-        middle: 'Middle',
-        senior: 'Senior',
-        expert: 'Expert'
-        // Добавьте другие уровни, если необходимо
-      };
 
       state.data[2].forEach((item) => {
-        // Определение уровня навыка
-        const skillLevel = Object.keys(SKILL_LEVEL).find((level) => item[`count_${level}_department`] !== undefined);
+        // Ищем, есть ли уже объект с таким же названием навыка
+        let skillObject = result.find((obj) => obj.name === item.skill_name);
 
-        if (!skillLevel) return;
-
-        // Найти или создать объект для данного skill_name
-        let skill = result.find((skill) => skill.name === item.skill_name);
-        if (!skill) {
-          skill = {
+        if (!skillObject) {
+          // Если объекта с таким названием навыка еще нет, создаем новый объект
+          skillObject = {
             name: item.skill_name,
-            prevNovice: 0,
-            prevJunior: 0,
-            prevMiddle: 0,
-            prevSenior: 0,
-            prevExpert: 0,
-            curNovice: 0,
-            curJunior: 0,
-            curMiddle: 0,
-            curSenior: 0,
-            curExpert: 0
+            prev_count_expert_department: 0,
+            prev_count_junior_department: 0,
+            prev_count_middle_department: 0,
+            prev_count_novice_department: 0,
+            prev_count_senior_department: 0,
+            cur_count_expert_department: 0,
+            cur_count_junior_department: 0,
+            cur_count_middle_department: 0,
+            cur_count_novice_department: 0,
+            cur_count_senior_department: 0
           };
-          result.push(skill);
+          result.push(skillObject);
         }
 
-        // Обновить счетчик для предыдущего года или текущего года
+        // Заполняем поля в зависимости от года
         if (item.calendar_year === 2022) {
-          skill[`prev${SKILL_LEVEL[skillLevel]}`] += item[`count_${skillLevel}_department`];
+          skillObject.prev_count_expert_department = item.count_expert_department;
+          skillObject.prev_count_junior_department = item.count_junior_department;
+          skillObject.prev_count_middle_department = item.count_middle_department;
+          skillObject.prev_count_novice_department = item.count_novice_department;
+          skillObject.prev_count_senior_department = item.count_senior_department;
         } else if (item.calendar_year === 2023) {
-          skill[`cur${SKILL_LEVEL[skillLevel]}`] += item[`count_${skillLevel}_department`];
+          skillObject.cur_count_expert_department = item.count_expert_department;
+          skillObject.cur_count_junior_department = item.count_junior_department;
+          skillObject.cur_count_middle_department = item.count_middle_department;
+          skillObject.cur_count_novice_department = item.count_novice_department;
+          skillObject.cur_count_senior_department = item.count_senior_department;
         }
       });
-
       console.log(result);
       state.depStackedMixedBar = result;
     }

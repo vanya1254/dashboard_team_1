@@ -92,17 +92,17 @@ export const StackedMixBarChart: React.FC = () => {
             <Tooltip />
             <Brush dataKey="name" height={20} stroke="#8da5d6" fill="#fff" strokeOpacity={0.8} travellerWidth={12} />
             {/* <Legend align="left" verticalAlign="middle" width={100} margin={{ right: 10 }} /> */}
-            <Bar dataKey="prevNovice" stackId="2022" fill="#8842B4" />
-            <Bar dataKey="prevJunior" stackId="2022" fill="#E29076" />
-            <Bar dataKey="prevMiddle" stackId="2022" fill="#58C5BE" />
-            <Bar dataKey="prevSenior" stackId="2022" fill="#8842B4" />
-            <Bar dataKey="prevExpert" stackId="2022" fill="#E29076" />
+            <Bar dataKey="prev_count_novice_department" stackId="2022" fill="#8842B4" />
+            <Bar dataKey="prev_count_junior_department" stackId="2022" fill="#E29076" />
+            <Bar dataKey="prev_count_middle_department" stackId="2022" fill="#58C5BE" />
+            <Bar dataKey="prev_count_senior_department" stackId="2022" fill="#8842B4" />
+            <Bar dataKey="prev_count_expert_department" stackId="2022" fill="#E29076" />
 
-            <Bar dataKey="curNovice" stackId="2023" fill="#8842B4" />
-            <Bar dataKey="curJunior" stackId="2023" fill="#E29076" />
-            <Bar dataKey="curMiddle" stackId="2023" fill="#58C5BE" />
-            <Bar dataKey="curSenior" stackId="2023" fill="#8842B4" />
-            <Bar dataKey="curExpert" stackId="2023" fill="#E29076" />
+            <Bar dataKey="cur_count_novice_department" stackId="2023" fill="#8842B4" />
+            <Bar dataKey="cur_count_junior_department" stackId="2023" fill="#E29076" />
+            <Bar dataKey="cur_count_middle_department" stackId="2023" fill="#58C5BE" />
+            <Bar dataKey="cur_count_senior_department" stackId="2023" fill="#8842B4" />
+            <Bar dataKey="cur_count_expert_department" stackId="2023" fill="#E29076" />
           </BarChart>
         </ResponsiveContainer>
       ) : status === Status.Pending ? (

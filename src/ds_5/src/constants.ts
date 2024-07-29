@@ -77,19 +77,28 @@ export const FILTERS_REQUESTS = {
     dimensions: ['position'],
     measures: [],
     filters: {},
-    comment: 'position'
+    comment: 'position',
+    request: {
+      sort: ['position']
+    }
   },
   department: {
     dimensions: ['department'],
     measures: [],
     filters: {},
-    comment: 'department'
+    comment: 'department',
+    request: {
+      sort: ['department']
+    }
   },
   skill_type: {
     dimensions: ['skill_type'],
     measures: [],
     filters: { skill_type: ['and', ['>', 0], ['<', 11]] },
-    comment: 'skill_type'
+    comment: 'skill_type',
+    request: {
+      sort: ['skill_type']
+    }
   }
 };
 
