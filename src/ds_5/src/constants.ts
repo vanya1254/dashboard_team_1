@@ -143,19 +143,11 @@ export const DEP_DASHES_REQUESTS = {
     comment: 'depTagCloud'
   },
   depSimpleArea: {
-    dimensions: ['skill_name', 'avg_skill_grade_position'],
-    measures: [],
+    dimensions: ['skill_name'],
+    measures: ['avg(current_skill_level)'],
     filters: {},
     comment: 'depSimpleArea'
   },
-  // depStackedMixedBar: {
-  //   dimensions: ['skill_name', 'max_skill_grade_employee', 'count_skill_department', 'calendar_year'],
-  //   measures: [],
-  //   filters: {
-  //     calendar_year: ['=', 2022, 2023]
-  //   },
-  //   comment: 'depStackedMixedBar'
-  // },
   depStackedMixedBar: {
     dimensions: ['dim_skills_skill_key', 'skill_name', 'calendar_year'],
     measures: [

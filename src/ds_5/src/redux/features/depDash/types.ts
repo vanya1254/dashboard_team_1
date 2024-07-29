@@ -13,7 +13,7 @@ export type FetchDepDashPropsT = {
   request?: RequestT;
 };
 
-export type DepSimpleAreaT = { skill_name: string; avg_skill_grade_position: number };
+export type DepSimpleAreaT = { skill_name: string; current_skill_level: number };
 
 export type DepStackedMixedBar = {
   name: string;
