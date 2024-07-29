@@ -1,0 +1,11 @@
+@import '../../styles/vars';
+
+.root {
+  display: grid;
+  gap: 10px;
+
+  padding: 16px;
+  border-radius: 6px;
+
+  background-color: $bgInfoColor;
+}

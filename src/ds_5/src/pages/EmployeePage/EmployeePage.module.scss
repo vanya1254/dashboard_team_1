@@ -4,6 +4,10 @@
   }
   &__categories {
     grid-area: categories;
+
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
   }
   &__radar {
     grid-area: radar;

@@ -17,6 +17,7 @@ import {
   EmployeeCard,
   EmployesList,
   KpiBlock,
+  KpiList,
   RadarChartCustom,
   SkillsList,
   StackedAreaChartCustom
@@ -69,10 +70,14 @@ const EmployerPage: React.FC = () => {
       <CardLayout className={styles.root__employee}>
         <EmployeeCard />
       </CardLayout>
-      <CardLayout className={styles.root__categories}>
-        {/* <KpiBlock icon={<GiProgression />} title={'Всего новых навыков за год '} value={'26'} /> */}
-        <SkillsList />
-      </CardLayout>
+      <div className={styles.root__categories}>
+        <CardLayout>
+          <SkillsList />
+        </CardLayout>
+        <CardLayout>
+          <KpiList />
+        </CardLayout>
+      </div>
       <CardLayout className={styles.root__upgrade}>
         <StackedAreaChartCustom />
       </CardLayout>

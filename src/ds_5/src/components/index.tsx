@@ -15,3 +15,4 @@ export { StackedMixBarChart } from './StackedMixBarChart';
 export { DepFilters } from './DepFilters';
 export { ToggleCustom } from './ToggleCustom';
 export { KpiBlock } from './KpiBlock';
+export { KpiList } from './KpiList';

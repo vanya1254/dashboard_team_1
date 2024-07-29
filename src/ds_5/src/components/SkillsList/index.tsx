@@ -93,7 +93,7 @@ export const SkillsList: React.FC = () => {
         </ul>
       </div>
       <div className={styles.root__skills}>
-        <div className={styles.root__skills__list}>
+        {/* <div className={styles.root__skills__list}>
           <h3>Текущие навыки:</h3>
           <ul className="scroller">
             {status === Status.Fulfilled && empSkillsList.length
@@ -102,7 +102,7 @@ export const SkillsList: React.FC = () => {
               ? 'LOADING'
               : ''}
           </ul>
-        </div>
+        </div> */}
         <div className={styles.root__skills__list}>
           <h3>Область развития:</h3>
           <ul className="scroller">
