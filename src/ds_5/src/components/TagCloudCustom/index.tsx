@@ -48,7 +48,7 @@ export const TagCloudCustom: React.FC = () => {
   return (
     <DashletLayout
       className={`${styles.root} scroller`}
-      title={'Самые развитые подразделенеия'}
+      title={'Самые развитые подразделения'}
       width={'100%'}
       height={'calc((1vh + 1vw) * 9.375)'}
     >

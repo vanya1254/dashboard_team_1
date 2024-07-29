@@ -46,6 +46,12 @@ const ticksLabels = { 0: '', 1: '1 ур.', 2: '2 ур.', 3: '3 ур.' };
 
 const titles = { false: 'отрасли', true: 'предметных областей' };
 
+const tooltipTicks = {
+  1: 'Знаком',
+  2: `Знаком, могу применить`,
+  3: `Знаком, могу реализовать`
+};
+
 export const StackedAreaChartCustom: React.FC = () => {
   const { empStackedArea, status } = useAppSelector(empDashSelector);
   const [isToggled, setIsToggled] = useState(false);
@@ -69,7 +75,7 @@ export const StackedAreaChartCustom: React.FC = () => {
             <YAxis stroke="#fff" domain={[0, 3]} tickCount={4} tickFormatter={(tick) => ticksLabels[tick]} />
             <Tooltip
               formatter={(level, name) => {
-                return [`${level}`, 'Уровень владения'];
+                return [`${tooltipTicks[level] || 'Нет опыта'}`];
               }}
             />
             <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} stroke="#ccc" />

@@ -10,6 +10,7 @@ import { DashletLayout } from '../../layouts/DashletLayout';
 
 import styles from './SimpleAreaChartCustom.module.scss';
 import { SKILL_LEVEL } from '../../constants';
+import { filterSelector } from '../../redux/features/filter/selectors';
 
 const data = [
   {
@@ -40,14 +41,14 @@ const data = [
 
 export const SimpleAreaChartCustom: React.FC = () => {
   const { depSimpleArea, status } = useAppSelector(depDashSelector);
+  const { department, position } = useAppSelector(filterSelector);
+
+  const title = `Средний уровень навыка: ${
+    department[1] || position[1] ? `${department[1] || ''} ${position[1] || ''}` : 'ДАР'
+  }`;
 
   return (
-    <DashletLayout
-      title={'Самый развитый навык в целом по ДАР'}
-      width={'100%'}
-      height={'calc((1vh + 1vw) * 9.375)'}
-      className={styles.root}
-    >
+    <DashletLayout title={title} width={'100%'} height={'calc((1vh + 1vw) * 9.375)'} className={styles.root}>
       {status === Status.Fulfilled ? (
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={depSimpleArea}>
@@ -60,7 +61,7 @@ export const SimpleAreaChartCustom: React.FC = () => {
             />
             <Tooltip
               formatter={(level, name) => {
-                return [`${level}`, 'Средний по должности'];
+                return [`${level.toFixed(1)}`, 'Average'];
               }}
             />
             <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} stroke="#ccc" />

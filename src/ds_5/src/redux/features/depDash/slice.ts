@@ -33,6 +33,8 @@ export const fetchDepDash = createAsyncThunk(
       )
     );
 
+    console.log(0, response[0]);
+
     return response;
   }
 );
@@ -50,6 +52,7 @@ export const depDashSlice = createSlice({
   initialState,
   reducers: {
     setDepTagCloud(state) {
+      //TODO: if [0].department === [1].department => [i]position
       state.depTagCloud = state.data[0].map((obj) => ({
         value: obj.department as string,
         count: obj.count_last_year_skill as number
