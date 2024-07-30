@@ -103,7 +103,7 @@ export const StackedMixBarChart: React.FC = () => {
           <BarChart data={depStackedMixedBar} barGap={0}>
             <XAxis dataKey="name" stroke="#fff" />
             <YAxis stroke="#fff" />
-            <Tooltip formatter={(value, name) => [`${value}`, tooltipTicks[name]]} />
+            <Tooltip formatter={(value, name) => (value ? [`${value}`, tooltipTicks[name]] : [])} />
             <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} stroke="#ccc" />
             <Brush dataKey="name" height={20} stroke="#8da5d6" fill="#fff" strokeOpacity={0.8} travellerWidth={12} />
             {/* <Legend align="left" verticalAlign="middle" width={100} margin={{ right: 10 }} /> */}
