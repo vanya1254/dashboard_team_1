@@ -61,7 +61,8 @@ export const StackedAreaChartCustom: React.FC = () => {
   return (
     <DashletLayout
       title={`Уровень знаний ${titles[isToggled.toString()]}`}
-      width={'calc((1vh + 1vw) * 19.0977)'}
+      width={'100%'}
+      // width={'calc((1vh + 1vw) * 19.0977)'}
       height={'calc((1vh + 1vw)* 6.007)'}
       className={styles.root}
     >

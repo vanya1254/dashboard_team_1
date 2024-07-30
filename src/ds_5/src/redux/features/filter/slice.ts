@@ -24,11 +24,6 @@ export const filterSlice = createSlice({
         state[key][1] = action.payload[key];
       }
     },
-    // resetCurFilter(state, action: PayloadAction<CoobDataI>) {
-    //   const key = Object.keys(action.payload)[0];
-
-    //   state[key] = initialState[key];
-    // },
     setFullname: (state, action: PayloadAction<string>) => {
       if (action.payload) {
         state.fullname = ['ilike', `%${action.payload}%`];
