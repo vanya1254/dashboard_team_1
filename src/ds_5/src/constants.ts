@@ -132,6 +132,12 @@ export const EMP_DASHES_REQUESTS = {
     measures: [],
     filters: { skill_type: ['=', 1, 2, 5, 6, 7, 8, 9, 10], calendar_year: ['=', 2022, 2023] },
     comment: 'empStackedArea'
+  },
+  empKpi: {
+    dimensions: ['improvement_percent', 'new_skills_current', 'new_skills_last'],
+    measures: [],
+    filters: {},
+    comment: 'empKpi'
   }
 };
 

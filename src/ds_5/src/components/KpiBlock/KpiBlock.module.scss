@@ -16,6 +16,7 @@
   }
 
   &_value {
+    position: relative;
     display: inline-flex;
     align-items: center;
 
@@ -27,6 +28,13 @@
 
     &_neg {
       color: #f82727;
+    }
+
+    &_subValue {
+      position: absolute;
+      right: -12px;
+      font-size: 10px;
+      color: black;
     }
   }
 }

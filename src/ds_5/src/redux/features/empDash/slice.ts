@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { EMP_DASHES_REQUESTS, KOOB_ID, SCHEMA_NAME, SKILL_KEYS, SKILL_LEVEL, SKILL_TYPES } from '../../../constants';
-import { EmpDashState, FetchEmpDashPropsT } from './types';
+import { EmpDashState, EmpKpiT, FetchEmpDashPropsT } from './types';
 //@ts-ignore
 import { KoobDataService } from 'bi-internal/services';
 import { CoobDataI, EmployeeT, Status } from '../../mainTypes';
@@ -33,7 +33,7 @@ export const fetchEmpDash = createAsyncThunk(
         )
       )
     );
-
+    console.log(5, response[5]);
     return response;
   }
 );
@@ -63,6 +63,7 @@ const initialState: EmpDashState = {
   empCard: [],
   empStackedArea: [],
   empBar: [],
+  empKpi: [],
   status: Status.Pending
 };
 
@@ -208,32 +209,38 @@ export const empDashSlice = createSlice({
         2022: result[skill][2022],
         2023: result[skill][2023]
       }));
+    },
+    setEmpKpi(state) {
+      console.log(state.data[5]);
+      state.empKpi = state.data[5] as EmpKpiT[];
     }
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchEmpDash.pending, (state) => {
-        state.data = initialState.data;
         state.status = Status.Pending;
+        state.data = initialState.data;
       })
       .addCase(fetchEmpDash.fulfilled, (state, action: PayloadAction<CoobDataI[][]>) => {
-        state.data = action.payload;
         state.status = Status.Fulfilled;
+        state.data = action.payload;
+
         // Данные под каждый дэшлет
         empDashSlice.caseReducers.setEmpSkillsList(state);
         empDashSlice.caseReducers.setEmpRadar(state);
         empDashSlice.caseReducers.setEmpCard(state);
         empDashSlice.caseReducers.setEmpStackedArea(state);
         empDashSlice.caseReducers.setEmpBar(state);
+        empDashSlice.caseReducers.setEmpKpi(state);
       })
       .addCase(fetchEmpDash.rejected, (state) => {
-        state.data = initialState.data;
         state.status = Status.Rejected;
+        state.data = initialState.data;
       });
   }
 });
 
-export const { setEmployee, setEmpSkillsList, setEmpRadar, setEmpCard, setEmpStackedArea, setEmpBar } =
+export const { setEmployee, setEmpSkillsList, setEmpRadar, setEmpCard, setEmpStackedArea, setEmpBar, setEmpKpi } =
   empDashSlice.actions;
 
 export default empDashSlice.reducer;
