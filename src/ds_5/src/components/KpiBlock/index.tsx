@@ -18,7 +18,7 @@ export const KpiBlock: React.FC<KpiBlockT> = ({ icon, title, value, subValue, is
       <h4 className={styles.root_title}>{title}</h4>
       <p
         className={`${styles.root_value}${
-          isColored ? (value ? ` ${styles.root_value_pos}` : ` ${styles.root_value_neg}`) : ''
+          isColored ? (value > 0 ? ` ${styles.root_value_pos}` : ` ${styles.root_value_neg}`) : ''
         }`}
       >
         {isColored ? `${value}%` : value}
