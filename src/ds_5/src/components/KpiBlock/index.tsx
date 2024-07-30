@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { TiArrowSortedDown, TiArrowSortedUp } from 'react-icons/ti';
+import { IoIosArrowRoundForward } from 'react-icons/io';
 
 import styles from './KpiBlock.module.scss';
 
@@ -21,9 +22,16 @@ export const KpiBlock: React.FC<KpiBlockT> = ({ icon, title, value, subValue, is
           isColored ? (value > 0 ? ` ${styles.root_value_pos}` : ` ${styles.root_value_neg}`) : ''
         }`}
       >
-        {isColored ? `${value}%` : value}
+        {isColored ? `${value}%` : `+${value}`}
+        {subValue !== undefined ? (
+          <>
+            <IoIosArrowRoundForward />
+            {`+${subValue}`}
+          </>
+        ) : (
+          ''
+        )}
         {isColored ? value > 0 ? <TiArrowSortedUp /> : <TiArrowSortedDown /> : ''}
-        {subValue !== undefined ? <span className={styles.root_value_subValue}>{`(${subValue})`}</span> : ''}
       </p>
     </div>
   );

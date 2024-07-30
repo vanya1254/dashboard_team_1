@@ -22,14 +22,14 @@ export const KpiList: React.FC = () => {
           <KpiBlock
             icon={<FaArrowUpRightDots />}
             title={'Навыков за год'}
-            value={empKpi[0].new_skills_current}
+            value={empKpi[0].new_skills_last}
+            subValue={empKpi[0].new_skills_current}
             isColored={false}
           />
           <KpiBlock
             icon={<BsClipboard2Check />}
             title={'Годовой темп'}
             value={empKpi[0].improvement_percent}
-            subValue={empKpi[0].new_skills_last}
             isColored={true}
           />
         </>
