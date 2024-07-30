@@ -55,7 +55,7 @@ export const depDashSlice = createSlice({
       //TODO: if [0].department === [1].department => [i]position
       state.depTagCloud = state.data[0].map((obj) => ({
         value: obj.department as string,
-        count: obj.count_last_year_skill as number
+        count: obj.count_skill_per_year_employee as number
       }));
     },
     setDepSimpleArea(state) {
@@ -101,7 +101,7 @@ export const depDashSlice = createSlice({
           skillObject.cur_count_senior_department = item.count_senior_department;
         }
       });
-      console.log(result);
+
       state.depStackedMixedBar = result;
     }
   },

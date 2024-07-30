@@ -143,9 +143,9 @@ export const EMP_DASHES_REQUESTS = {
 
 export const DEP_DASHES_REQUESTS = {
   depTagCloud: {
-    dimensions: ['department', 'count_last_year_skill'],
-    measures: [],
-    filters: {},
+    dimensions: ['department'],
+    measures: ['avg(count_skill_per_year_employee)'],
+    filters: { calendar_year: ['=', 2023] },
     comment: 'depTagCloud'
   },
   depSimpleArea: {
