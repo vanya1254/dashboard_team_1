@@ -18,12 +18,17 @@ export const filterSlice = createSlice({
     setCurFilter: (state, action: PayloadAction<CoobDataI>) => {
       const key = Object.keys(action.payload)[0];
 
-      if (action.payload[key] === 'Все') {
+      if (action.payload[key] === 'Все' || action.payload[key] === state[key][1]) {
         state[key] = initialState[key];
       } else {
         state[key][1] = action.payload[key];
       }
     },
+    // resetCurFilter(state, action: PayloadAction<CoobDataI>) {
+    //   const key = Object.keys(action.payload)[0];
+
+    //   state[key] = initialState[key];
+    // },
     setFullname: (state, action: PayloadAction<string>) => {
       if (action.payload) {
         state.fullname = ['ilike', `%${action.payload}%`];

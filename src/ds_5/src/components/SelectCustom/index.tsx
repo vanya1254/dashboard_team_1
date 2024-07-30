@@ -25,7 +25,13 @@ export const SelectCustom: React.FC<SelectCustomPropsT> = ({ onClickFilter, sele
 
   const onClickSkill = (idx: number) => {
     onClickFilter(options[idx]);
-    setActiveOption(idx);
+
+    if (activeOption === idx) {
+      setActiveOption(0);
+    } else {
+      setActiveOption(idx);
+    }
+
     setIsOpen(false);
   };
 

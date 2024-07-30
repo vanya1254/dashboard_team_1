@@ -24,6 +24,7 @@ export const Filters: React.FC = () => {
   const onClickFilter = (filter: CoobDataI) => {
     setIsReset(false);
     dispatch(setCurFilter(filter));
+    console.log(filter);
   };
 
   const onChangeSearchValue = (val: string) => {
