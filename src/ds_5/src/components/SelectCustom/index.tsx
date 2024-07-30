@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { RiFilter2Fill } from 'react-icons/ri';
 
 import { CoobDataI } from '../../redux/mainTypes';
 
 import styles from './SelectCustom.module.scss';
+import useOutsideClick from '../../hooks/useOutsideClick';
 
 type SelectCustomPropsT = {
   onClickFilter: (filter: any) => void; //TODO
@@ -13,8 +14,10 @@ type SelectCustomPropsT = {
 };
 
 export const SelectCustom: React.FC<SelectCustomPropsT> = ({ onClickFilter, selectTitle, options, isReset }) => {
+  const wrapperRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
   const [activeOption, setActiveOption] = useState(0);
+  useOutsideClick(wrapperRef, setIsOpen);
 
   const onClickCategories = () => {
     if (isReset) {
@@ -41,7 +44,10 @@ export const SelectCustom: React.FC<SelectCustomPropsT> = ({ onClickFilter, sele
         <RiFilter2Fill />
         <span>{selectTitle}</span>
       </button>
-      <div className={`${styles.root__options}${isOpen ? ` ${styles.root__options_activated}` : ''} scroller`}>
+      <div
+        ref={wrapperRef}
+        className={`${styles.root__options}${isOpen ? ` ${styles.root__options_activated}` : ''} scroller`}
+      >
         <ul>
           {options.map((option, i) => (
             <li className={`${activeOption === i ? ` activeOption` : ''}`} key={i} onClick={() => onClickSkill(i)}>
