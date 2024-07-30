@@ -19,7 +19,7 @@ export type FetchEmpDashPropsT = {
 
 export type EmpCardT = { skill_type: string; value: string[] };
 
-export type EmpRadarT = { skill_type: string; level: number; midLevel: number };
+export type EmpRadarT = { skill_type: string; level: number; midDepLevel: number; midPosLevel: number };
 
 export type EmpStackedAreaT = { name: string; level: number };
 

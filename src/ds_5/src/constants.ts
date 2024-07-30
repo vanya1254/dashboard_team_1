@@ -110,8 +110,8 @@ export const EMP_DASHES_REQUESTS = {
     comment: 'empSkillsList'
   },
   empRadar: {
-    dimensions: ['skill_type', 'avg_skill_grade_employee', 'avg_skill_grade_position'],
-    measures: [],
+    dimensions: ['skill_type'],
+    measures: ['avg(avg_skill_grade_department)', 'avg(avg_skill_grade_employee)', 'avg(avg_skill_grade_position)'],
     filters: { skill_type: ['=', 10, 1, 5, 2, 6, 8, 7, 9] },
     comment: 'empRadar'
   },

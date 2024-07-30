@@ -107,7 +107,8 @@ export const empDashSlice = createSlice({
       let result = skillTypes.map((skillType) => ({
         skill_type: SKILL_TYPES[skillType],
         level: 0,
-        midLevel: 0
+        midDepLevel: 0,
+        midPosLevel: 0
       }));
 
       // Заполнение полей level и midLevel
@@ -115,7 +116,8 @@ export const empDashSlice = createSlice({
         let found = result.find((obj) => obj.skill_type === SKILL_TYPES[item.skill_type]);
         if (found) {
           found.level = (item.avg_skill_grade_employee as number) || 0;
-          found.midLevel = (item.avg_skill_grade_position as number) || 0;
+          found.midDepLevel = (item.avg_skill_grade_department as number) || 0;
+          found.midPosLevel = (item.avg_skill_grade_position as number) || 0;
         }
       });
 

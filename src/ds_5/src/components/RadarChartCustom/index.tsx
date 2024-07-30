@@ -52,11 +52,13 @@ export const RadarChartCustom: React.FC = () => {
               axisLine={false}
             />
             <PolarGrid />
-            <Radar dataKey="midLevel" stroke="#6DA7FF" fill="#6DA7FF" fillOpacity={0.6} />
+            <Radar dataKey="midDepLevel" stroke="#6DA7FF" fill="#6DA7FF" fillOpacity={0.6} />
+            <Radar dataKey="midPosLevel" stroke="#E29076" fill="#E29076" fillOpacity={0.6} />
             <Radar dataKey="level" stroke="#ef8eff" fill="#ef8eff" fillOpacity={0.6} />
             <Tooltip
               formatter={(value, name) => {
-                if (name === 'midLevel') return [`${value}`, 'Средний по должности'];
+                if (name === 'midDepLevel') return [`${value}`, 'Средний по департаменту'];
+                if (name === 'midPosLevel') return [`${value}`, 'Средний по должности'];
                 if (name === 'level') return [`${value}`, 'По сотруднику'];
                 return value;
               }}
