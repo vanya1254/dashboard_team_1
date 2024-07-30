@@ -57,6 +57,8 @@ export const RadarChartCustom: React.FC = () => {
             <Radar dataKey="level" stroke="#ef8eff" fill="#ef8eff" fillOpacity={0.6} />
             <Tooltip
               formatter={(value, name) => {
+                value = value.toFixed(1);
+
                 if (name === 'midDepLevel') return [`${value}`, 'Средний по департаменту'];
                 if (name === 'midPosLevel') return [`${value}`, 'Средний по должности'];
                 if (name === 'level') return [`${value}`, 'По сотруднику'];

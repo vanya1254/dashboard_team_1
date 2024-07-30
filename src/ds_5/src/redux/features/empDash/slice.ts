@@ -11,25 +11,28 @@ const { koobDataRequest3 } = KoobDataService;
 
 export const fetchEmpDash = createAsyncThunk(
   'empDash/fetchEmpDash',
-  async (params: FetchEmpDashPropsT, thunkAPI): Promise<CoobDataI[][]> => {
+  async (params: FetchEmpDashPropsT, thunkAPI): Promise<CoobDataI[][][]> => {
     const { allFilters, request } = params;
 
-    const response: CoobDataI[][] = await Promise.all(
-      Object.keys(EMP_DASHES_REQUESTS).map((dash, i) =>
-        koobDataRequest3(
-          KOOB_ID,
-          EMP_DASHES_REQUESTS[dash].dimensions,
-          EMP_DASHES_REQUESTS[dash].measures,
-          {
-            ...EMP_DASHES_REQUESTS[dash].filters,
-            ...allFilters
-          },
-          /**
-           * пришлось расширить request, чтобы передавать schema_name
-           */
-          // @ts-ignore
-          { schema_name: SCHEMA_NAME, ...request },
-          `dashlet-${EMP_DASHES_REQUESTS[dash].comment}`
+    const response: CoobDataI[][][] = await Promise.all(
+      Object.entries(EMP_DASHES_REQUESTS).map(([dashReqs, dashArray]) =>
+        Promise.all(
+          dashArray.map((dash) =>
+            koobDataRequest3(
+              KOOB_ID,
+              dash.dimensions,
+              dash.measures,
+              {
+                ...allFilters,
+                ...dash.filters
+              },
+              { schema_name: SCHEMA_NAME, ...request },
+              `dashlet-${dash.comment}`
+            ).catch((error) => {
+              console.error(`Error in dashlet ${dash.comment}:`, error);
+              return []; // Возвращаем пустой массив или null, чтобы избежать прерывания Promise.all
+            })
+          )
         )
       )
     );
@@ -79,7 +82,7 @@ export const empDashSlice = createSlice({
       const groupedSkills = {};
 
       // Проходим по каждому элементу ответа от сервера
-      state.data[0].forEach(({ skill_type, skill_name, next_grade_level }) => {
+      state.data[0][0].forEach(({ skill_type, skill_name, next_grade_level }) => {
         // Определяем тип навыка на основе skill_type
         const skillTypeName = SKILL_TYPES[skill_type];
 
@@ -101,7 +104,20 @@ export const empDashSlice = createSlice({
       state.empSkillsList = result;
     },
     setEmpRadar(state) {
-      const skillTypes = EMP_DASHES_REQUESTS.empRadar.filters.skill_type.slice(1);
+      const employeeDataMap = state.data[1][1].reduce((acc, item) => {
+        acc[item.skill_type] = item.avg_skill_grade_employee;
+        return acc;
+      }, {});
+
+      const mergedData = state.data[1][0].map((item) => ({
+        skill_type: item.skill_type,
+        skill_name: SKILL_TYPES[item.skill_type],
+        avg_skill_grade_department: item.avg_skill_grade_department,
+        avg_skill_grade_position: item.avg_skill_grade_position,
+        avg_skill_grade_employee: employeeDataMap[item.skill_type] || 0
+      }));
+
+      const skillTypes = EMP_DASHES_REQUESTS.empRadar[0].filters.skill_type.slice(1);
 
       // Создание массива объектов с инициализированными значениями
       let result = skillTypes.map((skillType) => ({
@@ -112,7 +128,7 @@ export const empDashSlice = createSlice({
       }));
 
       // Заполнение полей level и midLevel
-      state.data[1].forEach((item) => {
+      mergedData.forEach((item) => {
         let found = result.find((obj) => obj.skill_type === SKILL_TYPES[item.skill_type]);
         if (found) {
           found.level = (item.avg_skill_grade_employee as number) || 0;
@@ -124,10 +140,10 @@ export const empDashSlice = createSlice({
       state.empRadar = result;
     },
     setEmpCard(state) {
-      const skillOrder = EMP_DASHES_REQUESTS.empCard.filters.skill_type.slice(1);
+      const skillOrder = EMP_DASHES_REQUESTS.empCard[0].filters.skill_type.slice(1);
       const transformed = {};
 
-      state.data[2].forEach((item) => {
+      state.data[2][0].forEach((item) => {
         const skillType = item.skill_type;
         const skillLevel = SKILL_LEVEL[item.dim_skill_level_skill_level_key];
 
@@ -169,7 +185,7 @@ export const empDashSlice = createSlice({
       });
 
       // Заполнение данных для type3 и type4
-      state.data[3].forEach((item) => {
+      state.data[3][0].forEach((item) => {
         const key = item.dim_skills_skill_key;
         const level = item.current_skill_level;
         //@ts-ignore
@@ -187,7 +203,7 @@ export const empDashSlice = createSlice({
     setEmpBar(state) {
       const result = {};
 
-      state.data[4].forEach(({ skill_name, calendar_year, max_skill_grade_employee }) => {
+      state.data[4][0].forEach(({ skill_name, calendar_year, max_skill_grade_employee }) => {
         if (!result[skill_name]) {
           result[skill_name] = {};
         }
@@ -211,7 +227,7 @@ export const empDashSlice = createSlice({
       }));
     },
     setEmpKpi(state) {
-      state.empKpi = state.data[5] as EmpKpiT[];
+      state.empKpi = state.data[5][0] as EmpKpiT[];
     }
   },
   extraReducers: (builder) => {
@@ -220,7 +236,7 @@ export const empDashSlice = createSlice({
         state.status = Status.Pending;
         state.data = initialState.data;
       })
-      .addCase(fetchEmpDash.fulfilled, (state, action: PayloadAction<CoobDataI[][]>) => {
+      .addCase(fetchEmpDash.fulfilled, (state, action: PayloadAction<CoobDataI[][][]>) => {
         state.status = Status.Fulfilled;
         state.data = action.payload;
 

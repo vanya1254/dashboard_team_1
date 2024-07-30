@@ -103,42 +103,60 @@ export const FILTERS_REQUESTS = {
 };
 
 export const EMP_DASHES_REQUESTS = {
-  empSkillsList: {
-    dimensions: ['skill_type', 'skill_name', 'next_grade_level'],
-    measures: [],
-    filters: { skill_type: ['=', 1, 2, 5, 6, 7, 8, 9, 10] },
-    comment: 'empSkillsList'
-  },
-  empRadar: {
-    dimensions: ['skill_type'],
-    measures: ['avg(avg_skill_grade_department)', 'avg(avg_skill_grade_employee)', 'avg(avg_skill_grade_position)'],
-    filters: { skill_type: ['=', 10, 1, 5, 2, 6, 8, 7, 9] },
-    comment: 'empRadar'
-  },
-  empCard: {
-    dimensions: ['skill_type', 'skill_name', 'dim_skill_level_skill_level_key'],
-    measures: [],
-    filters: { skill_type: ['=', 11, 12, 1, 2, 4, 5, 6, 7, 9, 10] },
-    comment: 'empCard'
-  },
-  empStackedArea: {
-    dimensions: ['dim_skills_skill_key', 'current_skill_level', 'skill_type'],
-    measures: [],
-    filters: { skill_type: ['=', 3, 4] },
-    comment: 'empStackedArea'
-  },
-  empBar: {
-    dimensions: ['skill_name', 'calendar_year', 'max_skill_grade_employee'],
-    measures: [],
-    filters: { skill_type: ['=', 1, 2, 5, 6, 7, 8, 9, 10], calendar_year: ['=', 2022, 2023] },
-    comment: 'empStackedArea'
-  },
-  empKpi: {
-    dimensions: ['improvement_percent', 'new_skills_current', 'new_skills_last'],
-    measures: [],
-    filters: {},
-    comment: 'empKpi'
-  }
+  empSkillsList: [
+    {
+      dimensions: ['skill_type', 'skill_name', 'next_grade_level'],
+      measures: [],
+      filters: { skill_type: ['=', 1, 2, 5, 6, 7, 8, 9, 10] },
+      comment: 'empSkillsList'
+    }
+  ],
+  empRadar: [
+    {
+      dimensions: ['skill_type'],
+      measures: ['avg(avg_skill_grade_department)', 'avg(avg_skill_grade_position)'],
+      filters: { skill_type: ['=', 10, 1, 5, 2, 6, 8, 7, 9], fullname: ['='], position: ['='] },
+      comment: 'empRadarDepPos'
+    },
+    {
+      dimensions: ['skill_type'],
+      measures: ['avg(avg_skill_grade_employee)'],
+      filters: { skill_type: ['=', 10, 1, 5, 2, 6, 8, 7, 9] },
+      comment: 'empRadarEmployee'
+    }
+  ],
+  empCard: [
+    {
+      dimensions: ['skill_type', 'skill_name', 'dim_skill_level_skill_level_key'],
+      measures: [],
+      filters: { skill_type: ['=', 11, 12, 1, 2, 4, 5, 6, 7, 9, 10] },
+      comment: 'empCard'
+    }
+  ],
+  empStackedArea: [
+    {
+      dimensions: ['dim_skills_skill_key', 'current_skill_level', 'skill_type'],
+      measures: [],
+      filters: { skill_type: ['=', 3, 4] },
+      comment: 'empStackedArea'
+    }
+  ],
+  empBar: [
+    {
+      dimensions: ['skill_name', 'calendar_year', 'max_skill_grade_employee'],
+      measures: [],
+      filters: { skill_type: ['=', 1, 2, 5, 6, 7, 8, 9, 10], calendar_year: ['=', 2022, 2023] },
+      comment: 'empStackedArea'
+    }
+  ],
+  empKpi: [
+    {
+      dimensions: ['improvement_percent', 'new_skills_current', 'new_skills_last'],
+      measures: [],
+      filters: {},
+      comment: 'empKpi'
+    }
+  ]
 };
 
 export const DEP_DASHES_REQUESTS = {

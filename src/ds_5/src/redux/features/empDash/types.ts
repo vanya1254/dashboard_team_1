@@ -2,7 +2,7 @@ import { AllFiltersT, CoobDataI, EmployeeT, RequestT, SkillT, Status } from '../
 
 export interface EmpDashState {
   employee: EmployeeT;
-  data: CoobDataI[][];
+  data: CoobDataI[][][];
   empSkillsList: SkillT[];
   empRadar: EmpRadarT[];
   empCard: EmpCardT[];
