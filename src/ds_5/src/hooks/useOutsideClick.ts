@@ -1,12 +1,16 @@
 import { useEffect } from 'react';
 
-function useOutsideClick(ref, setIsInside: React.Dispatch<React.SetStateAction<boolean>>) {
+function useOutsideClick(
+  ref: React.MutableRefObject<HTMLElement>,
+  setIsInside: React.Dispatch<React.SetStateAction<boolean>>,
+  subRef?: React.MutableRefObject<HTMLElement>
+) {
   useEffect(() => {
     /**
      * Alert if clicked on outside of element
      */
     function handleClickOutside(event) {
-      if (ref.current && !ref.current.contains(event.target)) {
+      if (ref?.current && !ref?.current.contains(event.target) && !subRef?.current.contains(event.target)) {
         setIsInside(false);
       }
     }

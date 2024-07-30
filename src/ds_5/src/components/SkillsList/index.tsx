@@ -57,12 +57,13 @@ const data = [
 
 export const SkillsList: React.FC = () => {
   const wrapperRef = useRef(null);
+  const btnRef = useRef(null);
   const { empSkillsList, status } = useAppSelector(empDashSelector);
 
   const [isOpen, setIsOpen] = useState(false);
   const [activeSkill, setActiveSkill] = useState(0);
 
-  useOutsideClick(wrapperRef, setIsOpen);
+  useOutsideClick(wrapperRef, setIsOpen, btnRef);
 
   const onClickCategories = () => {
     setIsOpen((prev) => !prev);
@@ -79,7 +80,7 @@ export const SkillsList: React.FC = () => {
 
   return (
     <div className={styles.root}>
-      <button className={styles.root_btn} onClick={onClickCategories}>
+      <button ref={btnRef} className={styles.root_btn} onClick={onClickCategories}>
         <span>Категория навыков</span>
       </button>
       <div

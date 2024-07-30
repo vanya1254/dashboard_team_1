@@ -15,9 +15,10 @@ type SelectCustomPropsT = {
 
 export const SelectCustom: React.FC<SelectCustomPropsT> = ({ onClickFilter, selectTitle, options, isReset }) => {
   const wrapperRef = useRef(null);
+  const btnRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
   const [activeOption, setActiveOption] = useState(0);
-  useOutsideClick(wrapperRef, setIsOpen);
+  useOutsideClick(wrapperRef, setIsOpen, btnRef);
 
   const onClickCategories = () => {
     if (isReset) {
@@ -40,7 +41,7 @@ export const SelectCustom: React.FC<SelectCustomPropsT> = ({ onClickFilter, sele
 
   return (
     <div className={styles.root}>
-      <button className={styles.root_btn} onClick={onClickCategories}>
+      <button ref={btnRef} className={styles.root_btn} onClick={onClickCategories}>
         <RiFilter2Fill />
         <span>{selectTitle}</span>
       </button>
