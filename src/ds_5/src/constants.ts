@@ -104,7 +104,7 @@ export const FILTERS_REQUESTS = {
 
 export const EMP_DASHES_REQUESTS = {
   empSkillsList: {
-    dimensions: ['skill_type', 'skill_name', 'dim_skill_level_skill_level_key', 'next_grade_level'],
+    dimensions: ['skill_type', 'skill_name', 'next_grade_level'],
     measures: [],
     filters: { skill_type: ['=', 1, 2, 5, 6, 7, 8, 9, 10] },
     comment: 'empSkillsList'

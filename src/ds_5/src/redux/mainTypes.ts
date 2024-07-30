@@ -27,7 +27,6 @@ export type FilterT =
 
 export type SkillT = {
   skill: string;
-  curSkills: string[];
   nextSkills: string[];
 };
 

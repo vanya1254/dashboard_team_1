@@ -33,7 +33,7 @@ export const fetchEmpDash = createAsyncThunk(
         )
       )
     );
-    console.log(5, response[5]);
+
     return response;
   }
 );
@@ -75,32 +75,30 @@ export const empDashSlice = createSlice({
       state.employee = action.payload;
     },
     setEmpSkillsList(state) {
-      const processedData = state.data[0].reduce((acc, item) => {
-        const curLevel = SKILL_LEVEL[item.dim_skill_level_skill_level_key];
-        const nextLevel = item.next_grade_level;
+      // Создаем объект, чтобы сгруппировать навыки по типам
+      const groupedSkills = {};
 
-        const curSkillWithLevel = `${item.skill_name} ${curLevel}`.trim();
-        const nextSkillWithLevel = nextLevel ? `${item.skill_name} ${nextLevel}`.trim() : null;
+      // Проходим по каждому элементу ответа от сервера
+      state.data[0].forEach(({ skill_type, skill_name, next_grade_level }) => {
+        // Определяем тип навыка на основе skill_type
+        const skillTypeName = SKILL_TYPES[skill_type];
 
-        const skillTypeName = SKILL_TYPES[item.skill_type];
-
-        const existingItem = acc.find((i) => i.skill === skillTypeName);
-        if (existingItem) {
-          existingItem.curSkills.push(curSkillWithLevel);
-          if (nextSkillWithLevel) {
-            existingItem.nextSkills.push(nextSkillWithLevel);
-          }
-        } else {
-          acc.push({
-            skill: skillTypeName,
-            curSkills: [curSkillWithLevel],
-            nextSkills: nextSkillWithLevel ? [nextSkillWithLevel] : []
-          });
+        // Если в groupedSkills еще нет этого типа навыков, создаем новый массив
+        if (!groupedSkills[skillTypeName]) {
+          groupedSkills[skillTypeName] = [];
         }
-        return acc;
-      }, []);
 
-      state.empSkillsList = processedData;
+        // Добавляем текущий навык в массив соответствующего типа навыков
+        groupedSkills[skillTypeName].push(`${skill_name} ${next_grade_level}`);
+      });
+
+      // Преобразуем groupedSkills в массив объектов с нужной структурой
+      const result = Object.keys(groupedSkills).map((skillTypeName) => ({
+        skill: skillTypeName,
+        nextSkills: groupedSkills[skillTypeName]
+      }));
+
+      state.empSkillsList = result;
     },
     setEmpRadar(state) {
       const skillTypes = EMP_DASHES_REQUESTS.empRadar.filters.skill_type.slice(1);
@@ -211,7 +209,6 @@ export const empDashSlice = createSlice({
       }));
     },
     setEmpKpi(state) {
-      console.log(state.data[5]);
       state.empKpi = state.data[5] as EmpKpiT[];
     }
   },
