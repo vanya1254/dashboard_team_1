@@ -22,7 +22,7 @@ export const KpiBlock: React.FC<KpiBlockT> = ({ icon, title, value, subValue, is
         }`}
       >
         {isColored ? `${value}%` : value}
-        {isColored ? value ? <TiArrowSortedUp /> : <TiArrowSortedDown /> : ''}
+        {isColored ? value > 0 ? <TiArrowSortedUp /> : <TiArrowSortedDown /> : ''}
         {subValue !== undefined ? <span className={styles.root_value_subValue}>{`(${subValue})`}</span> : ''}
       </p>
     </div>
