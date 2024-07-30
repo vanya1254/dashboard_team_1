@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { RiFilter2Fill } from 'react-icons/ri';
 
 import styles from './SkillsList.module.scss';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { empDashSelector } from '../../redux/features/empDash/selectors';
 import { Status } from '../../redux/mainTypes';
+import useOutsideClick from '../../hooks/useOutsideClick';
 
 const data = [
   {
@@ -55,10 +56,13 @@ const data = [
 ];
 
 export const SkillsList: React.FC = () => {
+  const wrapperRef = useRef(null);
   const { empSkillsList, status } = useAppSelector(empDashSelector);
 
   const [isOpen, setIsOpen] = useState(false);
   const [activeSkill, setActiveSkill] = useState(0);
+
+  useOutsideClick(wrapperRef, setIsOpen);
 
   const onClickCategories = () => {
     setIsOpen((prev) => !prev);
@@ -78,7 +82,10 @@ export const SkillsList: React.FC = () => {
       <button className={styles.root_btn} onClick={onClickCategories}>
         <span>Категория навыков</span>
       </button>
-      <div className={`${styles.root__categories}${isOpen ? ` ${styles.root__categories_activated}` : ''} scroller`}>
+      <div
+        ref={wrapperRef}
+        className={`${styles.root__categories}${isOpen ? ` ${styles.root__categories_activated}` : ''} scroller`}
+      >
         <ul>
           {status === Status.Fulfilled && empSkillsList.length
             ? empSkillsList.map((skill, i) => (
