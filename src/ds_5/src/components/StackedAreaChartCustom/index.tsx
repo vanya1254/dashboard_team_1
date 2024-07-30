@@ -84,9 +84,11 @@ export const StackedAreaChartCustom: React.FC = () => {
           </AreaChart>
         </ResponsiveContainer>
       ) : status === Status.Pending ? (
-        'LOADING'
+        'Загрузка...'
+      ) : status === Status.Rejected ? (
+        'Ошибка('
       ) : (
-        ''
+        'Нет данных'
       )}
     </DashletLayout>
   );

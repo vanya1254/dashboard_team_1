@@ -63,9 +63,11 @@ export const BarChartCustom: React.FC = () => {
           </BarChart>
         </ResponsiveContainer>
       ) : status === Status.Pending ? (
-        'LOADING'
+        'Загрузка...'
+      ) : status === Status.Rejected ? (
+        'Ошибка('
       ) : (
-        ''
+        'Нет данных'
       )}
     </DashletLayout>
   );

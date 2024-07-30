@@ -34,9 +34,11 @@ export const KpiList: React.FC = () => {
           />
         </>
       ) : status === Status.Pending ? (
-        'LOADING'
+        'Загрузка...'
+      ) : status === Status.Rejected ? (
+        'Ошибка('
       ) : (
-        ''
+        'Нет данных'
       )}
     </DashletLayout>
   );

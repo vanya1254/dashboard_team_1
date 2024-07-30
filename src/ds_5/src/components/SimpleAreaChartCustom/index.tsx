@@ -61,7 +61,7 @@ export const SimpleAreaChartCustom: React.FC = () => {
             />
             <Tooltip
               formatter={(level, name) => {
-                return [`${level.toFixed(1)}`, 'Average'];
+                return [`${level.toFixed(2)}`, 'Average'];
               }}
             />
             <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} stroke="#ccc" />
@@ -77,9 +77,11 @@ export const SimpleAreaChartCustom: React.FC = () => {
           </AreaChart>
         </ResponsiveContainer>
       ) : status === Status.Pending ? (
-        'LOADING'
+        'Загрузка...'
+      ) : status === Status.Rejected ? (
+        'Ошибка('
       ) : (
-        ''
+        'Нет данных'
       )}
     </DashletLayout>
   );

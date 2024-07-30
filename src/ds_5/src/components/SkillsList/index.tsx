@@ -76,7 +76,6 @@ export const SkillsList: React.FC = () => {
   return (
     <div className={styles.root}>
       <button className={styles.root_btn} onClick={onClickCategories}>
-        <RiFilter2Fill />
         <span>Категория навыков</span>
       </button>
       <div className={`${styles.root__categories}${isOpen ? ` ${styles.root__categories_activated}` : ''} scroller`}>
@@ -88,8 +87,10 @@ export const SkillsList: React.FC = () => {
                 </li>
               ))
             : status === Status.Pending
-            ? 'LOADING'
-            : ''}
+            ? 'Загрузка...'
+            : status === Status.Rejected
+            ? 'Ошибка('
+            : 'Нет данных'}
         </ul>
       </div>
       <div className={styles.root__skills}>
@@ -99,8 +100,10 @@ export const SkillsList: React.FC = () => {
             {status === Status.Fulfilled && empSkillsList.length
               ? empSkillsList[activeSkill].nextSkills.map((dSkill, i) => <li key={i}>{dSkill}</li>)
               : status === Status.Pending
-              ? 'LOADING'
-              : ''}
+              ? 'Загрузка...'
+              : status === Status.Rejected
+              ? 'Ошибка('
+              : 'Нет данных'}
           </ul>
         </div>
       </div>

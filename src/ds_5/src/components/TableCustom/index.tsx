@@ -52,8 +52,10 @@ export const TableCustom: React.FC = () => {
             </li>
           ))
         : status === Status.Pending
-        ? 'LOADING'
-        : ''}
+        ? 'Загрузка...'
+        : status === Status.Rejected
+        ? 'Ошибка('
+        : 'Нет данных'}
     </ul>
   );
 };

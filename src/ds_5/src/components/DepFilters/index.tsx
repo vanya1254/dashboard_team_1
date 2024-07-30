@@ -61,9 +61,11 @@ export const DepFilters: React.FC = () => {
             />
           </>
         ) : status === Status.Pending ? (
-          'LOADING'
+          'Загрузка...'
+        ) : status === Status.Rejected ? (
+          'Ошибка('
         ) : (
-          ''
+          'Нет данных'
         )}
         <button onClick={onClickResetFilters} className={styles.root_btn}>
           <RiFilterOffFill />

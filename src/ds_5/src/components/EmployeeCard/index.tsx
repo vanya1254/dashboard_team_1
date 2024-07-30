@@ -43,8 +43,10 @@ export const EmployeeCard: React.FC = () => {
                   )
                 )
               : status === Status.Pending
-              ? 'LOADING'
-              : ''}
+              ? 'Загрузка...'
+              : status === Status.Rejected
+              ? 'Ошибка('
+              : 'Нет данных'}
           </ul>
         </div>
       </div>
@@ -62,8 +64,10 @@ export const EmployeeCard: React.FC = () => {
                 )
               )
             : status === Status.Pending
-            ? 'LOADING'
-            : ''}
+            ? 'Загрузка...'
+            : status === Status.Rejected
+            ? 'Ошибка('
+            : 'Нет данных'}
         </ul>
       </div>
     </section>

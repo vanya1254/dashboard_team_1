@@ -63,9 +63,11 @@ export const TagCloudCustom: React.FC = () => {
           renderer={customRenderer}
         />
       ) : status === Status.Pending ? (
-        'LOADING'
+        'Загрузка...'
+      ) : status === Status.Rejected ? (
+        'Ошибка('
       ) : (
-        ''
+        'Нет данных'
       )}
     </DashletLayout>
   );

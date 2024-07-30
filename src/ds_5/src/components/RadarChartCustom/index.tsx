@@ -57,7 +57,7 @@ export const RadarChartCustom: React.FC = () => {
             <Radar dataKey="level" stroke="#ef8eff" fill="#ef8eff" fillOpacity={0.6} />
             <Tooltip
               formatter={(value, name) => {
-                value = value.toFixed(1);
+                value = value.toFixed(2);
 
                 if (name === 'midDepLevel') return [`${value}`, 'Средний по департаменту'];
                 if (name === 'midPosLevel') return [`${value}`, 'Средний по должности'];
@@ -68,9 +68,11 @@ export const RadarChartCustom: React.FC = () => {
           </RadarChart>
         </ResponsiveContainer>
       ) : status === Status.Pending ? (
-        'LOADING'
+        'Загрузка...'
+      ) : status === Status.Rejected ? (
+        'Ошибка('
       ) : (
-        ''
+        'Нет данных'
       )}
     </DashletLayout>
   );
