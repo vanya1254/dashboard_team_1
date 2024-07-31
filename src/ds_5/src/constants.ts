@@ -152,7 +152,7 @@ export const EMP_DASHES_REQUESTS = {
       dimensions: ['skill_name', 'calendar_year', 'max_skill_grade_employee'],
       measures: [],
       filters: { skill_type: ['=', 1, 2, 5, 6, 7, 8, 9, 10], calendar_year: ['=', 2022, 2023] },
-      comment: 'empStackedArea'
+      comment: 'empBar'
     }
   ],
   empKpi: [
