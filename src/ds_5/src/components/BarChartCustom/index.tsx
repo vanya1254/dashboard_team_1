@@ -47,7 +47,6 @@ export const BarChartCustom: React.FC = () => {
     <DashletLayout
       title="Динамика развития навыка сотрудника"
       width={'100%'}
-      // width={'calc((1vh + 1vw) * 39.2019)'}
       height={'calc((1vh + 1vw) * 6.007)'}
       className={styles.root}
     >

@@ -10,25 +10,28 @@ const { koobDataRequest3 } = KoobDataService;
 
 export const fetchDepDash = createAsyncThunk(
   'empDash/fetchDepDash',
-  async (params: FetchDepDashPropsT, thunkAPI): Promise<CoobDataI[][]> => {
+  async (params: FetchDepDashPropsT, thunkAPI): Promise<CoobDataI[][][]> => {
     const { allFilters, request } = params;
 
-    const response: CoobDataI[][] = await Promise.all(
-      Object.keys(DEP_DASHES_REQUESTS).map((dash, i) =>
-        koobDataRequest3(
-          KOOB_ID,
-          DEP_DASHES_REQUESTS[dash].dimensions,
-          DEP_DASHES_REQUESTS[dash].measures,
-          {
-            ...DEP_DASHES_REQUESTS[dash].filters,
-            ...allFilters
-          },
-          /**
-           * пришлось расширить request, чтобы передавать schema_name
-           */
-          // @ts-ignore
-          { schema_name: SCHEMA_NAME, ...request },
-          `dashlet-${DEP_DASHES_REQUESTS[dash].comment}`
+    const response: CoobDataI[][][] = await Promise.all(
+      Object.entries(DEP_DASHES_REQUESTS).map(([dashReqs, dashArray]) =>
+        Promise.all(
+          dashArray.map((dash) =>
+            koobDataRequest3(
+              KOOB_ID,
+              dash.dimensions,
+              dash.measures,
+              {
+                ...allFilters,
+                ...dash.filters
+              },
+              { schema_name: SCHEMA_NAME, ...request },
+              `dashlet-${dash.comment}`
+            ).catch((error) => {
+              console.error(`Error in dashlet ${dash.comment}:`, error);
+              return []; // Возвращаем пустой массив или null, чтобы избежать прерывания Promise.all
+            })
+          )
         )
       )
     );
@@ -51,56 +54,62 @@ export const depDashSlice = createSlice({
   reducers: {
     setDepTagCloud(state) {
       //TODO: if [0].department === [1].department => [i]position
-      state.depTagCloud = state.data[0].map((obj) => ({
+      state.depTagCloud = state.data[0][0].map((obj) => ({
         value: obj.department as string,
         count: obj.count_skill_per_year_employee as number
       }));
     },
     setDepSimpleArea(state) {
-      state.depSimpleArea = state.data[1] as DepSimpleAreaT[];
+      state.depSimpleArea = state.data[1][0] as DepSimpleAreaT[];
     },
     setDepStackedMixedBar(state) {
-      const result = [];
+      const processArray = (array) => {
+        let result = [];
 
-      state.data[2].forEach((item) => {
-        // Ищем, есть ли уже объект с таким же названием навыка
-        let skillObject = result.find((obj) => obj.name === item.skill_name);
+        array.forEach((item) => {
+          // Ищем, есть ли уже объект с таким же названием навыка
+          let skillObject = result.find((obj) => obj.name === item.skill_name);
 
-        if (!skillObject) {
-          // Если объекта с таким названием навыка еще нет, создаем новый объект
-          skillObject = {
-            name: item.skill_name,
-            prev_count_expert_department: 0,
-            prev_count_junior_department: 0,
-            prev_count_middle_department: 0,
-            prev_count_novice_department: 0,
-            prev_count_senior_department: 0,
-            cur_count_expert_department: 0,
-            cur_count_junior_department: 0,
-            cur_count_middle_department: 0,
-            cur_count_novice_department: 0,
-            cur_count_senior_department: 0
-          };
-          result.push(skillObject);
-        }
+          if (!skillObject) {
+            // Если объекта с таким названием навыка еще нет, создаем новый объект
+            skillObject = {
+              name: item.skill_name,
+              prev_count_expert_department: 0,
+              prev_count_junior_department: 0,
+              prev_count_middle_department: 0,
+              prev_count_novice_department: 0,
+              prev_count_senior_department: 0,
+              cur_count_expert_department: 0,
+              cur_count_junior_department: 0,
+              cur_count_middle_department: 0,
+              cur_count_novice_department: 0,
+              cur_count_senior_department: 0
+            };
+            result.push(skillObject);
+          }
 
-        // Заполняем поля в зависимости от года
-        if (item.calendar_year === 2022) {
-          skillObject.prev_count_expert_department = item.count_expert_department;
-          skillObject.prev_count_junior_department = item.count_junior_department;
-          skillObject.prev_count_middle_department = item.count_middle_department;
-          skillObject.prev_count_novice_department = item.count_novice_department;
-          skillObject.prev_count_senior_department = item.count_senior_department;
-        } else if (item.calendar_year === 2023) {
-          skillObject.cur_count_expert_department = item.count_expert_department;
-          skillObject.cur_count_junior_department = item.count_junior_department;
-          skillObject.cur_count_middle_department = item.count_middle_department;
-          skillObject.cur_count_novice_department = item.count_novice_department;
-          skillObject.cur_count_senior_department = item.count_senior_department;
-        }
-      });
+          // Заполняем поля в зависимости от года
+          if (item.calendar_year === 2022) {
+            skillObject.prev_count_expert_department = item.count_expert_department;
+            skillObject.prev_count_junior_department = item.count_junior_department;
+            skillObject.prev_count_middle_department = item.count_middle_department;
+            skillObject.prev_count_novice_department = item.count_novice_department;
+            skillObject.prev_count_senior_department = item.count_senior_department;
+          } else if (item.calendar_year === 2023) {
+            skillObject.cur_count_expert_department = item.count_expert_department;
+            skillObject.cur_count_junior_department = item.count_junior_department;
+            skillObject.cur_count_middle_department = item.count_middle_department;
+            skillObject.cur_count_novice_department = item.count_novice_department;
+            skillObject.cur_count_senior_department = item.count_senior_department;
+          }
+        });
 
-      state.depStackedMixedBar = result;
+        return result;
+      };
+
+      // Обработка двух массивов
+      // Обновляем состояние
+      state.depStackedMixedBar = [processArray(state.data[2][0]), processArray(state.data[2][1])];
     }
   },
   extraReducers: (builder) => {
@@ -109,7 +118,7 @@ export const depDashSlice = createSlice({
         state.data = initialState.data;
         state.status = Status.Pending;
       })
-      .addCase(fetchDepDash.fulfilled, (state, action: PayloadAction<CoobDataI[][]>) => {
+      .addCase(fetchDepDash.fulfilled, (state, action: PayloadAction<CoobDataI[][][]>) => {
         state.data = action.payload;
         state.status = Status.Fulfilled;
 

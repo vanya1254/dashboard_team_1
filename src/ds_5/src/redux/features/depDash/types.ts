@@ -1,10 +1,10 @@
 import { AllFiltersT, CoobDataI, RequestT, Status } from '../../mainTypes';
 
 export interface DepDashState {
-  data: CoobDataI[][];
+  data: CoobDataI[][][];
   depTagCloud: DepTagCloudT[];
   depSimpleArea: DepSimpleAreaT[];
-  depStackedMixedBar: DepStackedMixedBar[];
+  depStackedMixedBar: DepStackedMixedBar[][];
   status: Status;
 }
 

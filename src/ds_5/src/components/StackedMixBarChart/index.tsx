@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ResponsiveContainer, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Bar, Brush } from 'recharts';
 
 import { DashletLayout } from '../../layouts/DashletLayout';
@@ -8,6 +8,7 @@ import { useAppSelector } from '../../redux/store';
 import { depDashSelector } from '../../redux/features/depDash/selectors';
 import { Status } from '../../redux/mainTypes';
 import { filterSelector } from '../../redux/features/filter/selectors';
+import { ToggleCustom } from '..';
 
 const data = [
   {
@@ -91,6 +92,9 @@ const tooltipTicks = {
 export const StackedMixBarChart: React.FC = () => {
   const { depStackedMixedBar, status } = useAppSelector(depDashSelector);
   const { department, position } = useAppSelector(filterSelector);
+  const [isToggled, setIsToggled] = useState(false);
+
+  const onToggle = () => setIsToggled(!isToggled);
 
   const title = `Динамика развития навыков: ${
     department[1] || position[1] ? `${department[1] || ''} ${position[1] || ''}` : 'ДАР'
@@ -98,9 +102,12 @@ export const StackedMixBarChart: React.FC = () => {
 
   return (
     <DashletLayout className={styles.root} title={title} width={'100%'} height={'calc((1vh + 1vw) * 9.375)'}>
+      <div className={styles.root__toggleContainer}>
+        <ToggleCustom isToggled={isToggled} onToggle={onToggle} />
+      </div>
       {status === Status.Fulfilled ? (
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={depStackedMixedBar} barGap={0}>
+          <BarChart data={depStackedMixedBar[isToggled ? 1 : 0]} barGap={0}>
             <XAxis dataKey="name" stroke="#fff" />
             <YAxis stroke="#fff" />
             <Tooltip formatter={(value, name) => (value ? [`${value}`, tooltipTicks[name]] : [])} />

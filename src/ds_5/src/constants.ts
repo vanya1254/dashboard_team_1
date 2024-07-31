@@ -114,8 +114,14 @@ export const EMP_DASHES_REQUESTS = {
   empRadar: [
     {
       dimensions: ['skill_type'],
-      measures: ['avg(avg_skill_grade_department)', 'avg(avg_skill_grade_position)'],
+      measures: ['avg(avg_skill_grade_department)'],
       filters: { skill_type: ['=', 10, 1, 5, 2, 6, 8, 7, 9], fullname: ['='], position: ['='] },
+      comment: 'empRadarDepPos'
+    },
+    {
+      dimensions: ['skill_type'],
+      measures: ['avg(avg_skill_grade_position)'],
+      filters: { skill_type: ['=', 10, 1, 5, 2, 6, 8, 7, 9], fullname: ['='], department: ['='] },
       comment: 'empRadarDepPos'
     },
     {
@@ -160,30 +166,50 @@ export const EMP_DASHES_REQUESTS = {
 };
 
 export const DEP_DASHES_REQUESTS = {
-  depTagCloud: {
-    dimensions: ['department'],
-    measures: ['avg(count_skill_per_year_employee)'],
-    filters: { calendar_year: ['=', 2023] },
-    comment: 'depTagCloud'
-  },
-  depSimpleArea: {
-    dimensions: ['skill_name'],
-    measures: ['avg(current_skill_level)'],
-    filters: {},
-    comment: 'depSimpleArea'
-  },
-  depStackedMixedBar: {
-    dimensions: ['dim_skills_skill_key', 'skill_name', 'calendar_year'],
-    measures: [
-      'sum(count_novice_department)',
-      'sum(count_junior_department)',
-      'sum(count_middle_department)',
-      'sum(count_senior_department)',
-      'sum(count_expert_department)'
-    ],
-    filters: {
-      calendar_year: ['=', 2022, 2023]
+  depTagCloud: [
+    {
+      dimensions: ['department'],
+      measures: ['avg(count_skill_per_year_employee)'],
+      filters: { calendar_year: ['=', 2023] },
+      comment: 'depTagCloud'
+    }
+  ],
+  depSimpleArea: [
+    {
+      dimensions: ['skill_name'],
+      measures: ['avg(current_skill_level)'],
+      filters: {},
+      comment: 'depSimpleArea'
+    }
+  ],
+  depStackedMixedBar: [
+    {
+      dimensions: ['dim_skills_skill_key', 'skill_name', 'calendar_year'],
+      measures: [
+        'sum(count_novice_department)',
+        'sum(count_junior_department)',
+        'sum(count_middle_department)',
+        'sum(count_senior_department)',
+        'sum(count_expert_department)'
+      ],
+      filters: {
+        calendar_year: ['=', 2022, 2023]
+      },
+      comment: 'depStackedMixedBar'
     },
-    comment: 'depStackedMixedBar'
-  }
+    {
+      dimensions: ['dim_skills_skill_key', 'skill_name', 'calendar_year'],
+      measures: [
+        'sum(total_novice_department):count_novice_department',
+        'sum(total_junior_department):count_junior_department',
+        'sum(total_middle_department):count_middle_department',
+        'sum(total_senior_department):count_senior_department',
+        'sum(total_expert_department):count_expert_department'
+      ],
+      filters: {
+        calendar_year: ['=', 2022, 2023]
+      },
+      comment: 'depStackedMixedBar'
+    }
+  ]
 };

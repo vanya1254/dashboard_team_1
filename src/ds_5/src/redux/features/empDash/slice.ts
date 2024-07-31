@@ -104,17 +104,27 @@ export const empDashSlice = createSlice({
       state.empSkillsList = result;
     },
     setEmpRadar(state) {
-      const employeeDataMap = state.data[1][1].reduce((acc, item) => {
-        acc[item.skill_type] = item.avg_skill_grade_employee;
+      const dataArrays = state.data[1];
+      const longestArray = dataArrays.reduce((a, b) => (a.length > b.length ? a : b), []);
+
+      const skillDataMap = dataArrays.reduce((acc, array, index) => {
+        array.forEach((item) => {
+          if (!acc[item.skill_type]) {
+            acc[item.skill_type] = { skill_type: item.skill_type, skill_name: SKILL_TYPES[item.skill_type] };
+          }
+          if (index === 0) acc[item.skill_type].avg_skill_grade_department = item.avg_skill_grade_department;
+          if (index === 1) acc[item.skill_type].avg_skill_grade_position = item.avg_skill_grade_position;
+          if (index === 2) acc[item.skill_type].avg_skill_grade_employee = item.avg_skill_grade_employee;
+        });
         return acc;
       }, {});
 
-      const mergedData = state.data[1][0].map((item) => ({
+      const mergedData = longestArray.map((item) => ({
         skill_type: item.skill_type,
         skill_name: SKILL_TYPES[item.skill_type],
-        avg_skill_grade_department: item.avg_skill_grade_department,
-        avg_skill_grade_position: item.avg_skill_grade_position,
-        avg_skill_grade_employee: employeeDataMap[item.skill_type] || 0
+        avg_skill_grade_department: skillDataMap[item.skill_type].avg_skill_grade_department || 0,
+        avg_skill_grade_position: skillDataMap[item.skill_type].avg_skill_grade_position || 0,
+        avg_skill_grade_employee: skillDataMap[item.skill_type].avg_skill_grade_employee || 0
       }));
 
       const skillTypes = EMP_DASHES_REQUESTS.empRadar[0].filters.skill_type.slice(1);

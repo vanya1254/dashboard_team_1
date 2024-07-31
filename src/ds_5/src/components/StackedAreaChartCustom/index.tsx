@@ -62,7 +62,6 @@ export const StackedAreaChartCustom: React.FC = () => {
     <DashletLayout
       title={`Уровень знаний ${titles[isToggled.toString()]}`}
       width={'100%'}
-      // width={'calc((1vh + 1vw) * 19.0977)'}
       height={'calc((1vh + 1vw)* 6.007)'}
       className={styles.root}
     >
@@ -71,7 +70,7 @@ export const StackedAreaChartCustom: React.FC = () => {
       </div>
       {status === Status.Fulfilled ? (
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={empStackedArea[isToggled ? 0 : 1]}>
+          <AreaChart data={empStackedArea[isToggled ? 1 : 0]}>
             <XAxis dataKey="name" stroke="#fff" />
             <YAxis stroke="#fff" domain={[0, 3]} tickCount={4} tickFormatter={(tick) => ticksLabels[tick]} />
             <Tooltip
