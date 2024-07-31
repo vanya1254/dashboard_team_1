@@ -141,8 +141,11 @@ export const EMP_DASHES_REQUESTS = {
   ],
   empStackedArea: [
     {
-      dimensions: ['dim_skills_skill_key', 'current_skill_level', 'skill_type'],
-      measures: [],
+      dimensions: [
+        'dim_skills_skill_key', //TODO: remove
+        'skill_type'
+      ],
+      measures: ['current_skill_level'],
       filters: { skill_type: ['=', 3, 4] },
       comment: 'empStackedArea'
     }
@@ -173,6 +176,18 @@ export const DEP_DASHES_REQUESTS = {
       filters: { calendar_year: ['=', 2023] },
       comment: 'depTagCloud'
     }
+    // {
+    //   dimensions: ['position'],
+    //   measures: ['avg(count_skill_per_year_employee)'],
+    //   filters: { calendar_year: ['=', 2023] },
+    //   comment: 'depTagCloud'
+    // },
+    // {
+    //   dimensions: ['skill_type'],
+    //   measures: ['avg(count_skill_per_year_employee)'],
+    //   filters: { calendar_year: ['=', 2023] },
+    //   comment: 'depTagCloud'
+    // }
   ],
   depSimpleArea: [
     {
@@ -211,5 +226,19 @@ export const DEP_DASHES_REQUESTS = {
       },
       comment: 'depStackedMixedBar'
     }
+    // {
+    //   dimensions: ['skill_name', 'calendar_year'],
+    //   measures: [
+    //     'sum(total_novice_department:count_novice_department',
+    //     'sum(total_junior_department):count_junior_department',
+    //     'sum(total_middle_department):count_middle_department',
+    //     'sum(total_senior_department):count_senior_department',
+    //     'sum(total_expert_department):count_expert_department'
+    //   ],
+    //   filters: {
+    //     calendar_year: ['=', 2022, 2023]
+    //   },
+    //   comment: 'depStackedMixedBar'
+    // }
   ]
 };

@@ -59,8 +59,8 @@ export const RadarChartCustom: React.FC = () => {
               formatter={(value, name) => {
                 value = value.toFixed(2);
 
-                if (name === 'midDepLevel') return [`${value}`, 'Средний по департаменту'];
-                if (name === 'midPosLevel') return [`${value}`, 'Средний по должности'];
+                if (name === 'midDepLevel') return [`${value}`, 'Средний балл по департаменту'];
+                if (name === 'midPosLevel') return [`${value}`, 'Средний балл по должности'];
                 if (name === 'level') return [`${value}`, 'По сотруднику'];
                 return value;
               }}

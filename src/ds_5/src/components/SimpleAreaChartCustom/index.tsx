@@ -61,7 +61,7 @@ export const SimpleAreaChartCustom: React.FC = () => {
             />
             <Tooltip
               formatter={(level, name) => {
-                return [`${level.toFixed(2)}`, 'Average'];
+                return [`${level.toFixed(2)}`, 'Средний балл'];
               }}
             />
             <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} stroke="#ccc" />

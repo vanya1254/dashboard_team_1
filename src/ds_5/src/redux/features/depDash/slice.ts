@@ -35,7 +35,7 @@ export const fetchDepDash = createAsyncThunk(
         )
       )
     );
-
+    // console.log(2, response[2][1], response[2][2]);
     return response;
   }
 );

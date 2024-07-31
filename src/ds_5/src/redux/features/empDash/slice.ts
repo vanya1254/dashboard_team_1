@@ -36,7 +36,7 @@ export const fetchEmpDash = createAsyncThunk(
         )
       )
     );
-
+    console.log(3, response[3][0]);
     return response;
   }
 );
@@ -207,7 +207,7 @@ export const empDashSlice = createSlice({
           if (obj) obj.level = level;
         }
       });
-
+      console.log([type3, type4]);
       state.empStackedArea = [type3, type4];
     },
     setEmpBar(state) {
