@@ -58,9 +58,9 @@ export const TagCloudCustom: React.FC = () => {
           maxSize={48}
           shuffle={true}
           tags={depTagCloud}
-          colorOptions={colors}
           className={`simple-cloud ${styles.root__chart}`}
           renderer={customRenderer}
+          colorOptions={colors}
         />
       ) : status === Status.Pending ? (
         'Загрузка...'
@@ -76,6 +76,7 @@ export const TagCloudCustom: React.FC = () => {
 const customRenderer = (tag, size, color) => (
   <span
     key={tag.value}
+    className={styles.root__chart_item}
     style={{
       animation: 'blinker 3s linear infinite',
       animationDelay: `${Math.random() * 2}s`,
@@ -84,5 +85,6 @@ const customRenderer = (tag, size, color) => (
     }}
   >
     {tag.value}
+    <span className={styles.root__tooltip}>{`Новых навыков за год: ${Math.floor(tag.count)}`}</span>
   </span>
 );

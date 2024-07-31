@@ -25,7 +25,7 @@ export const fetchDepDash = createAsyncThunk(
                 ...allFilters,
                 ...dash.filters
               },
-              { schema_name: SCHEMA_NAME, ...request },
+              { schema_name: SCHEMA_NAME, ...request, ...dash.request },
               `dashlet-${dash.comment}`
             ).catch((error) => {
               console.error(`Error in dashlet ${dash.comment}:`, error);

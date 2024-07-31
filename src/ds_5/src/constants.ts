@@ -68,7 +68,8 @@ export const EMPLOYEES_REQUEST = {
   dimensions: ['fullname', 'position', 'department', 'fact_empl_skills_employee_key', 'picture_url'],
   measures: [],
   filters: {},
-  comment: 'employees'
+  comment: 'employees',
+  request: {}
 };
 
 //TODO:maybe change to array?(func?)
@@ -108,7 +109,8 @@ export const EMP_DASHES_REQUESTS = {
       dimensions: ['skill_type', 'skill_name', 'next_grade_level'],
       measures: [],
       filters: { skill_type: ['=', 1, 2, 5, 6, 7, 8, 9, 10] },
-      comment: 'empSkillsList'
+      comment: 'empSkillsList',
+      request: {}
     }
   ],
   empRadar: [
@@ -116,19 +118,22 @@ export const EMP_DASHES_REQUESTS = {
       dimensions: ['skill_type'],
       measures: ['avg(avg_skill_grade_department)'],
       filters: { skill_type: ['=', 10, 1, 5, 2, 6, 8, 7, 9], fullname: ['='], position: ['='] },
-      comment: 'empRadarDepPos'
+      comment: 'empRadarDepPos',
+      request: {}
     },
     {
       dimensions: ['skill_type'],
       measures: ['avg(avg_skill_grade_position)'],
       filters: { skill_type: ['=', 10, 1, 5, 2, 6, 8, 7, 9], fullname: ['='], department: ['='] },
-      comment: 'empRadarDepPos'
+      comment: 'empRadarDepPos',
+      request: {}
     },
     {
       dimensions: ['skill_type'],
       measures: ['avg(avg_skill_grade_employee)'],
       filters: { skill_type: ['=', 10, 1, 5, 2, 6, 8, 7, 9] },
-      comment: 'empRadarEmployee'
+      comment: 'empRadarEmployee',
+      request: {}
     }
   ],
   empCard: [
@@ -136,7 +141,8 @@ export const EMP_DASHES_REQUESTS = {
       dimensions: ['skill_type', 'skill_name', 'dim_skill_level_skill_level_key'],
       measures: [],
       filters: { skill_type: ['=', 11, 12, 1, 2, 4, 5, 6, 7, 9, 10] },
-      comment: 'empCard'
+      comment: 'empCard',
+      request: {}
     }
   ],
   empStackedArea: [
@@ -147,7 +153,8 @@ export const EMP_DASHES_REQUESTS = {
       ],
       measures: ['current_skill_level'],
       filters: { skill_type: ['=', 3, 4] },
-      comment: 'empStackedArea'
+      comment: 'empStackedArea',
+      request: {}
     }
   ],
   empBar: [
@@ -155,7 +162,8 @@ export const EMP_DASHES_REQUESTS = {
       dimensions: ['skill_name', 'calendar_year', 'max_skill_grade_employee'],
       measures: [],
       filters: { skill_type: ['=', 1, 2, 5, 6, 7, 8, 9, 10], calendar_year: ['=', 2022, 2023] },
-      comment: 'empBar'
+      comment: 'empBar',
+      request: {}
     }
   ],
   empKpi: [
@@ -163,7 +171,8 @@ export const EMP_DASHES_REQUESTS = {
       dimensions: ['improvement_percent', 'new_skills_current', 'new_skills_last'],
       measures: [],
       filters: {},
-      comment: 'empKpi'
+      comment: 'empKpi',
+      request: {}
     }
   ]
 };
@@ -174,7 +183,8 @@ export const DEP_DASHES_REQUESTS = {
       dimensions: ['department'],
       measures: ['avg(count_skill_per_year_employee)'],
       filters: { calendar_year: ['=', 2023] },
-      comment: 'depTagCloud'
+      comment: 'depTagCloud',
+      request: {}
     }
     // {
     //   dimensions: ['position'],
@@ -194,7 +204,10 @@ export const DEP_DASHES_REQUESTS = {
       dimensions: ['skill_name'],
       measures: ['avg(current_skill_level)'],
       filters: {},
-      comment: 'depSimpleArea'
+      comment: 'depSimpleArea',
+      request: {
+        sort: ['-current_skill_level']
+      }
     }
   ],
   depStackedMixedBar: [
@@ -210,7 +223,16 @@ export const DEP_DASHES_REQUESTS = {
       filters: {
         calendar_year: ['=', 2022, 2023]
       },
-      comment: 'depStackedMixedBar'
+      comment: 'depStackedMixedBar',
+      request: {
+        sort: [
+          '-count_expert_department',
+          '-count_senior_department',
+          '-count_middle_department',
+          '-count_junior_department',
+          '-count_novice_department'
+        ]
+      }
     },
     {
       dimensions: ['dim_skills_skill_key', 'skill_name', 'calendar_year'],
@@ -224,7 +246,16 @@ export const DEP_DASHES_REQUESTS = {
       filters: {
         calendar_year: ['=', 2022, 2023]
       },
-      comment: 'depStackedMixedBar'
+      comment: 'depStackedMixedBar',
+      request: {
+        sort: [
+          '-count_expert_department',
+          '-count_senior_department',
+          '-count_middle_department',
+          '-count_junior_department',
+          '-count_novice_department'
+        ]
+      }
     }
     // {
     //   dimensions: ['skill_name', 'calendar_year'],
