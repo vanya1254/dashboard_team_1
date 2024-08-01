@@ -36,7 +36,7 @@ export const fetchEmpDash = createAsyncThunk(
         )
       )
     );
-    console.log(3, response[3][0]);
+
     return response;
   }
 );
