@@ -9,6 +9,23 @@ import useOutsideClick from '../../hooks/useOutsideClick';
 
 import styles from './SkillsList.module.scss';
 
+/**
+ * Компонент SkillsList отображает список навыков сотрудника и область развития выбранного навыка.
+ *
+ * - empSkillsList: список навыков сотрудника, полученный из Redux store.
+ * - status: состояние загрузки данных (Fulfilled, Pending, Rejected, No Data).
+ *
+ * Компонент включает:
+ * - Кнопку для открытия/закрытия списка навыков.
+ * - Список навыков с возможностью выбора. При выборе навыка отображается его область развития.
+ * - Используется хук `useOutsideClick` для закрытия списка при клике вне его области.
+ *
+ * Компонент управляет внутренним состоянием:
+ * - `isOpen`: флаг, указывающий, открыт ли список навыков.
+ * - `activeSkill`: индекс выбранного навыка.
+ *
+ * При изменении статуса данных (`status`), выбранный навык сбрасывается на первый.
+ */
 export const SkillsList: React.FC = () => {
   const wrapperRef = useRef(null);
   const btnRef = useRef(null);

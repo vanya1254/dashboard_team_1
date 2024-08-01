@@ -12,6 +12,13 @@ import { DashletLayout } from '../../layouts/DashletLayout';
 
 import styles from './RadarCharCustom.module.scss';
 
+/**
+ * Компонент RadarChartCustom отображает радарную диаграмму, представляющую характеристики сотрудника.
+ * Использует библиотеку recharts для визуализации данных.
+ *
+ * - Иконки: FaArrowUpRightDots для новых навыков за год, BsClipboard2Check для годового темпа.
+ * - Отображает состояние загрузки данных (Загрузка, Ошибка, Нет данных).
+ */
 export const RadarChartCustom: React.FC = () => {
   const { empRadar, status } = useAppSelector(empDashSelector);
 

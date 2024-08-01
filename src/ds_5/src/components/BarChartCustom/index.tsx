@@ -12,6 +12,12 @@ import { DashletLayout } from '../../layouts/DashletLayout';
 
 import styles from './BarChartCustom.module.scss';
 
+/**
+ * Компонент BarChartCustom отображает график барчарт, представляющий данные о навыках сотрудников.
+ * Данные получаются из глобального состояния с помощью селектора empDashSelector.
+ * Компонент отображает график с осью X, представляющей навыки, и осью Y, представляющей уровень навыка.
+ * Также добавлены элементы управления, такие как Tooltip и Brush, для улучшения взаимодействия с пользователем.
+ */
 export const BarChartCustom: React.FC = () => {
   const { empBar, status } = useAppSelector(empDashSelector);
 

@@ -1,19 +1,30 @@
 import React, { useRef, useState } from 'react';
 import { RiFilter2Fill } from 'react-icons/ri';
 
-import { AllFiltersT, CoobDataI } from '../../redux/mainTypes';
+import { CoobDataI } from '../../redux/mainTypes';
 
 import useOutsideClick from '../../hooks/useOutsideClick';
 
 import styles from './SelectCustom.module.scss';
 
 type SelectCustomPropsT = {
-  onClickFilter: (filter: AllFiltersT) => void;
+  onClickFilter: (filter: CoobDataI) => void;
   selectTitle: string;
   options: CoobDataI[];
   isReset: boolean;
 };
 
+/**
+ * Компонент SelectCustom предоставляет интерфейс для выбора категорий из выпадающего списка.
+ *
+ * - onClickFilter: функция, вызываемая при выборе категории, принимает объект filter.
+ * - selectTitle: заголовок кнопки выбора.
+ * - options: массив объектов с данными для отображения в списке опций.
+ * - isReset: флаг, указывающий, следует ли сбросить активный выбор.
+ *
+ * Компонент использует useOutsideClick для закрытия списка при клике вне его области.
+ * Состояние isOpen управляет открытием/закрытием списка, а activeOption отслеживает активную опцию.
+ */
 export const SelectCustom: React.FC<SelectCustomPropsT> = ({ onClickFilter, selectTitle, options, isReset }) => {
   const wrapperRef = useRef(null);
   const btnRef = useRef(null);

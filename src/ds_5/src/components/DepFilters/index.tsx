@@ -15,15 +15,24 @@ import { SelectCustom } from '../SelectCustom';
 
 import styles from './DepFilters.module.scss';
 
+/**
+ * Компонент DepFilters предоставляет интерфейс для фильтрации данных по различным параметрам,
+ * таким как подразделение, должность и категория навыков.
+ *
+ * - Использует SelectCustom для отображения выпадающих списков с возможностью выбора.
+ * - Фильтры могут быть сброшены с помощью кнопки, при этом все выбранные фильтры сбрасываются.
+ * - Состояние загрузки отображается при получении данных.
+ */
 export const DepFilters: React.FC = () => {
   const dispatch = useAppDispatch();
   const { filters, status } = useAppSelector(filtersSelector);
   const [isReset, setIsReset] = useState(false);
 
+  // Обработка выбора фильтра, преобразование и отправка в глобальное состояние
   const onClickFilter = (filter: CoobDataI) => {
     if (filter.skill_type && filter.skill_type !== 'Все') {
       const key = getKeyByValue(SKILL_TYPES, filter.skill_type);
-
+      //@ts-ignore
       filter.skill_type = Number.parseInt(key);
     }
     setIsReset(false);

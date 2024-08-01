@@ -12,6 +12,13 @@ import { KpiBlock } from '..';
 
 import styles from './KpiList.module.scss';
 
+/**
+ * Компонент KpiList отображает список ключевых показателей эффективности (KPI) сотрудника.
+ * Использует компонент KpiBlock для отображения отдельных KPI.
+ *
+ * - Иконки: FaArrowUpRightDots для новых навыков за год, BsClipboard2Check для годового темпа.
+ * - Отображает состояние загрузки данных (Загрузка, Ошибка, Нет данных).
+ */
 export const KpiList: React.FC = () => {
   const { empKpi, status } = useAppSelector(empDashSelector);
 

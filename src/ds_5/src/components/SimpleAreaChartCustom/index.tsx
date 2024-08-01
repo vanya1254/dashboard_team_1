@@ -13,6 +13,21 @@ import { DashletLayout } from '../../layouts/DashletLayout';
 
 import styles from './SimpleAreaChartCustom.module.scss';
 
+/**
+ * Компонент SimpleAreaChartCustom отображает график среднего уровня навыков с использованием библиотеки recharts.
+ *
+ * - depSimpleArea: данные для отображения графика, полученные из Redux store.
+ * - status: состояние загрузки данных (Fulfilled, Pending, Rejected, No Data).
+ * - department и position: фильтры, применяемые для формирования заголовка графика.
+ *
+ * График отображает данные в виде области (AreaChart) и включает следующие элементы:
+ * - XAxis: ось X, показывающая имена навыков.
+ * - YAxis: ось Y, показывающая уровень навыков с использованием шкалы SKILL_LEVEL.
+ * - Tooltip: отображает значение среднего балла при наведении.
+ * - CartesianGrid: сетка графика для улучшения визуального восприятия.
+ * - Brush: позволяет пользователям выбирать диапазон данных для подробного анализа.
+ * - Area: график области, отображающий изменения уровня навыков.
+ */
 export const SimpleAreaChartCustom: React.FC = () => {
   const { depSimpleArea, status } = useAppSelector(depDashSelector);
   const { department, position } = useAppSelector(filterSelector);

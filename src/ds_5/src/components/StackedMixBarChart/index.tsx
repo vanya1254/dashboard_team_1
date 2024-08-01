@@ -12,7 +12,7 @@ import { DashletLayout } from '../../layouts/DashletLayout';
 
 import styles from './StackedMixBarChart.module.scss';
 
-// Используются только в этом компоненте
+// Маппинг для тултипов
 const tooltipTicks = {
   prev_count_expert_department: 'Experts 2022',
   prev_count_junior_department: 'Juniors 2022',
@@ -26,6 +26,21 @@ const tooltipTicks = {
   cur_count_senior_department: 'Seniors 2023'
 };
 
+/**
+ * Компонент StackedMixBarChart отображает комбинированный график баров для уровня навыков по годам.
+ *
+ * Включает:
+ * - Тогглер (`ToggleCustom`) для переключения между отображением новых и всех навыков.
+ * - График столбцов с данными по уровням навыков за 2022 и 2023 годы.
+ * - Использует данные из Redux store через селекторы `depDashSelector` и `filterSelector`.
+ * - Отображает информацию в зависимости от состояния загрузки данных (Fulfilled, Pending, Rejected, No Data).
+ *
+ * Внутреннее состояние:
+ * - `isToggled`: флаг, указывающий, выбран ли режим отображения всех навыков (true) или новых навыков (false).
+ *
+ * Маппинг данных:
+ * - `tooltipTicks`: описание для каждого уровня навыка, отображаемое в тултипе.
+ */
 export const StackedMixBarChart: React.FC = () => {
   const { depStackedMixedBar, status } = useAppSelector(depDashSelector);
   const { department, position } = useAppSelector(filterSelector);
@@ -50,7 +65,7 @@ export const StackedMixBarChart: React.FC = () => {
             <Tooltip formatter={(value, name) => (value ? [`${value}`, tooltipTicks[name]] : [])} />
             <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} stroke="#ccc" />
             <Brush dataKey="name" height={20} stroke="#8da5d6" fill="#fff" strokeOpacity={0.8} travellerWidth={12} />
-            {/* <Legend align="left" verticalAlign="middle" width={100} margin={{ right: 10 }} /> */}
+            {/* Столбцы для каждого уровня навыка по годам */}
             <Bar dataKey="prev_count_novice_department" stackId="2022" fill="#8842B4" />
             <Bar dataKey="prev_count_junior_department" stackId="2022" fill="#b56995" />
             <Bar dataKey="prev_count_middle_department" stackId="2022" fill="#E29076" />

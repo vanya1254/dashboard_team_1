@@ -10,7 +10,7 @@ import { DashletLayout } from '../../layouts/DashletLayout';
 
 import styles from './TagCloudCustom.module.scss';
 
-// Используются только в этом компоненте
+// Цвета для тегов
 const colors = {
   blue: '#6DA7FF',
   purple: '#8842B4',
@@ -18,6 +18,16 @@ const colors = {
   green: '#58C5BE'
 };
 
+/**
+ * Компонент TagCloudCustom отображает облако тегов, представляющее наиболее развитые подразделения.
+ *
+ * Использует данные из Redux store для получения информации о тегах и их статусе.
+ *
+ * Включает:
+ * - Отображение облака тегов с возможностью кастомизации размера и цвета.
+ * - Различные состояния загрузки данных (Fulfilled, Pending, Rejected, No Data).
+ * - Кастомный рендерер для тегов с анимацией и отображением дополнительной информации в виде тултипа.
+ */
 export const TagCloudCustom: React.FC = () => {
   const { depTagCloud, status } = useAppSelector(depDashSelector);
 
@@ -49,6 +59,16 @@ export const TagCloudCustom: React.FC = () => {
   );
 };
 
+/**
+ * Кастомный рендерер для тегов в облаке тегов.
+ *
+ * Отображает каждый тег с анимацией мигания, настраиваемым цветом и размером.
+ * Также включает тултип с дополнительной информацией.
+ *
+ * @param tag Объект с данными тега (значение и количество).
+ * @param size Размер шрифта для тега.
+ * @param color Цвет тега.
+ */
 const customRenderer = (tag: { value: string; count: number }, size: number, color: string) => (
   <span
     key={tag.value}

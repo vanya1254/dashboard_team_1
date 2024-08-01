@@ -9,18 +9,31 @@ import { Status, EmployeeT } from '../../redux/mainTypes';
 
 import styles from './TableCustom.module.scss';
 
-// Используются только в этом компоненте
+// Конфигурация столбцов таблицы
 const columns = [
   { label: 'ФИО', accessor: 'fullname' },
   { label: 'Должность', accessor: 'position' },
   { label: 'Подразделение', accessor: 'department' }
 ];
 
+/**
+ * Компонент TableCustom отображает список сотрудников в виде таблицы.
+ *
+ * Использует данные из Redux store для получения списка сотрудников и текущего выбранного сотрудника.
+ *
+ * Включает:
+ * - Отображение списка сотрудников с возможностью выбора.
+ * - Стилизация активной строки при выборе сотрудника.
+ * - Обработка различных состояний загрузки данных (Fulfilled, Pending, Rejected, No Data).
+ *
+ * При клике на строку таблицы вызывается функция `onClickEmployee`, которая устанавливает выбранного сотрудника в Redux store.
+ */
 export const TableCustom: React.FC = () => {
   const dispatch = useAppDispatch();
   const { employees, status } = useAppSelector(employeesSelector);
   const { employee } = useAppSelector(empDashSelector);
 
+  // Функция для обработки клика на сотрудника
   const onClickEmployee = (employee: EmployeeT) => {
     dispatch(setEmployee(employee));
   };

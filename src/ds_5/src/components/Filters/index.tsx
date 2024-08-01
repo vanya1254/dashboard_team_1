@@ -12,27 +12,46 @@ import { SelectCustom } from '../';
 
 import styles from './Filters.module.scss';
 
+/**
+ * Компонент Filters отвечает за отображение и управление фильтрами для списка сотрудников.
+ *
+ * - Содержит поле ввода для поиска по ФИО с использованием функции debounce.
+ * - Отображает фильтры для должности и подразделения, используя компонент SelectCustom.
+ * - Включает кнопку для сброса всех фильтров.
+ */
 export const Filters: React.FC = () => {
   const dispatch = useAppDispatch();
   const { filters, status } = useAppSelector(filtersSelector);
   const [value, setValue] = useState('');
   const [isReset, setIsReset] = useState(false);
 
+  /**
+   * Обработчик клика по фильтру. Устанавливает текущий фильтр.
+   */
   const onClickFilter = (filter: CoobDataI) => {
     setIsReset(false);
     dispatch(setCurFilter(filter));
   };
 
+  /**
+   * Обработчик изменения значения поля поиска. Обновляет состояние и вызывает обновление фильтрации по имени.
+   */
   const onChangeSearchValue = (val: string) => {
     setValue(val);
     updateSearchValue(val);
   };
 
+  /**
+   * Функция для обновления значения фильтрации по имени с задержкой (debounce).
+   */
   const updateSearchValue = React.useCallback(
     debounce((value) => dispatch(setFullname(value)), 808),
     []
   );
 
+  /**
+   * Обработчик для сброса всех фильтров и очистки поля поиска.
+   */
   const onClickResetFilters = () => {
     dispatch(clearCurFilters());
     setValue('');

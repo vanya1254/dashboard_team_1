@@ -12,7 +12,7 @@ import { DashletLayout } from '../../layouts/DashletLayout';
 
 import styles from './StackedAreaChartCustom.module.scss';
 
-// Используются только в этом компоненте
+// Маппинг значений для оси Y и тултипов
 const ticksLabels = { 0: '', 1: '1 ур.', 2: '2 ур.', 3: '3 ур.' };
 const titles = { false: 'отрасли', true: 'предметных областей' };
 const tooltipTicks = {
@@ -21,6 +21,23 @@ const tooltipTicks = {
   3: `Знаком, могу реализовать`
 };
 
+/**
+ * Компонент StackedAreaChartCustom отображает график накопительной площади для уровня знаний.
+ *
+ * Включает:
+ * - Тогглер (`ToggleCustom`) для переключения между отображением данных по отраслям и предметным областям.
+ * - График накопительной площади, который изменяется в зависимости от состояния тогглера.
+ * - Использует данные из Redux store через селектор `empDashSelector`.
+ * - Отображает информацию в зависимости от состояния загрузки данных (Fulfilled, Pending, Rejected, No Data).
+ *
+ * Внутреннее состояние:
+ * - `isToggled`: флаг, указывающий, выбран ли режим отображения по предметным областям (true) или отраслям (false).
+ *
+ * Маппинг данных:
+ * - `ticksLabels`: метки на оси Y, соответствующие уровням знаний.
+ * - `titles`: заголовок графика в зависимости от состояния тогглера.
+ * - `tooltipTicks`: описание уровней знаний для отображения в тултипе.
+ */
 export const StackedAreaChartCustom: React.FC = () => {
   const { empStackedArea, status } = useAppSelector(empDashSelector);
   const [isToggled, setIsToggled] = useState(false);

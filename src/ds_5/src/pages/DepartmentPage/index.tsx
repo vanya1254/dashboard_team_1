@@ -15,18 +15,30 @@ import { DepFilters, SimpleAreaChartCustom, StackedMixBarChart, TagCloudCustom }
 
 import styles from './DepartmentPage.module.scss';
 
+/**
+ * Страница `DepartmentPage` предназначена для отображения информации о подразделениях.
+ *
+ * Использует различные компоненты для отображения фильтров, тегов, графиков и диаграмм.
+ *
+ * Эффекты:
+ * - При первом рендере сбрасывает текущие фильтры и запрашивает все возможные фильтры для подразделений.
+ * - Запрашивает данные для отображения по выбранным фильтрам (позиция, подразделение, тип навыков).
+ */
 const DepartmentPage: React.FC = () => {
   const dispatch = useAppDispatch();
   const isFirstLoading = useRef(true);
   const { position, department, skill_type } = useAppSelector(filterSelector);
 
+  // Инициализация при первом рендере
   useEffect(() => {
     if (isFirstLoading.current) {
-      dispatch(clearCurFilters());
-      dispatch(fetchFilters({ koobId: KOOB_ID_DEP }));
+      dispatch(clearCurFilters()); // Сброс текущих фильтров
+      dispatch(fetchFilters({ koobId: KOOB_ID_DEP })); // Запрос всех возможных фильтров
+      isFirstLoading.current = false;
     }
-  }, []);
+  }, [dispatch]);
 
+  // Запрос данных для отображения при изменении фильтров
   useEffect(() => {
     dispatch(
       fetchDepDash({
@@ -38,7 +50,7 @@ const DepartmentPage: React.FC = () => {
         }
       })
     );
-  }, [position, department, skill_type]);
+  }, [position, department, skill_type, dispatch]);
 
   return (
     <section className={styles.root}>
