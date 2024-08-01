@@ -3,41 +3,15 @@ import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 
 import { useAppSelector } from '../../redux/store';
 import { depDashSelector } from '../../redux/features/depDash/selectors';
+import { filterSelector } from '../../redux/features/filter/selectors';
 
 import { Status } from '../../redux/mainTypes';
+
+import { SKILL_LEVEL } from '../../constants';
 
 import { DashletLayout } from '../../layouts/DashletLayout';
 
 import styles from './SimpleAreaChartCustom.module.scss';
-import { SKILL_LEVEL } from '../../constants';
-import { filterSelector } from '../../redux/features/filter/selectors';
-
-const data = [
-  {
-    name: `Фин`,
-    value: 20
-  },
-  {
-    name: `Фарм`,
-    value: 40
-  },
-  {
-    name: `Строи`,
-    value: 25
-  },
-  {
-    name: `Рекл`,
-    value: 28
-  },
-  {
-    name: `Нефть`,
-    value: 10
-  },
-  {
-    name: `Логист`,
-    value: 40
-  }
-];
 
 export const SimpleAreaChartCustom: React.FC = () => {
   const { depSimpleArea, status } = useAppSelector(depDashSelector);

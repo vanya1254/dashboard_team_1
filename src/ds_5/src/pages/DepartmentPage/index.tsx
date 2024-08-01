@@ -3,7 +3,10 @@ import React, { useEffect, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { fetchFilters } from '../../redux/features/filters/slice';
 import { fetchDepDash } from '../../redux/features/depDash/slice';
+import { clearCurFilters } from '../../redux/features/filter/slice';
 import { filterSelector } from '../../redux/features/filter/selectors';
+
+import { KOOB_ID_DEP } from '../../constants';
 
 import { DepartmentGridLayout } from '../../layouts/DepartmentGridLayout';
 import { CardLayout } from '../../layouts/CardLayout';
@@ -11,8 +14,6 @@ import { CardLayout } from '../../layouts/CardLayout';
 import { DepFilters, SimpleAreaChartCustom, StackedMixBarChart, TagCloudCustom } from '../../components';
 
 import styles from './DepartmentPage.module.scss';
-import { clearCurFilters } from '../../redux/features/filter/slice';
-import { KOOB_ID_DEP } from '../../constants';
 
 const DepartmentPage: React.FC = () => {
   const dispatch = useAppDispatch();

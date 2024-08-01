@@ -1,9 +1,11 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
-import { FILTERS_REQUESTS, SCHEMA_NAME } from '../../../constants';
-import { FiltersState, FetchFiltersPropsT } from './types';
 //@ts-ignore
 import { KoobDataService } from 'bi-internal/services';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
+
+import { FILTERS_REQUESTS, SCHEMA_NAME } from '../../../constants';
+
+import { FiltersState, FetchFiltersPropsT } from './types';
 import { CoobDataI, Status } from '../../mainTypes';
 
 const { koobDataRequest3 } = KoobDataService;

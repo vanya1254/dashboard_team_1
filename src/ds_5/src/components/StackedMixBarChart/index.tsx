@@ -1,81 +1,18 @@
 import React, { useState } from 'react';
-import { ResponsiveContainer, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Bar, Brush } from 'recharts';
+import { ResponsiveContainer, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Bar, Brush } from 'recharts';
 
+import { useAppSelector } from '../../redux/store';
+import { depDashSelector } from '../../redux/features/depDash/selectors';
+import { filterSelector } from '../../redux/features/filter/selectors';
+
+import { Status } from '../../redux/mainTypes';
+
+import { ToggleCustom } from '..';
 import { DashletLayout } from '../../layouts/DashletLayout';
 
 import styles from './StackedMixBarChart.module.scss';
-import { useAppSelector } from '../../redux/store';
-import { depDashSelector } from '../../redux/features/depDash/selectors';
-import { Status } from '../../redux/mainTypes';
-import { filterSelector } from '../../redux/features/filter/selectors';
-import { ToggleCustom } from '..';
 
-const data = [
-  {
-    name: 'Finances',
-    prevOk: 13,
-    prevGood: 7,
-    prevPerfect: 20,
-
-    curOk: 45,
-    curGood: 90
-  },
-  {
-    name: 'Finances',
-    prevOk: 13,
-    prevGood: 7,
-    prevPerfect: 20,
-
-    curOk: 45,
-    curGood: 90
-  },
-  {
-    name: 'Finances',
-    prevOk: 13,
-    prevGood: 7,
-    prevPerfect: 20,
-
-    curOk: 45,
-    curGood: 90
-  },
-  {
-    name: 'Finances',
-    prevOk: 13,
-    prevGood: 7,
-    prevPerfect: 20,
-
-    curOk: 45,
-    curGood: 90
-  },
-  {
-    name: 'Finances',
-    prevOk: 13,
-    prevGood: 7,
-    prevPerfect: 20,
-
-    curOk: 45,
-    curGood: 90
-  },
-  {
-    name: 'Finances',
-    prevOk: 13,
-    prevGood: 7,
-    prevPerfect: 20,
-
-    curOk: 45,
-    curGood: 90
-  },
-  {
-    name: 'Finances',
-    prevOk: 13,
-    prevGood: 7,
-    prevPerfect: 20,
-
-    curOk: 45,
-    curGood: 90
-  }
-];
-
+// Используются только в этом компоненте
 const tooltipTicks = {
   prev_count_expert_department: 'Experts 2022',
   prev_count_junior_department: 'Juniors 2022',

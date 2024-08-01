@@ -1,33 +1,16 @@
 import React from 'react';
-import {
-  RadarChart,
-  PolarGrid,
-  PolarAngleAxis,
-  PolarRadiusAxis,
-  Radar,
-  Legend,
-  Tooltip,
-  ResponsiveContainer
-} from 'recharts';
+import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, Tooltip, ResponsiveContainer } from 'recharts';
+
+import { useAppSelector } from '../../redux/store';
+import { empDashSelector } from '../../redux/features/empDash/selectors';
+
+import { Status } from '../../redux/mainTypes';
+
+import { SKILL_LEVEL } from '../../constants';
 
 import { DashletLayout } from '../../layouts/DashletLayout';
 
 import styles from './RadarCharCustom.module.scss';
-import { useAppSelector } from '../../redux/store';
-import { empDashSelector } from '../../redux/features/empDash/selectors';
-import { Status } from '../../redux/mainTypes';
-import { SKILL_LEVEL } from '../../constants';
-
-const data = [
-  { skill_type: 'Базы данных', level: 0, midLevel: 0 },
-  { skill_type: 'Инструменты', level: 2, midLevel: 3 },
-  { skill_type: 'Платформы', level: 2, midLevel: 3 },
-  { skill_type: 'Среды разработки', level: 0, midLevel: 0 },
-  { skill_type: 'Технологии', level: 3, midLevel: 2 },
-  { skill_type: 'Типы систем', level: 0, midLevel: 0 },
-  { skill_type: 'Фреймворки', level: 0, midLevel: 0 },
-  { skill_type: 'Языки программировния', level: 3, midLevel: 3 }
-];
 
 export const RadarChartCustom: React.FC = () => {
   const { empRadar, status } = useAppSelector(empDashSelector);

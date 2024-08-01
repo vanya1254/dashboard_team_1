@@ -1,7 +1,11 @@
+import { Requests, RequestStructure } from './types/global';
+
+// Переменные идентификаторов для KOOB
 export const KOOB_ID_EMP = 'etl_db_1.team_1';
 export const KOOB_ID_DEP = 'etl_db_1.team_1_2';
 export const SCHEMA_NAME = 'ds_5';
 
+// Типы навыков
 export const SKILL_TYPES = {
   1: 'Базы данных',
   2: 'Инструменты',
@@ -12,11 +16,12 @@ export const SKILL_TYPES = {
   7: 'Технологии',
   8: 'Типы систем',
   9: 'Фреймворки',
-  10: 'Языки программировния',
+  10: 'Языки программирования',
   11: 'Иностранные языки',
   12: 'Образование'
 };
 
+// Уровни навыков
 export const SKILL_LEVEL = {
   0: '',
   1: 'Novice',
@@ -39,6 +44,7 @@ export const SKILL_LEVEL = {
   18: 'C2'
 };
 
+// Ключи для навыков
 export const SKILL_KEYS = {
   43: 'Торговля',
   44: 'Медицина',
@@ -63,9 +69,8 @@ export const SKILL_KEYS = {
   63: 'Строительство'
 };
 
-// KOOB REQUESTS
-
-export const EMPLOYEES_REQUEST = {
+// Пример объекта запроса для сотрудников
+export const EMPLOYEES_REQUEST: RequestStructure = {
   dimensions: ['fullname', 'position', 'department', 'fact_empl_skills_employee_key', 'picture_url'],
   measures: [],
   filters: {},
@@ -73,8 +78,8 @@ export const EMPLOYEES_REQUEST = {
   request: {}
 };
 
-//TODO:maybe change to array?(func?)
-export const FILTERS_REQUESTS = {
+// Пример объекта запросов для фильтров
+export const FILTERS_REQUESTS: Requests = {
   position: {
     dimensions: ['position'],
     measures: [],
@@ -104,7 +109,8 @@ export const FILTERS_REQUESTS = {
   }
 };
 
-export const EMP_DASHES_REQUESTS = {
+// Пример объекта запросов для сотрудников (Dashlets)
+export const EMP_DASHES_REQUESTS: Requests = {
   empSkillsList: [
     {
       dimensions: ['skill_type', 'skill_name', 'next_grade_level'],
@@ -178,7 +184,8 @@ export const EMP_DASHES_REQUESTS = {
   ]
 };
 
-export const DEP_DASHES_REQUESTS = {
+// Пример объекта запросов для департаментов (Dashlets)
+export const DEP_DASHES_REQUESTS: Requests = {
   depTagCloud: [
     {
       dimensions: ['department'],

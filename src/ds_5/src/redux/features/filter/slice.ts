@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { FilterState } from './types';
 
+import { FilterState } from './types';
 import { CoobDataI } from '../../mainTypes';
 
 const initialState: FilterState = {

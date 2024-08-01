@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { TiArrowSortedDown, TiArrowSortedUp } from 'react-icons/ti';
 import { IoIosArrowRoundForward } from 'react-icons/io';
 

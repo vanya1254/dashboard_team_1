@@ -7,11 +7,13 @@ import { useAppDispatch, useAppSelector } from '../../redux/store';
 
 import { CoobDataI, Status } from '../../redux/mainTypes';
 
+import { SKILL_TYPES } from '../../constants';
+
+import getKeyByValue from '../../utils/getKeyByValue';
+
 import { SelectCustom } from '../SelectCustom';
 
 import styles from './DepFilters.module.scss';
-import { SKILL_TYPES } from '../../constants';
-import getKeyByValue from '../../utils/getKeyByValue';
 
 export const DepFilters: React.FC = () => {
   const dispatch = useAppDispatch();

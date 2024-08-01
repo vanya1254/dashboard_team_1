@@ -12,9 +12,6 @@ import { SelectCustom } from '../';
 
 import styles from './Filters.module.scss';
 
-const posts = [];
-const divisions = [];
-
 export const Filters: React.FC = () => {
   const dispatch = useAppDispatch();
   const { filters, status } = useAppSelector(filtersSelector);

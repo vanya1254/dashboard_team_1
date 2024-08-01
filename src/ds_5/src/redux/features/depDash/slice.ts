@@ -1,9 +1,11 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
-import { DEP_DASHES_REQUESTS, SCHEMA_NAME, SKILL_KEYS, SKILL_LEVEL, SKILL_TYPES } from '../../../constants';
-import { DepDashState, DepSimpleAreaT, DepTagCloudT, FetchDepDashPropsT } from './types';
 //@ts-ignore
 import { KoobDataService } from 'bi-internal/services';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
+
+import { DEP_DASHES_REQUESTS, SCHEMA_NAME } from '../../../constants';
+
+import { DepDashState, DepSimpleAreaT, FetchDepDashPropsT } from './types';
 import { CoobDataI, Status } from '../../mainTypes';
 
 const { koobDataRequest3 } = KoobDataService;
@@ -133,6 +135,6 @@ export const depDashSlice = createSlice({
   }
 });
 
-export const { setDepSimpleArea, setDepStackedMixedBar } = depDashSlice.actions;
+export const { setDepTagCloud, setDepSimpleArea, setDepStackedMixedBar } = depDashSlice.actions;
 
 export default depDashSlice.reducer;

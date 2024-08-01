@@ -1,44 +1,16 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { ResponsiveContainer, BarChart, XAxis, YAxis, Tooltip, Bar, Brush, CartesianGrid } from 'recharts';
+
+import { useAppSelector } from '../../redux/store';
+import { empDashSelector } from '../../redux/features/empDash/selectors';
+
+import { Status } from '../../redux/mainTypes';
+
+import { SKILL_LEVEL } from '../../constants';
 
 import { DashletLayout } from '../../layouts/DashletLayout';
 
 import styles from './BarChartCustom.module.scss';
-import { useAppSelector } from '../../redux/store';
-import { empDashSelector } from '../../redux/features/empDash/selectors';
-import { Status } from '../../redux/mainTypes';
-import { SKILL_LEVEL } from '../../constants';
-
-const data = [
-  {
-    skill: 'SQL',
-    2022: 1,
-    2023: 3
-  },
-  {
-    skill: 'JS',
-    2022: 2,
-    2023: 2
-  },
-  {
-    skill: 'HTML',
-    2022: 3,
-    2023: 3
-  },
-  {
-    skill: 'PYTHON',
-    2022: 3,
-    2023: 4
-  },
-  {
-    skill: 'C++',
-    2022: 0,
-    2023: 1
-  }
-];
-
-const ticksLabels = { 0: '', 1: 'Novice', 2: 'Junior', 3: 'Middle', 4: 'Senior', 5: 'Expert' };
-const ticks = [0, 1, 2, 3, 4, 5];
 
 export const BarChartCustom: React.FC = () => {
   const { empBar, status } = useAppSelector(empDashSelector);

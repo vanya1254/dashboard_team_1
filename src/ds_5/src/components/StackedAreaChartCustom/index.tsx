@@ -1,51 +1,20 @@
 import React, { useState } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Brush } from 'recharts';
 
+import { useAppSelector } from '../../redux/store';
+import { empDashSelector } from '../../redux/features/empDash/selectors';
+
+import { Status } from '../../redux/mainTypes';
+
+import { ToggleCustom } from '../ToggleCustom';
+
 import { DashletLayout } from '../../layouts/DashletLayout';
 
 import styles from './StackedAreaChartCustom.module.scss';
-import { useAppSelector } from '../../redux/store';
-import { empDashSelector } from '../../redux/features/empDash/selectors';
-import { Status } from '../../redux/mainTypes';
-import { ToggleCustom } from '../ToggleCustom';
 
-const data = [
-  {
-    name: `Фин`,
-    2023: 1,
-    2024: 3
-  },
-  {
-    name: `Фарм`,
-    2023: 2,
-    2024: 3
-  },
-  {
-    name: `Строи`,
-    2023: 1,
-    2024: 3
-  },
-  {
-    name: `Рекл`,
-    2023: 2,
-    2024: 3
-  },
-  {
-    name: `Нефть`,
-    2023: 2,
-    2024: 2
-  },
-  {
-    name: `Логист`,
-    2023: 3,
-    2024: 2
-  }
-];
-
+// Используются только в этом компоненте
 const ticksLabels = { 0: '', 1: '1 ур.', 2: '2 ур.', 3: '3 ур.' };
-
 const titles = { false: 'отрасли', true: 'предметных областей' };
-
 const tooltipTicks = {
   1: 'Знаком',
   2: `Знаком, могу применить`,

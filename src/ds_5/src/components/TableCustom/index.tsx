@@ -1,27 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import styles from './TableCustom.module.scss';
+import { useAppDispatch, useAppSelector } from '../../redux/store';
+import { setEmployee } from '../../redux/features/empDash/slice';
 import { empDashSelector } from '../../redux/features/empDash/selectors';
 import { employeesSelector } from '../../redux/features/employees/selectors';
-import { useAppDispatch, useAppSelector } from '../../redux/store';
-import { Status } from '../../redux/mainTypes';
-import { EmployeeT } from '../../redux/mainTypes';
-import { setEmployee } from '../../redux/features/empDash/slice';
 
+import { Status, EmployeeT } from '../../redux/mainTypes';
+
+import styles from './TableCustom.module.scss';
+
+// Используются только в этом компоненте
 const columns = [
   { label: 'ФИО', accessor: 'fullname' },
   { label: 'Должность', accessor: 'position' },
   { label: 'Подразделение', accessor: 'department' }
-];
-
-const rows = [
-  { fullname: 'Иван Иванов', employee_post: 'Разработчик', division: 'ИТ отдел' },
-  { fullname: 'Ольга Петрова', employee_post: 'Менеджер', division: 'Отдел продаж' },
-  { fullname: 'Сергей Смирнов', employee_post: 'Аналитик', division: 'Аналитический отдел' },
-  { fullname: 'Ольга Петрова', employee_post: 'Менеджер', division: 'Отдел продаж' },
-  { fullname: 'Сергей Смирнов', employee_post: 'Аналитик', division: 'Аналитический отдел' },
-  { fullname: 'Ольга Петрова', employee_post: 'Менеджер', division: 'Отдел продаж' },
-  { fullname: 'Сергей Смирнов', employee_post: 'Аналитик', division: 'Аналитический отдел' }
 ];
 
 export const TableCustom: React.FC = () => {

@@ -1,40 +1,16 @@
 import React from 'react';
 import { TagCloud } from 'react-tagcloud';
 
+import { useAppSelector } from '../../redux/store';
+import { depDashSelector } from '../../redux/features/depDash/selectors';
+
+import { Status } from '../../redux/mainTypes';
+
 import { DashletLayout } from '../../layouts/DashletLayout';
 
 import styles from './TagCloudCustom.module.scss';
-import { useAppSelector } from '../../redux/store';
-import { depDashSelector } from '../../redux/features/depDash/selectors';
-import { Status } from '../../redux/mainTypes';
 
-const data = [
-  {
-    value: 'Направление СКИМ',
-    count: 6
-  },
-  {
-    value: 'KeepRise',
-    count: 5
-  },
-  {
-    value: 'Направление DG&GQ',
-    count: 4
-  },
-  {
-    value: 'Направление BI',
-    count: 3
-  },
-  {
-    value: 'Группа СА РЖД',
-    count: 2
-  },
-  {
-    value: 'Направление DWH&ML',
-    count: 1
-  }
-];
-
+// Используются только в этом компоненте
 const colors = {
   blue: '#6DA7FF',
   purple: '#8842B4',
@@ -73,7 +49,7 @@ export const TagCloudCustom: React.FC = () => {
   );
 };
 
-const customRenderer = (tag, size, color) => (
+const customRenderer = (tag: { value: string; count: number }, size: number, color: string) => (
   <span
     key={tag.value}
     className={styles.root__chart_item}

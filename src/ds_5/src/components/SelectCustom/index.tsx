@@ -1,13 +1,14 @@
 import React, { useRef, useState } from 'react';
 import { RiFilter2Fill } from 'react-icons/ri';
 
-import { CoobDataI } from '../../redux/mainTypes';
+import { AllFiltersT, CoobDataI } from '../../redux/mainTypes';
 
-import styles from './SelectCustom.module.scss';
 import useOutsideClick from '../../hooks/useOutsideClick';
 
+import styles from './SelectCustom.module.scss';
+
 type SelectCustomPropsT = {
-  onClickFilter: (filter: any) => void; //TODO
+  onClickFilter: (filter: AllFiltersT) => void;
   selectTitle: string;
   options: CoobDataI[];
   isReset: boolean;
@@ -28,6 +29,7 @@ export const SelectCustom: React.FC<SelectCustomPropsT> = ({ onClickFilter, sele
   };
 
   const onClickSkill = (idx: number) => {
+    //@ts-ignore
     onClickFilter(options[idx]);
 
     if (activeOption === idx) {

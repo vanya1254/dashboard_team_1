@@ -2,23 +2,10 @@ import React from 'react';
 
 import { useAppSelector } from '../../redux/store';
 import { empDashSelector } from '../../redux/features/empDash/selectors';
+
 import { Status } from '../../redux/mainTypes';
 
 import styles from './EmployeeCard.module.scss';
-
-const data = [
-  { label: 'ФИО', value: 'Иван Иванов' },
-  { label: 'Образование', value: ['Высшее'] },
-  { label: 'Иностранные языки', value: ['Английский', 'Немецкий'] },
-  { label: 'Инструменты', value: ['VS Code', 'Git'] },
-  { label: 'Опыт в отрасли', value: ['5 лет'] },
-  { label: 'Платформы', value: ['Windows', 'Linux'] },
-  { label: 'Опыт сотрудника в предметной области', value: ['Веб-разработка'] },
-  { label: 'Среды разработки', value: ['Eclipse', 'IntelliJ IDEA'] },
-  { label: 'Фреймворки', value: ['React', 'Next.js', 'Redux'] },
-  { label: 'Языки программирования', value: ['JavaScript', 'Python', 'Java'] },
-  { label: 'Технологии', value: ['HTML', 'SCSS'] }
-];
 
 export const EmployeeCard: React.FC = () => {
   const { employee, empCard, status } = useAppSelector(empDashSelector);

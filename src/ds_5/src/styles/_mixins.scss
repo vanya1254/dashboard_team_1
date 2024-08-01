@@ -1,23 +1,41 @@
 @import './vars';
 
+/* 
+  Миксин для базового стиля кнопки:
+  - padding: Внутренние отступы
+  - background-color: Цвет фона кнопки
+  - color: Цвет текста кнопки
+  - border-radius: Скругление углов
+  - transition: Плавный переход при изменении стиля
+*/
 @mixin btnStyles() {
   padding: 6px 12px;
   background-color: $btnColor;
   color: $whiteColor;
   border-radius: $mainBR;
-
   transition: 0.3s ease-in-out;
 }
 
+/* 
+  Миксин для состояния hover кнопки:
+  - opacity: Прозрачность при наведении курсора
+*/
 @mixin btnHover() {
   opacity: 0.8;
 }
 
+/* 
+  Миксин для стиля заголовка dashlet:
+  - width: Ширина по содержимому
+  - padding: Внутренние отступы
+  - background-color: Цвет фона заголовка
+  - border-radius: Скругление углов
+  - color: Цвет текста
+*/
 @mixin titleDashletStyles {
   width: fit-content;
   padding: 6px 12px;
   background-color: $titleColor;
   border-radius: $mainBR;
-
   color: $whiteColor;
 }

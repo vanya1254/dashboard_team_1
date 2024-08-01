@@ -1,7 +1,9 @@
+/* Подключение шрифтов и переменных стилей */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
-@import './src/styles/vars';
-@import './src/styles/animations';
+@import './src/styles/vars'; /* Импорт переменных стилей */
+@import './src/styles/animations'; /* Импорт анимаций */
 
+/* Сброс отступов и установка общих стилей для заголовков */
 h1,
 h2,
 h3,
@@ -13,75 +15,80 @@ h6 {
   font-size: inherit;
 }
 
+/* Сброс отступов для абзацев */
 p {
   margin: 0;
   padding: 0;
 }
 
+/* Настройка шрифта для светлой и тёмной тем */
 .theme-light,
 .theme-dark {
   --font-family: 'Roboto' !important;
 }
 
+/* Основные стили для контейнера приложения */
 .App {
-  color: #151515;
-  font-size: 14px;
-  padding: 0 32px 32px 32px;
-  font-family: 'Roboto';
-  overflow-y: scroll;
-  width: 100%;
-  min-height: calc(100vh - $heightHeader);
+  color: #151515; /* Цвет текста */
+  font-size: 14px; /* Размер шрифта */
+  padding: 0 32px 32px 32px; /* Отступы */
+  font-family: 'Roboto'; /* Шрифт */
+  overflow-y: scroll; /* Скролл по вертикали */
+  width: 100%; /* Ширина контейнера */
+  min-height: calc(100vh - $heightHeader); /* Минимальная высота */
 
   @media (max-width: 1700px) {
-    font-size: 12px;
+    font-size: 12px; /* Изменение размера шрифта на меньших экранах */
   }
 }
 
+/* Стилизация скроллбара */
 .scroller {
   &::-webkit-scrollbar:horizontal {
-    height: 5px;
+    height: 5px; /* Высота горизонтального скроллбара */
   }
 
   &::-webkit-scrollbar:vertical {
-    width: 5px;
+    width: 5px; /* Ширина вертикального скроллбара */
   }
 
   &::-webkit-scrollbar {
-    -webkit-appearance: none;
+    -webkit-appearance: none; /* Удаление стандартного стиля */
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: $btnColor;
-    border-radius: 10px;
+    background-color: $btnColor; /* Цвет скроллбара */
+    border-radius: 10px; /* Скругление углов */
     border: 0;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out; /* Плавный переход */
   }
 
   &::-webkit-scrollbar-track {
-    background-color: transparent;
-    transition: all 0.2s ease-in-out;
+    background-color: transparent; /* Прозрачный фон трека */
+    transition: all 0.2s ease-in-out; /* Плавный переход */
   }
 }
 
+/* Специфические стили для компонентов Dashboard */
 .Dashboard__Scroller {
-  padding: 0 !important;
+  padding: 0 !important; /* Удаление отступов */
 }
 
 .Dashlet__Shadow {
-  margin: 0;
+  margin: 0; /* Удаление отступов */
 }
 
 .Dashlet {
-  border-radius: 0;
-  margin: 0;
-  background: $bgLinear;
+  border-radius: 0; /* Удаление скруглений */
+  margin: 0; /* Удаление отступов */
+  background: $bgLinear; /* Фоновый градиент */
 }
 .Dashlet > .Vizel {
-  border-radius: 0;
+  border-radius: 0; /* Удаление скруглений */
 }
 
 .Dashboards__ListItem {
-  padding: 0 !important;
+  padding: 0 !important; /* Удаление отступов */
 }
 
 .Dashboard {
@@ -89,14 +96,16 @@ p {
 }
 
 .Dashboard__Footer {
-  display: none;
+  display: none; /* Скрытие футера */
 }
 
+/* Скрытие заголовков для компонентов Vizel и chart-header */
 .VizelDashlet__Header,
 .chart-header {
   display: none;
 }
 
+/* Настройка отображения компонентов Vizel */
 .Vizel,
 .VizelInternal {
   display: flex;
@@ -104,7 +113,7 @@ p {
   justify-content: space-between;
 }
 
-/* Reset and base styles  */
+/* Сброс базовых стилей и общие стили */
 * {
   padding: 0px;
   margin: 0px;
@@ -114,23 +123,21 @@ p {
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
+  box-sizing: border-box; /* Установка модели коробки */
 }
 
-/* Links */
-
+/* Стили для ссылок */
 a,
 a:link,
 a:visited {
-  text-decoration: none;
+  text-decoration: none; /* Удаление подчеркивания */
 }
 
 a:hover {
-  text-decoration: none;
+  text-decoration: none; /* Удаление подчеркивания при наведении */
 }
 
-/* Common */
-
+/* Общие стили для HTML элементов */
 aside,
 nav,
 footer,
@@ -142,14 +149,12 @@ main {
 
 ul,
 ul li {
-  list-style: none;
+  list-style: none; /* Удаление маркеров у списков */
 }
 
+/* Стили для изображений */
 img {
   vertical-align: top;
-}
-
-img {
   max-width: 100%;
   height: auto;
 }
@@ -158,8 +163,7 @@ address {
   font-style: normal;
 }
 
-/* Form */
-
+/* Стили для форм */
 input,
 textarea,
 button,
@@ -171,14 +175,14 @@ select {
 }
 
 input::-ms-clear {
-  display: none;
+  display: none; /* Скрытие кнопки очистки в IE */
 }
 
 button,
 input[type='submit'] {
   display: inline-block;
-  box-shadow: none;
-  background-color: transparent;
+  box-shadow: none; /* Удаление тени */
+  background-color: transparent; /* Прозрачный фон */
   background: none;
   cursor: pointer;
 }
@@ -187,7 +191,7 @@ input:focus,
 input:active,
 button:focus,
 button:active {
-  outline: none;
+  outline: none; /* Удаление обводки при фокусе */
 }
 
 button::-moz-focus-inner {
@@ -199,27 +203,26 @@ label {
   cursor: pointer;
 }
 
+/* Стили для активных элементов */
 .activated {
-  background-color: $activeColor;
+  background-color: $activeColor; /* Цвет фона активного элемента */
 }
 .activeOption {
-  background-color: $btnColor;
+  background-color: $btnColor; /* Цвет фона активного элемента */
 }
 
-/*
-цвет линий RadarChart
-*/
+/* Цвет линий для компонента RadarChart */
 svg.recharts-surface {
   g.recharts-polar-grid {
     g.recharts-polar-grid-angle {
       line {
-        stroke: #000;
+        stroke: #000; /* Цвет линий углов */
       }
     }
 
     g.recharts-polar-grid-concentric {
       path {
-        stroke: #000;
+        stroke: #000; /* Цвет концентрических линий */
       }
     }
   }

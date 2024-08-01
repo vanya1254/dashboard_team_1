@@ -1,59 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { RiFilter2Fill } from 'react-icons/ri';
 
-import styles from './SkillsList.module.scss';
-import { useAppDispatch, useAppSelector } from '../../redux/store';
+import { useAppSelector } from '../../redux/store';
 import { empDashSelector } from '../../redux/features/empDash/selectors';
+
 import { Status } from '../../redux/mainTypes';
+
 import useOutsideClick from '../../hooks/useOutsideClick';
 
-const data = [
-  {
-    skill: 'Frameworks',
-    curSkills: ['react', 'next', 'redux', 'react', 'next', 'redux', 'react', 'next', 'redux', 'react', 'next', 'redux'],
-    development: ['scss', 'html']
-  },
-  {
-    skill: 'Databases',
-    curSkills: ['mysql', 'postgresql', 'mongodb'],
-    development: ['sql', 'nosql']
-  },
-  {
-    skill: 'Tools',
-    curSkills: ['webpack', 'babel', 'eslint'],
-    development: ['npm', 'yarn']
-  },
-  {
-    skill: 'Platforms',
-    curSkills: ['aws', 'azure', 'google cloud'],
-    development: ['docker', 'kubernetes']
-  },
-  {
-    skill: 'Spheres',
-    curSkills: ['web development', 'mobile development', 'data science'],
-    development: ['frontend', 'backend']
-  },
-  {
-    skill: 'Technologies',
-    curSkills: ['blockchain', 'ai', 'iot'],
-    development: ['machine learning', 'cloud computing']
-  },
-  {
-    skill: 'Types System',
-    curSkills: ['typescript', 'flow'],
-    development: ['static typing', 'dynamic typing']
-  },
-  {
-    skill: 'Frameworks',
-    curSkills: ['angular', 'vue', 'svelte'],
-    development: ['css modules', 'styled-components']
-  },
-  {
-    skill: 'Languages',
-    curSkills: ['javascript', 'python', 'java'],
-    development: ['es6', 'django']
-  }
-];
+import styles from './SkillsList.module.scss';
 
 export const SkillsList: React.FC = () => {
   const wrapperRef = useRef(null);

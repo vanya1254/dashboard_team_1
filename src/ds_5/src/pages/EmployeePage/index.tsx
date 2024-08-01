@@ -1,13 +1,15 @@
 import React, { useEffect, useRef } from 'react';
-import { GiProgression } from 'react-icons/gi';
 
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { fetchEmployees } from '../../redux/features/employees/slice';
 import { fetchFilters } from '../../redux/features/filters/slice';
+import { clearCurFilters } from '../../redux/features/filter/slice';
 import { fetchEmpDash, setEmployeeAndFetchDashboard } from '../../redux/features/empDash/slice';
 import { filterSelector } from '../../redux/features/filter/selectors';
 import { empDashSelector } from '../../redux/features/empDash/selectors';
 import { employeesSelector } from '../../redux/features/employees/selectors';
+
+import { KOOB_ID_EMP } from '../../constants';
 
 import { EmployeeGridLayout } from '../../layouts/EmployeeGridLayout';
 import { CardLayout } from '../../layouts/CardLayout';
@@ -16,7 +18,6 @@ import {
   BarChartCustom,
   EmployeeCard,
   EmployesList,
-  KpiBlock,
   KpiList,
   RadarChartCustom,
   SkillsList,
@@ -24,8 +25,6 @@ import {
 } from '../../components';
 
 import styles from './EmployeePage.module.scss';
-import { clearCurFilters } from '../../redux/features/filter/slice';
-import { KOOB_ID_EMP } from '../../constants';
 
 const EmployerPage: React.FC = () => {
   const dispatch = useAppDispatch();

@@ -7,17 +7,17 @@ function useOutsideClick(
 ) {
   useEffect(() => {
     /**
-     * Alert if clicked on outside of element
+     * setIsInside если кликнуть вне элемента или sub-элемента
      */
     function handleClickOutside(event) {
       if (ref?.current && !ref?.current.contains(event.target) && !subRef?.current.contains(event.target)) {
         setIsInside(false);
       }
     }
-    // Bind the event listener
+    // Создаем слушатель
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      // Unbind the event listener on clean up
+      // Удаляем слушатель
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [ref]);

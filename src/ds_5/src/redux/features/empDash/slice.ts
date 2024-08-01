@@ -1,11 +1,14 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
-import { EMP_DASHES_REQUESTS, SCHEMA_NAME, SKILL_KEYS, SKILL_LEVEL, SKILL_TYPES } from '../../../constants';
-import { EmpDashState, EmpKpiT, FetchEmpDashPropsT } from './types';
 //@ts-ignore
 import { KoobDataService } from 'bi-internal/services';
-import { CoobDataI, EmployeeT, Status } from '../../mainTypes';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
+
 import { RootState } from '../../store';
+
+import { EMP_DASHES_REQUESTS, SCHEMA_NAME, SKILL_KEYS, SKILL_LEVEL, SKILL_TYPES } from '../../../constants';
+
+import { EmpDashState, EmpKpiT, FetchEmpDashPropsT } from './types';
+import { CoobDataI, EmployeeT, Status } from '../../mainTypes';
 
 const { koobDataRequest3 } = KoobDataService;
 
