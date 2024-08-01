@@ -10,6 +10,13 @@ import { CoobDataI, Status } from '../../mainTypes';
 
 const { koobDataRequest3 } = KoobDataService;
 
+/**
+ * Асинхронный thunk для получения данных фильтров.
+ * Запрашивает фильтры из API на основе параметров и возвращает ответ.
+ * @param params Параметры запроса, включая идентификатор и запросы.
+ * @param thunkAPI Контекст для работы с thunk.
+ * @returns Массив массивов данных фильтров.
+ */
 export const fetchFilters = createAsyncThunk(
   'filters/fetchFilters',
   async (params: FetchFiltersPropsT, thunkAPI): Promise<CoobDataI[][]> => {
@@ -41,16 +48,29 @@ const initialState: FiltersState = {
   status: Status.Pending
 };
 
+/**
+ * Создание слайса состояния фильтров.
+ * Включает редукторы для обработки состояния запросов на получение фильтров.
+ */
 export const filtersSlice = createSlice({
   name: 'filters',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
+      /**
+       * Обрабатывает состояние при начале запроса фильтров.
+       * Устанавливает статус в "Pending" и сбрасывает фильтры в начальное состояние.
+       */
       .addCase(fetchFilters.pending, (state) => {
         state.filters = initialState.filters;
         state.status = Status.Pending;
       })
+      /**
+       * Обрабатывает состояние при успешном получении фильтров.
+       * Обновляет фильтры в состоянии и устанавливает статус в "Fulfilled".
+       * Добавляет фильтр "Все" в начало каждого массива фильтров.
+       */
       .addCase(fetchFilters.fulfilled, (state, action: PayloadAction<CoobDataI[][]>) => {
         state.filters = action.payload.map((filterArr) => {
           const allFilter = {};
@@ -61,6 +81,10 @@ export const filtersSlice = createSlice({
         });
         state.status = Status.Fulfilled;
       })
+      /**
+       * Обрабатывает состояние при ошибке запроса фильтров.
+       * Устанавливает фильтры в начальное состояние и устанавливает статус в "Rejected".
+       */
       .addCase(fetchFilters.rejected, (state) => {
         state.filters = initialState.filters;
         state.status = Status.Rejected;

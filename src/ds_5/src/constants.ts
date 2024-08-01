@@ -1,4 +1,4 @@
-import { Requests, RequestStructure } from './types/global';
+import { Requests, RequestsFilters, RequestStructure } from './types/global';
 
 // Переменные идентификаторов для KOOB
 export const KOOB_ID_EMP = 'etl_db_1.team_1';
@@ -79,7 +79,7 @@ export const EMPLOYEES_REQUEST: RequestStructure = {
 };
 
 // Пример объекта запросов для фильтров
-export const FILTERS_REQUESTS: Requests = {
+export const FILTERS_REQUESTS: RequestsFilters = {
   position: {
     dimensions: ['position'],
     measures: [],

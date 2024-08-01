@@ -4,12 +4,17 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
 import { DEP_DASHES_REQUESTS, SCHEMA_NAME } from '../../../constants';
-
 import { DepDashState, DepSimpleAreaT, FetchDepDashPropsT } from './types';
 import { CoobDataI, Status } from '../../mainTypes';
 
 const { koobDataRequest3 } = KoobDataService;
 
+/**
+ * Асинхронная функция для получения данных по департаментам.
+ * Используется для отправки запросов на сервер и обработки ответов.
+ * @param params Объект с параметрами, включая koobId, allFilters и request.
+ * @returns Обещание, разрешающееся массивом данных (CoobDataI[][][]).
+ */
 export const fetchDepDash = createAsyncThunk(
   'empDash/fetchDepDash',
   async (params: FetchDepDashPropsT, thunkAPI): Promise<CoobDataI[][][]> => {
@@ -42,6 +47,10 @@ export const fetchDepDash = createAsyncThunk(
   }
 );
 
+/**
+ * Начальное состояние для состояния департаментов.
+ * Включает данные, облака тегов, простую область, смешанный бар и статус.
+ */
 const initialState: DepDashState = {
   data: [],
   depTagCloud: [],
@@ -50,19 +59,40 @@ const initialState: DepDashState = {
   status: Status.Pending
 };
 
+/**
+ * Создание слайса состояния для департаментов.
+ * Включает редукторы для обновления облаков тегов, простой области и смешанного бара.
+ */
 export const depDashSlice = createSlice({
   name: 'depDash',
   initialState,
   reducers: {
+    /**
+     * Обновление облака тегов департамента.
+     * Преобразует данные в формате массива объектов с полями 'value' и 'count'.
+     * Использует данные из state.data[0][0].
+     */
     setDepTagCloud(state) {
       state.depTagCloud = state.data[0][0].map((obj) => ({
         value: obj.department as string,
         count: obj.total_grades as number
       }));
     },
+
+    /**
+     * Обновление простой области департамента.
+     * Преобразует данные в массив объектов DepSimpleAreaT.
+     * Использует данные из state.data[1][0].
+     */
     setDepSimpleArea(state) {
       state.depSimpleArea = state.data[1][0] as DepSimpleAreaT[];
     },
+
+    /**
+     * Обновление смешанного бара департамента.
+     * Преобразует данные в объекты с полями для предыдущих и текущих уровней навыков.
+     * Данные сгруппированы по навыкам и годам.
+     */
     setDepStackedMixedBar(state) {
       const processArray = (array) => {
         let result = [];
@@ -108,8 +138,7 @@ export const depDashSlice = createSlice({
         return result;
       };
 
-      // Обработка двух массивов
-      // Обновляем состояние
+      // Обработка двух массивов данных
       state.depStackedMixedBar = [processArray(state.data[2][0]), processArray(state.data[2][1])];
     }
   },
@@ -123,7 +152,7 @@ export const depDashSlice = createSlice({
         state.data = action.payload;
         state.status = Status.Fulfilled;
 
-        // Данные под каждый дэшлет
+        // Обновление состояния для каждого из дэшлетов
         depDashSlice.caseReducers.setDepTagCloud(state);
         depDashSlice.caseReducers.setDepSimpleArea(state);
         depDashSlice.caseReducers.setDepStackedMixedBar(state);

@@ -4,14 +4,18 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from '../../store';
-
 import { EMP_DASHES_REQUESTS, SCHEMA_NAME, SKILL_KEYS, SKILL_LEVEL, SKILL_TYPES } from '../../../constants';
-
 import { EmpDashState, EmpKpiT, FetchEmpDashPropsT } from './types';
 import { CoobDataI, EmployeeT, Status } from '../../mainTypes';
 
 const { koobDataRequest3 } = KoobDataService;
 
+/**
+ * Асинхронная функция для получения данных по сотрудникам.
+ * Отправляет запросы на сервер и возвращает массив данных (CoobDataI[][][]).
+ * @param params Объект с параметрами, включая koobId, allFilters и request.
+ * @returns Обещание, разрешающееся массивом данных.
+ */
 export const fetchEmpDash = createAsyncThunk(
   'empDash/fetchEmpDash',
   async (params: FetchEmpDashPropsT, thunkAPI): Promise<CoobDataI[][][]> => {
@@ -44,6 +48,13 @@ export const fetchEmpDash = createAsyncThunk(
   }
 );
 
+/**
+ * Асинхронная функция для установки сотрудника и получения данных дэшборда.
+ * Сначала устанавливает сотрудника, затем запрашивает данные для дэшборда.
+ * @param params Объект с массивом сотрудников и идентификатором koobId.
+ * @param dispatch Функция для отправки действий.
+ * @param getState Функция для получения текущего состояния.
+ */
 export const setEmployeeAndFetchDashboard = createAsyncThunk(
   'empDash/setEmployeeAndFetchDashboard',
   async (params: { employees: EmployeeT[]; koobId: string }, { dispatch, getState }) => {
@@ -64,6 +75,10 @@ export const setEmployeeAndFetchDashboard = createAsyncThunk(
   }
 );
 
+/**
+ * Начальное состояние для состояния сотрудника.
+ * Включает данные сотрудника, массивы данных для различных графиков и статус.
+ */
 const initialState: EmpDashState = {
   employee: { fullname: '', position: '', department: '', fact_empl_skills_employee_key: 0, picture_url: '' },
   data: [],
@@ -76,13 +91,27 @@ const initialState: EmpDashState = {
   status: Status.Pending
 };
 
+/**
+ * Создание слайса состояния для данных о сотрудниках.
+ * Включает редукторы для обновления различных данных и графиков.
+ */
 export const empDashSlice = createSlice({
   name: 'empDash',
   initialState,
   reducers: {
+    /**
+     * Установка данных о сотруднике в состоянии.
+     * @param state Текущее состояние.
+     * @param action Действие с данными сотрудника.
+     */
     setEmployee(state, action: PayloadAction<EmployeeT>) {
       state.employee = action.payload;
     },
+
+    /**
+     * Обновление списка навыков сотрудника.
+     * Сгруппировывает навыки по типам и преобразует их в массив объектов.
+     */
     setEmpSkillsList(state) {
       // Создаем объект, чтобы сгруппировать навыки по типам
       const groupedSkills = {};
@@ -109,6 +138,11 @@ export const empDashSlice = createSlice({
 
       state.empSkillsList = result;
     },
+
+    /**
+     * Обновление данных для радара сотрудника.
+     * Обрабатывает данные и создаёт массив объектов с уровнем навыков для разных типов навыков.
+     */
     setEmpRadar(state) {
       const dataArrays = state.data[1];
       const longestArray = dataArrays.reduce((a, b) => (a.length > b.length ? a : b), []);
@@ -155,6 +189,11 @@ export const empDashSlice = createSlice({
 
       state.empRadar = result;
     },
+
+    /**
+     * Обновление данных для карточки сотрудника.
+     * Преобразует данные в формат, подходящий для отображения в карточке.
+     */
     setEmpCard(state) {
       const skillOrder = EMP_DASHES_REQUESTS.empCard[0].filters.skill_type.slice(1);
       const transformed = {};
@@ -183,6 +222,11 @@ export const empDashSlice = createSlice({
 
       state.empCard = result;
     },
+
+    /**
+     * Обновление данных для графика "Stacked Area".
+     * Обрабатывает данные, разделяет их на два типа и заполняет соответствующие объекты.
+     */
     setEmpStackedArea(state) {
       const type3 = [];
       const type4 = [];
@@ -216,6 +260,11 @@ export const empDashSlice = createSlice({
 
       state.empStackedArea = [type3, type4];
     },
+
+    /**
+     * Обновление данных для графика "Bar".
+     * Обрабатывает данные и заполняет их для отображения по годам.
+     */
     setEmpBar(state) {
       const result = {};
 
@@ -242,6 +291,11 @@ export const empDashSlice = createSlice({
         2023: result[skill][2023]
       }));
     },
+
+    /**
+     * Установка данных KPI для сотрудника.
+     * @param state Текущее состояние.
+     */
     setEmpKpi(state) {
       state.empKpi = state.data[5][0] as EmpKpiT[];
     }
@@ -256,7 +310,7 @@ export const empDashSlice = createSlice({
         state.status = Status.Fulfilled;
         state.data = action.payload;
 
-        // Данные под каждый дэшлет
+        // Обновляем данные для каждого графика
         empDashSlice.caseReducers.setEmpSkillsList(state);
         empDashSlice.caseReducers.setEmpRadar(state);
         empDashSlice.caseReducers.setEmpCard(state);

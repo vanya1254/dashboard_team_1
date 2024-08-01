@@ -10,6 +10,12 @@ import { EmployeeT, Status } from '../../mainTypes';
 
 const { koobDataRequest3 } = KoobDataService;
 
+/**
+ * Асинхронная функция для получения данных сотрудников.
+ * Отправляет запрос на сервер и возвращает массив сотрудников (EmployeeT[]).
+ * @param params Объект с параметрами, включая koobId, measures, allFilters, request и comment.
+ * @returns Обещание, разрешающееся массивом сотрудников.
+ */
 export const fetchEmployees = createAsyncThunk(
   'employees/fetchEmployees',
   async (params: FetchEmployeesPropsT, thunkAPI): Promise<EmployeeT[]> => {
@@ -21,7 +27,7 @@ export const fetchEmployees = createAsyncThunk(
       measures || EMPLOYEES_REQUEST.measures,
       allFilters,
       /**
-       * пришлось расширить request, чтобы передавать schema_name
+       * Расширяем request для включения schema_name.
        */
       // @ts-ignore
       { schema_name: SCHEMA_NAME, sort: ['fullname'], ...request },
@@ -32,11 +38,19 @@ export const fetchEmployees = createAsyncThunk(
   }
 );
 
+/**
+ * Начальное состояние для сотрудников.
+ * Включает массив сотрудников и статус загрузки.
+ */
 const initialState: EmployeesState = {
   employees: [],
   status: Status.Pending
 };
 
+/**
+ * Создание слайса состояния для сотрудников.
+ * Включает редукторы для обновления данных сотрудников и статуса загрузки.
+ */
 export const employeesSlice = createSlice({
   name: 'employees',
   initialState,
@@ -44,14 +58,17 @@ export const employeesSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchEmployees.pending, (state) => {
+        // Устанавливаем статус загрузки в Pending и очищаем массив сотрудников
         state.employees = initialState.employees;
         state.status = Status.Pending;
       })
       .addCase(fetchEmployees.fulfilled, (state, action: PayloadAction<EmployeeT[]>) => {
+        // Устанавливаем полученные данные сотрудников и обновляем статус на Fulfilled
         state.employees = action.payload;
         state.status = Status.Fulfilled;
       })
       .addCase(fetchEmployees.rejected, (state) => {
+        // Устанавливаем статус загрузки в Rejected и очищаем массив сотрудников
         state.employees = initialState.employees;
         state.status = Status.Rejected;
       });

@@ -23,5 +23,10 @@ export interface RequestStructure {
 
 // Тип для объектов запросов
 export type Requests = {
-  [key: string]: RequestStructure | RequestStructure[];
+  [key: string]: RequestStructure[];
+};
+
+// Тип для объектов запросов Filters
+export type RequestsFilters = {
+  [key: string]: RequestStructure;
 };
