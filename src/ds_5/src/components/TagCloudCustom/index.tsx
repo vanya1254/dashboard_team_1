@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TagCloud } from 'react-tagcloud';
 
 import { useAppSelector } from '../../redux/store';
@@ -81,6 +81,6 @@ const customRenderer = (tag: { value: string; count: number }, size: number, col
     }}
   >
     {tag.value}
-    <span className={styles.root__tooltip}>{`Новых навыков за год: ${Math.floor(tag.count)}`}</span>
+    <span className={styles.root__tooltip}>{`Новых навыков в среднем за год: ${Math.floor(tag.count)}`}</span>
   </span>
 );
