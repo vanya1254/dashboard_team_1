@@ -7,9 +7,6 @@ export interface FiltersState {
 
 export type FetchFiltersPropsT = {
   koobId: string;
-  // dimensions?: DimensionsT;
-  //   measures?: MeasuresT;
-  //   allFilters: AllFiltersT;
   request?: RequestT;
   comment?: CommentT;
 };

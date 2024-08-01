@@ -187,18 +187,6 @@ export const DEP_DASHES_REQUESTS = {
       comment: 'depTagCloud',
       request: {}
     }
-    // {
-    //   dimensions: ['position'],
-    //   measures: ['avg(count_skill_per_year_employee)'],
-    //   filters: { calendar_year: ['=', 2023] },
-    //   comment: 'depTagCloud'
-    // },
-    // {
-    //   dimensions: ['skill_type'],
-    //   measures: ['avg(count_skill_per_year_employee)'],
-    //   filters: { calendar_year: ['=', 2023] },
-    //   comment: 'depTagCloud'
-    // }
   ],
   depSimpleArea: [
     {
@@ -246,19 +234,5 @@ export const DEP_DASHES_REQUESTS = {
         sort: ['dim_skills_skill_key']
       }
     }
-    // {
-    //   dimensions: ['skill_name', 'calendar_year'],
-    //   measures: [
-    //     'sum(total_novice_department:count_novice_department',
-    //     'sum(total_junior_department):count_junior_department',
-    //     'sum(total_middle_department):count_middle_department',
-    //     'sum(total_senior_department):count_senior_department',
-    //     'sum(total_expert_department):count_expert_department'
-    //   ],
-    //   filters: {
-    //     calendar_year: ['=', 2022, 2023]
-    //   },
-    //   comment: 'depStackedMixedBar'
-    // }
   ]
 };

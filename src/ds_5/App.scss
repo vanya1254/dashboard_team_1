@@ -51,7 +51,6 @@ p {
   }
 
   &::-webkit-scrollbar-thumb {
-    // background-color: rgba(175, 197, 216, 0.3);
     background-color: $btnColor;
     border-radius: 10px;
     border: 0;
@@ -221,7 +220,6 @@ svg.recharts-surface {
     g.recharts-polar-grid-concentric {
       path {
         stroke: #000;
-        // fill: #dae6ff;
       }
     }
   }

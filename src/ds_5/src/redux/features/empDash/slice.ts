@@ -41,23 +41,6 @@ export const fetchEmpDash = createAsyncThunk(
   }
 );
 
-// export const setEmployeeAndFetchDashboard = createAsyncThunk(
-//   'empDash/setEmployeeAndFetchDashboard',
-//   async (employees: EmployeeT[], { dispatch, getState }) => {
-//     if (employees.length) {
-//       dispatch(setEmployee(employees[0]));
-//     }
-//     const state = getState() as RootState;
-//     const { fullname, position, department } = state.empDash.employee;
-
-//     await dispatch(
-//       fetchEmpDash({
-//         allFilters: { fullname: ['=', fullname], position: ['=', position], department: ['=', department] }
-//       })
-//     );
-//   }
-// );
-
 export const setEmployeeAndFetchDashboard = createAsyncThunk(
   'empDash/setEmployeeAndFetchDashboard',
   async (params: { employees: EmployeeT[]; koobId: string }, { dispatch, getState }) => {
@@ -227,7 +210,7 @@ export const empDashSlice = createSlice({
           if (obj) obj.level = level;
         }
       });
-      console.log([type3, type4]);
+
       state.empStackedArea = [type3, type4];
     },
     setEmpBar(state) {

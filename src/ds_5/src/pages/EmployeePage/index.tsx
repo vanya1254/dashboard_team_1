@@ -34,35 +34,6 @@ const EmployerPage: React.FC = () => {
   const { employee } = useAppSelector(empDashSelector);
   const { employees } = useAppSelector(employeesSelector);
 
-  // useEffect(() => {
-  //   if (isFirstLoading.current) {
-  //     dispatch(clearCurFilters());
-  //     dispatch(fetchFilters({}));
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   dispatch(fetchEmployees({ measures: [], allFilters: { position, department, fullname } }));
-  // }, [position, department, fullname]);
-
-  // useEffect(() => {
-  //   dispatch(setEmployeeAndFetchDashboard(employees));
-  // }, [employees]);
-
-  // useEffect(() => {
-  //   if (employee.fullname) {
-  //     dispatch(
-  //       fetchEmpDash({
-  //         allFilters: {
-  //           fullname: ['=', employee.fullname],
-  //           position: ['=', employee.position],
-  //           department: ['=', employee.department]
-  //         }
-  //       })
-  //     );
-  //   }
-  // }, [employee]);
-
   // Инициализация при первом рендере
   useEffect(() => {
     if (isFirstLoading.current) {

@@ -7,7 +7,6 @@ export interface EmployeesState {
 
 export type FetchEmployeesPropsT = {
   koobId: string;
-  // dimensions?: DimensionsT;
   measures?: MeasuresT;
   allFilters: AllFiltersT;
   request?: RequestT;
