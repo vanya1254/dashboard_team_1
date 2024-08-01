@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { DEP_DASHES_REQUESTS, KOOB_ID, SCHEMA_NAME, SKILL_KEYS, SKILL_LEVEL, SKILL_TYPES } from '../../../constants';
+import { DEP_DASHES_REQUESTS, SCHEMA_NAME, SKILL_KEYS, SKILL_LEVEL, SKILL_TYPES } from '../../../constants';
 import { DepDashState, DepSimpleAreaT, DepTagCloudT, FetchDepDashPropsT } from './types';
 //@ts-ignore
 import { KoobDataService } from 'bi-internal/services';
@@ -11,14 +11,14 @@ const { koobDataRequest3 } = KoobDataService;
 export const fetchDepDash = createAsyncThunk(
   'empDash/fetchDepDash',
   async (params: FetchDepDashPropsT, thunkAPI): Promise<CoobDataI[][][]> => {
-    const { allFilters, request } = params;
+    const { koobId, allFilters, request } = params;
 
     const response: CoobDataI[][][] = await Promise.all(
       Object.entries(DEP_DASHES_REQUESTS).map(([dashReqs, dashArray]) =>
         Promise.all(
           dashArray.map((dash) =>
             koobDataRequest3(
-              KOOB_ID,
+              koobId,
               dash.dimensions,
               dash.measures,
               {
@@ -35,7 +35,7 @@ export const fetchDepDash = createAsyncThunk(
         )
       )
     );
-    console.log(0, response[0][0]);
+    console.log(1, response[1][0]);
     return response;
   }
 );
@@ -56,7 +56,7 @@ export const depDashSlice = createSlice({
       //TODO: if [0].department === [1].department => [i]position
       state.depTagCloud = state.data[0][0].map((obj) => ({
         value: obj.department as string,
-        count: obj.count_skill_per_year_employee as number
+        count: obj.total_grades as number
       }));
     },
     setDepSimpleArea(state) {

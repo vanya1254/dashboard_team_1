@@ -13,6 +13,7 @@ export interface EmpDashState {
 }
 
 export type FetchEmpDashPropsT = {
+  koobId: string;
   allFilters: AllFiltersT;
   request?: RequestT;
 };

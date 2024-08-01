@@ -73,7 +73,7 @@ export const SimpleAreaChartCustom: React.FC = () => {
               strokeOpacity={0.8}
               travellerWidth={12}
             />
-            <Area type="monotone" dataKey="current_skill_level" stroke="#E697FF" fill="#E697FF" fillOpacity={1} />
+            <Area type="monotone" dataKey="pos_skill_level" stroke="#E697FF" fill="#E697FF" fillOpacity={1} />
           </AreaChart>
         </ResponsiveContainer>
       ) : status === Status.Pending ? (

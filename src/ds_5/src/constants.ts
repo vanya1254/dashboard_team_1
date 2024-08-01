@@ -1,4 +1,5 @@
-export const KOOB_ID = 'etl_db_1.team_1';
+export const KOOB_ID_EMP = 'etl_db_1.team_1';
+export const KOOB_ID_DEP = 'etl_db_1.team_1_2';
 export const SCHEMA_NAME = 'ds_5';
 
 export const SKILL_TYPES = {
@@ -181,7 +182,7 @@ export const DEP_DASHES_REQUESTS = {
   depTagCloud: [
     {
       dimensions: ['department'],
-      measures: ['avg(count_skill_per_year_employee)'],
+      measures: ['sum(total_grades)'],
       filters: { calendar_year: ['=', 2023] },
       comment: 'depTagCloud',
       request: {}
@@ -202,11 +203,11 @@ export const DEP_DASHES_REQUESTS = {
   depSimpleArea: [
     {
       dimensions: ['skill_name'],
-      measures: ['avg(current_skill_level)'],
+      measures: ['avg(pos_skill_level)'],
       filters: {},
       comment: 'depSimpleArea',
       request: {
-        sort: ['-current_skill_level']
+        sort: ['-pos_skill_level']
       }
     }
   ],
@@ -225,13 +226,7 @@ export const DEP_DASHES_REQUESTS = {
       },
       comment: 'depStackedMixedBar',
       request: {
-        sort: [
-          '-count_expert_department',
-          '-count_senior_department',
-          '-count_middle_department',
-          '-count_junior_department',
-          '-count_novice_department'
-        ]
+        sort: ['dim_skills_skill_key']
       }
     },
     {
@@ -248,13 +243,7 @@ export const DEP_DASHES_REQUESTS = {
       },
       comment: 'depStackedMixedBar',
       request: {
-        sort: [
-          '-count_expert_department',
-          '-count_senior_department',
-          '-count_middle_department',
-          '-count_junior_department',
-          '-count_novice_department'
-        ]
+        sort: ['dim_skills_skill_key']
       }
     }
     // {

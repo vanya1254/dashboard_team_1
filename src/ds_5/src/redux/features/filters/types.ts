@@ -6,7 +6,7 @@ export interface FiltersState {
 }
 
 export type FetchFiltersPropsT = {
-  // koobId: KoobIdT;
+  koobId: string;
   // dimensions?: DimensionsT;
   //   measures?: MeasuresT;
   //   allFilters: AllFiltersT;

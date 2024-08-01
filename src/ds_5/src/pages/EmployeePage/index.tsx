@@ -25,6 +25,7 @@ import {
 
 import styles from './EmployeePage.module.scss';
 import { clearCurFilters } from '../../redux/features/filter/slice';
+import { KOOB_ID_EMP } from '../../constants';
 
 const EmployerPage: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -33,25 +34,62 @@ const EmployerPage: React.FC = () => {
   const { employee } = useAppSelector(empDashSelector);
   const { employees } = useAppSelector(employeesSelector);
 
+  // useEffect(() => {
+  //   if (isFirstLoading.current) {
+  //     dispatch(clearCurFilters());
+  //     dispatch(fetchFilters({}));
+  //   }
+  // }, []);
+
+  // useEffect(() => {
+  //   dispatch(fetchEmployees({ measures: [], allFilters: { position, department, fullname } }));
+  // }, [position, department, fullname]);
+
+  // useEffect(() => {
+  //   dispatch(setEmployeeAndFetchDashboard(employees));
+  // }, [employees]);
+
+  // useEffect(() => {
+  //   if (employee.fullname) {
+  //     dispatch(
+  //       fetchEmpDash({
+  //         allFilters: {
+  //           fullname: ['=', employee.fullname],
+  //           position: ['=', employee.position],
+  //           department: ['=', employee.department]
+  //         }
+  //       })
+  //     );
+  //   }
+  // }, [employee]);
+
+  // Инициализация при первом рендере
   useEffect(() => {
     if (isFirstLoading.current) {
-      dispatch(clearCurFilters());
-      dispatch(fetchFilters({}));
+      dispatch(clearCurFilters()); // Сброс фильтров
+      dispatch(fetchFilters({ koobId: KOOB_ID_EMP })); // Запрос всех возможных фильтров
+      isFirstLoading.current = false;
     }
-  }, []);
+  }, [dispatch]);
 
+  // Запрос списка сотрудников при изменении фильтров
   useEffect(() => {
-    dispatch(fetchEmployees({ measures: [], allFilters: { position, department, fullname } }));
-  }, [position, department, fullname]);
+    dispatch(fetchEmployees({ koobId: KOOB_ID_EMP, measures: [], allFilters: { position, department, fullname } }));
+  }, [position, department, fullname, dispatch]);
 
+  // Установка первого сотрудника активным и запрос данных для него
   useEffect(() => {
-    dispatch(setEmployeeAndFetchDashboard(employees));
-  }, [employees]);
+    if (employees.length > 0) {
+      dispatch(setEmployeeAndFetchDashboard({ koobId: KOOB_ID_EMP, employees }));
+    }
+  }, [employees, dispatch]);
 
+  // Запрос данных для выбранного сотрудника
   useEffect(() => {
     if (employee.fullname) {
       dispatch(
         fetchEmpDash({
+          koobId: KOOB_ID_EMP,
           allFilters: {
             fullname: ['=', employee.fullname],
             position: ['=', employee.position],
@@ -60,7 +98,7 @@ const EmployerPage: React.FC = () => {
         })
       );
     }
-  }, [employee]);
+  }, [employee, dispatch]);
 
   return (
     <EmployeeGridLayout>

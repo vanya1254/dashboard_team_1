@@ -54,7 +54,7 @@ export const DepFilters: React.FC = () => {
             <SelectCustom
               isReset={isReset}
               onClickFilter={onClickFilter}
-              selectTitle={'Категории сравнения'}
+              selectTitle={'Категории навыков'}
               options={filters[2].map((item) => ({
                 skill_type: SKILL_TYPES[item.skill_type] || item.skill_type
               }))}

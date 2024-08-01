@@ -12,6 +12,7 @@ import { DepFilters, SimpleAreaChartCustom, StackedMixBarChart, TagCloudCustom }
 
 import styles from './DepartmentPage.module.scss';
 import { clearCurFilters } from '../../redux/features/filter/slice';
+import { KOOB_ID_DEP } from '../../constants';
 
 const DepartmentPage: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -21,13 +22,14 @@ const DepartmentPage: React.FC = () => {
   useEffect(() => {
     if (isFirstLoading.current) {
       dispatch(clearCurFilters());
-      dispatch(fetchFilters({}));
+      dispatch(fetchFilters({ koobId: KOOB_ID_DEP }));
     }
   }, []);
 
   useEffect(() => {
     dispatch(
       fetchDepDash({
+        koobId: KOOB_ID_DEP,
         allFilters: {
           department: department,
           position: position,

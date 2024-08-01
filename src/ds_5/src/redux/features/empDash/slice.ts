@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { EMP_DASHES_REQUESTS, KOOB_ID, SCHEMA_NAME, SKILL_KEYS, SKILL_LEVEL, SKILL_TYPES } from '../../../constants';
+import { EMP_DASHES_REQUESTS, SCHEMA_NAME, SKILL_KEYS, SKILL_LEVEL, SKILL_TYPES } from '../../../constants';
 import { EmpDashState, EmpKpiT, FetchEmpDashPropsT } from './types';
 //@ts-ignore
 import { KoobDataService } from 'bi-internal/services';
@@ -12,14 +12,14 @@ const { koobDataRequest3 } = KoobDataService;
 export const fetchEmpDash = createAsyncThunk(
   'empDash/fetchEmpDash',
   async (params: FetchEmpDashPropsT, thunkAPI): Promise<CoobDataI[][][]> => {
-    const { allFilters, request } = params;
+    const { koobId, allFilters, request } = params;
 
     const response: CoobDataI[][][] = await Promise.all(
       Object.entries(EMP_DASHES_REQUESTS).map(([dashReqs, dashArray]) =>
         Promise.all(
           dashArray.map((dash) =>
             koobDataRequest3(
-              KOOB_ID,
+              koobId,
               dash.dimensions,
               dash.measures,
               {
@@ -41,17 +41,37 @@ export const fetchEmpDash = createAsyncThunk(
   }
 );
 
+// export const setEmployeeAndFetchDashboard = createAsyncThunk(
+//   'empDash/setEmployeeAndFetchDashboard',
+//   async (employees: EmployeeT[], { dispatch, getState }) => {
+//     if (employees.length) {
+//       dispatch(setEmployee(employees[0]));
+//     }
+//     const state = getState() as RootState;
+//     const { fullname, position, department } = state.empDash.employee;
+
+//     await dispatch(
+//       fetchEmpDash({
+//         allFilters: { fullname: ['=', fullname], position: ['=', position], department: ['=', department] }
+//       })
+//     );
+//   }
+// );
+
 export const setEmployeeAndFetchDashboard = createAsyncThunk(
   'empDash/setEmployeeAndFetchDashboard',
-  async (employees: EmployeeT[], { dispatch, getState }) => {
+  async (params: { employees: EmployeeT[]; koobId: string }, { dispatch, getState }) => {
+    const { employees, koobId } = params;
+
     if (employees.length) {
-      dispatch(setEmployee(employees[0]));
+      await dispatch(setEmployee(employees[0]));
     }
     const state = getState() as RootState;
     const { fullname, position, department } = state.empDash.employee;
 
     await dispatch(
       fetchEmpDash({
+        koobId,
         allFilters: { fullname: ['=', fullname], position: ['=', position], department: ['=', department] }
       })
     );

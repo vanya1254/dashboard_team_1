@@ -9,11 +9,12 @@ export interface DepDashState {
 }
 
 export type FetchDepDashPropsT = {
+  koobId: string;
   allFilters: AllFiltersT;
   request?: RequestT;
 };
 
-export type DepSimpleAreaT = { skill_name: string; current_skill_level: number };
+export type DepSimpleAreaT = { skill_name: string; pos_skill_level: number };
 
 export type DepStackedMixedBar = {
   name: string;

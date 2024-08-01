@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { EMPLOYEES_REQUEST, KOOB_ID, SCHEMA_NAME } from '../../../constants';
+import { EMPLOYEES_REQUEST, SCHEMA_NAME } from '../../../constants';
 import { EmployeesState, FetchEmployeesPropsT } from './types';
 //@ts-ignore
 import { KoobDataService } from 'bi-internal/services';
@@ -11,10 +11,10 @@ const { koobDataRequest3 } = KoobDataService;
 export const fetchEmployees = createAsyncThunk(
   'employees/fetchEmployees',
   async (params: FetchEmployeesPropsT, thunkAPI): Promise<EmployeeT[]> => {
-    const { measures, allFilters, request, comment } = params;
+    const { koobId, measures, allFilters, request, comment } = params;
 
     const response: EmployeeT[] = await koobDataRequest3(
-      KOOB_ID,
+      koobId,
       EMPLOYEES_REQUEST.dimensions,
       measures || EMPLOYEES_REQUEST.measures,
       allFilters,

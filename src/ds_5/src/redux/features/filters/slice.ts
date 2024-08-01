@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { FILTERS_REQUESTS, KOOB_ID, SCHEMA_NAME } from '../../../constants';
+import { FILTERS_REQUESTS, SCHEMA_NAME } from '../../../constants';
 import { FiltersState, FetchFiltersPropsT } from './types';
 //@ts-ignore
 import { KoobDataService } from 'bi-internal/services';
@@ -11,12 +11,12 @@ const { koobDataRequest3 } = KoobDataService;
 export const fetchFilters = createAsyncThunk(
   'filters/fetchFilters',
   async (params: FetchFiltersPropsT, thunkAPI): Promise<CoobDataI[][]> => {
-    const { request, comment } = params;
+    const { koobId, request, comment } = params;
 
     const response: CoobDataI[][] = await Promise.all(
       Object.keys(FILTERS_REQUESTS).map((filter) =>
         koobDataRequest3(
-          KOOB_ID,
+          koobId,
           FILTERS_REQUESTS[filter].dimensions,
           FILTERS_REQUESTS[filter].measures,
           FILTERS_REQUESTS[filter].filters,
