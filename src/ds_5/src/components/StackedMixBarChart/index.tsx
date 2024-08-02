@@ -48,7 +48,7 @@ export const StackedMixBarChart: React.FC = () => {
 
   const onToggle = () => setIsToggled(!isToggled);
 
-  const title = `${isToggled ? 'Всего навыков' : 'Новых навыков'}: ${
+  const title = `${isToggled ? 'Кол-во обновления навыка' : 'Соотношение людей по годам'}: ${
     department[1] || position[1] ? `${department[1] || ''} ${position[1] || ''}` : 'ДАР'
   }`;
 
