@@ -113,11 +113,13 @@ export const FILTERS_REQUESTS: RequestsFilters = {
 export const EMP_DASHES_REQUESTS: Requests = {
   empSkillsList: [
     {
-      dimensions: ['skill_type', 'skill_name', 'next_grade_level'],
+      dimensions: ['skill_type', 'skill_name', 'next_grade_level', 'skill_popularity'],
       measures: [],
       filters: { skill_type: ['=', 1, 2, 5, 6, 7, 8, 9, 10] },
       comment: 'empSkillsList',
-      request: {}
+      request: {
+        sort: ['skill_popularity']
+      }
     }
   ],
   empRadar: [
